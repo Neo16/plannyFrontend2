@@ -5,7 +5,6 @@ export class AccountState {
 }
 
 export const accountReducer = (state, action) => {
-
     switch (action.type) {
         case 'LOGIN_ACTION_RESULT':
             console.log(action.result.accessToken);
@@ -21,9 +20,7 @@ export const accountReducer = (state, action) => {
                 ...state,
                 isLoggedIn: false
             }
-        case 'REGISTER_RESULT_ACTION':
-
-            console.log(action);
+        case 'REGISTER_RESULT_ACTION':           
             if (action.success) {
                 return {
                     ...state,

@@ -1,29 +1,21 @@
 import * as React from 'react';
+import { Row, Col, Input, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MainCategoryButton } from '../atoms/MainCategoryButton';
 import './MainPage.scss';
-import {
- Row,
- Col,
- Input,
- Button } from 'reactstrap';
+import { plannyActionCreators } from '../../actions/actionCreators';
 
-class MainPageState {
-  subcategoriesVisible;
-  currentSubCategories;
-  currentParentCategoryId;
-  query;
-}
 
 export class MainPage extends React.Component {
 
-  selectedCategories = new Array;
+  //selectedCategories = [];
 
   constructor(props) {
-    super(props);
+    super(props);   
+    console.log(props);
     this.state = {
       subcategoriesVisible: false,
-      currentSubCategories: new Array,
+      currentSubCategories: [],
       currentParentCategoryId: 0,
       query: ''
     }
@@ -54,30 +46,31 @@ export class MainPage extends React.Component {
       }
     });
 
-    if (name == "settlementName" && e.target.value.length > 2) {
+    if (name === "settlementName" && e.target.value.length > 2) {
       this.props.geoCode(this.state.query.settlementName);
     }
     setTimeout(() => this.search(), 200);
   }
 
   componentDidMount() {
-    this.props.getMainCategories();
-    this.props.getSubCategories();
+    console.log(this.props);
+    //this.props.getMainCategories();
+    //this.props.getSubCategories();
   }
 
   toggleSelectCategory(parent) {
-    if (this.state.currentParentCategoryId == 0 ||
-      parent.id == this.state.currentParentCategoryId || !this.state.subcategoriesVisible) {
+    if (this.state.currentParentCategoryId === 0 ||
+      parent.id === this.state.currentParentCategoryId || !this.state.subcategoriesVisible) {
       this.setState({
         subcategoriesVisible: !this.state.subcategoriesVisible,
-        currentSubCategories: this.props.state.subCategories.filter((c) => c.parentCategoryId == parent.id),
+        currentSubCategories: this.props.state.subCategories.filter((c) => c.parentCategoryId === parent.id),
         currentParentCategoryId: parent.id,
       });
     }
     else {
       this.setState({
         currentParentCategoryId: parent.id,
-        currentSubCategories: this.props.state.subCategories.filter((c) => c.parentCategoryId == parent.id)
+        currentSubCategories: this.props.state.subCategories.filter((c) => c.parentCategoryId === parent.id)
       });
     }
   }
@@ -99,7 +92,7 @@ export class MainPage extends React.Component {
   }
 
   render() {
-    const mainCats = this.props.state.mainCategories;
+    // const mainCats = this.props.state.mainCategories;
     return (
       <div>
         <h1>Interests</h1>
@@ -107,7 +100,7 @@ export class MainPage extends React.Component {
           <Col xs={1} className="navbar-pager">
             <span className="scroll-left">left></span>
           </Col>
-          <Col xs={10}>
+          {/* <Col xs={10}>
             <ul className="nav category-tabs horizontal" role="tablist">
               {mainCats.map((c) =>
                 <MainCategoryButton
@@ -119,8 +112,8 @@ export class MainPage extends React.Component {
             </ul>
           </Col>
           <Col xs={1} className="navbar-pager">
-            <span  className="scroll-right">right</span>           
-          </Col>
+            <span className="scroll-right">right</span>
+          </Col> */}
         </Row>
 
         <Row style={{ display: this.state.subcategoriesVisible ? 'block' : 'none' }}>
@@ -140,7 +133,7 @@ export class MainPage extends React.Component {
           <Col xs={4}>
             <div>
               <label>Gender:</label>
-              <Input
+              {/* <Input
                 value={this.state.query.participantsGender}
                 name="participantsGender"
                 onChange={this.handleQueryChange}
@@ -149,7 +142,7 @@ export class MainPage extends React.Component {
                 <option value="0">male</option>
                 <option value="1">female</option>
                 <option value="2" selected >doesn't matter</option>
-              </Input>
+              </Input> */}
             </div>
           </Col>
           <Col xs={4}>
@@ -227,7 +220,7 @@ export class MainPage extends React.Component {
                 value={this.state.query.toTime}
                 name="toTime"
                 onChange={this.handleQueryChange}
-                style={{ 'margin-left': '29px' }}
+                style={{ 'margiLeft': '29px' }}
                 className="inlineControlBig"
                 type="datetime-local">
               </Input>
@@ -236,8 +229,8 @@ export class MainPage extends React.Component {
         </Row>
         <Row>
           <Col xs={12} className="searchButtonWrapper">
-            <Button bsStyle="primary" className="searchButton" onClick={this.search}>Search</Button>
-            <Button bsStyle="primary" className="searchButton" href="/createplanny">Add yours</Button>
+            <Button className="searchButton" onClick={this.search}>Search</Button>
+            <Button className="searchButton" href="/createplanny">Add yours</Button>
             {/* {
               this.props.state.isLoading &&
               <Spinner />
@@ -257,5 +250,5 @@ export default connect(
   (state) => ({
     state: state.acquirePlanniesState,
   }),
-  // plannyActionCreators
+  plannyActionCreators  
 )(MainPage);

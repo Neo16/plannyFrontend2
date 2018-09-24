@@ -2,12 +2,15 @@ import * as React from 'react';
 import { Row, Col, Button, Input } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {acountActionCreators} from './../../actions/actionCreators'
+import { acountActionCreators } from './../../actions/actionCreators';
+import { plannyActionCreators } from '../../actions/actionCreators';
+
 
 export class Register extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             email: '',
             age: 0,
@@ -92,6 +95,7 @@ export default connect(
     (state) => ({
         state: state.accountState
     }),
-    acountActionCreators
+   
+    plannyActionCreators
 )(Register);
 
