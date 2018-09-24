@@ -2,7 +2,7 @@
 import { loginAction, logoutAction, registerAction } from '../actions/accountActions';
 import {
     approveParticipationAction, cancelParticipationAction, declineParticipationAction, deleteProposalAction, geoCodeAction, getMainCategoriesAction,
-    getMyParticiapationsAction, getMyPlanniesAction, getSubCategoriesAction, getPlannyAction, joinPlannyAction, pictureUploadAction, searchPlanniesAction
+    getMyParticiapationsAction, getMyPlanniesAction, getSubCategoriesAction, getPlannyAction, joinPlannyAction, searchPlanniesAction
 } from '../actions/plannyActions';
 import {startLoadingAction, stopLoadingAction} from '../actions/appStatusActions'
 import {getCategoriesAction} from '../actions/categoryActions'
@@ -205,7 +205,7 @@ export const plannyActionCreators = (dispatch) => {
                 dispatch(declineParticipationAction());
             });
         },
-        getMainCategories: () => {
+        getMainCategories: () => {         
             dispatch(startLoadingAction());
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
             fetch("https://localhost:44378/api/categories/main", {

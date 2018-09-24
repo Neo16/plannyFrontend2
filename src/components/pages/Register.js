@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { Row, Col, Button, Input } from 'reactstrap';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { acountActionCreators } from './../../actions/actionCreators';
 import { plannyActionCreators } from '../../actions/actionCreators';
 
 
-export class Register extends React.Component {
+class Register extends React.Component {
 
     constructor(props) {
         super(props);
@@ -35,7 +34,7 @@ export class Register extends React.Component {
         this.props.history.push('/login');
     }
     render() {
-        const { from } = this.props.location.state || { from: { pathname: "/" } };
+        //const { from } = this.props.location.state || { from: { pathname: "/" } };
         //ha be van lépse a state szerint
         // if (localStorage.getItem('user')) {
         //     return <Redirect to={from} />;

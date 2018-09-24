@@ -54,7 +54,7 @@ export function declineParticipationAction() {
 
 export function getMainCategoriesAction(categories) {
     return {
-        type: 'GET_MAINCATEGORIESS',
+        type: 'GET_MAINCATEGORIES',
         categories
     }
 }

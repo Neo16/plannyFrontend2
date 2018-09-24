@@ -1,12 +1,12 @@
 import React from 'react';
+import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactDOM from 'react-dom';
-import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Register from './components/pages/Register';
 import { Container } from 'reactstrap';
-import { MainPage } from './components/pages/MainPage';
+import MainPage  from './components/pages/MainPage';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';

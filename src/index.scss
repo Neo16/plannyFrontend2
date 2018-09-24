@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import './variables.scss';
 
 .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header{
   margin-left: -15px;
@@ -16,7 +16,7 @@ body {
 }
 
 html, body, #root {
-  height: 100%;
+  height: 100%
 }
 
 .fill{

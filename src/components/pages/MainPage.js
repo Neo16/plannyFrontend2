@@ -1,18 +1,16 @@
 import * as React from 'react';
+import './MainPage.css';
 import { Row, Col, Input, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MainCategoryButton } from '../atoms/MainCategoryButton';
-import './MainPage.scss';
 import { plannyActionCreators } from '../../actions/actionCreators';
 
+class MainPage extends React.Component {
 
-export class MainPage extends React.Component {
-
-  //selectedCategories = [];
+  selectedCategories = [];
 
   constructor(props) {
-    super(props);   
-    console.log(props);
+    super(props);       
     this.state = {
       subcategoriesVisible: false,
       currentSubCategories: [],
@@ -52,10 +50,9 @@ export class MainPage extends React.Component {
     setTimeout(() => this.search(), 200);
   }
 
-  componentDidMount() {
-    console.log(this.props);
-    //this.props.getMainCategories();
-    //this.props.getSubCategories();
+  componentDidMount() { 
+    this.props.getMainCategories();
+    this.props.getSubCategories();   
   }
 
   toggleSelectCategory(parent) {
@@ -92,7 +89,11 @@ export class MainPage extends React.Component {
   }
 
   render() {
-    // const mainCats = this.props.state.mainCategories;
+    var mainCats = this.props.state.mainCategories; 
+    if (mainCats === undefined){
+      return null;
+    }
+
     return (
       <div>
         <h1>Interests</h1>
@@ -100,7 +101,7 @@ export class MainPage extends React.Component {
           <Col xs={1} className="navbar-pager">
             <span className="scroll-left">left></span>
           </Col>
-          {/* <Col xs={10}>
+          <Col xs={10}>
             <ul className="nav category-tabs horizontal" role="tablist">
               {mainCats.map((c) =>
                 <MainCategoryButton
@@ -113,7 +114,7 @@ export class MainPage extends React.Component {
           </Col>
           <Col xs={1} className="navbar-pager">
             <span className="scroll-right">right</span>
-          </Col> */}
+          </Col>
         </Row>
 
         <Row style={{ display: this.state.subcategoriesVisible ? 'block' : 'none' }}>
@@ -133,7 +134,7 @@ export class MainPage extends React.Component {
           <Col xs={4}>
             <div>
               <label>Gender:</label>
-              {/* <Input
+              <Input
                 value={this.state.query.participantsGender}
                 name="participantsGender"
                 onChange={this.handleQueryChange}
@@ -142,7 +143,7 @@ export class MainPage extends React.Component {
                 <option value="0">male</option>
                 <option value="1">female</option>
                 <option value="2" selected >doesn't matter</option>
-              </Input> */}
+              </Input>
             </div>
           </Col>
           <Col xs={4}>
