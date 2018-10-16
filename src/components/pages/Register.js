@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Row, Col, Button, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { acountActionCreators } from './../../actions/actionCreators';
-import { plannyActionCreators } from '../../actions/actionCreators';
+import { accountAsyncActionsCreators } from './../../actions/asyncActionCreators/accountAsyncActionsCreators';
 
 
 class Register extends React.Component {
@@ -93,8 +92,7 @@ class Register extends React.Component {
 export default connect(
     (state) => ({
         state: state.accountState
-    }),
-   
-    plannyActionCreators
+    }),   
+    accountAsyncActionsCreators
 )(Register);
 

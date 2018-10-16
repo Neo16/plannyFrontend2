@@ -1,59 +1,13 @@
-
-import { loginAction, logoutAction, registerAction } from '../actions/accountActions';
-import {
-    approveParticipationAction, cancelParticipationAction, declineParticipationAction, deleteProposalAction, geoCodeAction, getMainCategoriesAction,
-    getMyParticiapationsAction, getMyPlanniesAction, getSubCategoriesAction, getPlannyAction, joinPlannyAction, searchPlanniesAction
-} from '../actions/plannyActions';
-import {startLoadingAction, stopLoadingAction} from '../actions/appStatusActions'
-import {getCategoriesAction} from '../actions/categoryActions'
-import { HeaderHelper } from './headerHelper';
+import { HeaderHelper } from '../headerHelper';
+import { getMyPlannies, searchPlannies, pictureUpload, getPlanny, joinPlanny, cancelParticipation,
+    approveParticipation, declineParticipation, getSubCategories, geoCode, 
+    deleteProposal, getMyParticiapations} from '../actionCreators/plannyActionCreators';
+import {stopLoading, startLoading} from '../actionCreators/globalActionCreators';
 
 
-export const acountActionCreators = (dispatch) => {
+export const plannyAsyncActionCreators = (dispatch) => {
     return {
-        login: (loginData) => {
-            let requestHeaders = HeaderHelper.getJsonHeader();
-
-            fetch("https://localhost:44378/api/Account/login", {
-                method: "POST",
-                body: String(loginData),
-                headers: requestHeaders,
-            })
-            .then(handleErrors)
-            .then((response) => response.json())
-            .then(function (data) {
-                dispatch(loginAction(data));
-            })
-            .catch(function (error) {
-                console.log("request failed.");
-            });
-        },
-        logout: () => {
-            dispatch(logoutAction());
-        },
-        register: (data) => {
-            let requestHeaders = HeaderHelper.getJsonHeader();
-
-            fetch("https://localhost:44378/api/Account/Register", {
-                method: "POST",
-                body: String(data),
-                headers: requestHeaders,
-            })
-            .then((response) => response.json())
-            .then(function (data) {
-                console.log(data);
-                dispatch(registerAction(data));
-            })
-            .catch(function (error) {
-                console.log("Registration failed.");
-            });
-        },
-    }
-};
-
-export const plannyActionCreators = (dispatch) => {
-    return {
-        createPlannyProposal: (planny) => {
+        createPlannyProposalAsync: (planny) => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
 
             fetch("https://localhost:44378/api/plannies", {
@@ -63,7 +17,7 @@ export const plannyActionCreators = (dispatch) => {
             })
             .then((response) => response.json());            
         },
-        uploadPlannyPicture: (picture) => {
+        uploadPlannyPictureAsync: (picture) => {
             dispatch({
                 type: 'UPLOAD_PIC_REQUEST'
             });
@@ -78,31 +32,19 @@ export const plannyActionCreators = (dispatch) => {
                 body: formData,
                 headers: requestHeaders,
             })
-                .then((response) => response.json())
-                .then(function (data) {
-                    {
-                        dispatch({
-                            type: 'UPLOAD_PIC_SUCCESS',
-                            picName: data
-                            // todo result                        
-                        });
-                    }
-                });
-        },
-        getCategories: () => {
-            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
-
-            fetch("https://localhost:44378/api/categories", {
-                method: "GET",
-                headers: requestHeaders,
-            })
             .then((response) => response.json())
-            .then(function (data) {            
-                dispatch(getCategoriesAction(data));            
+            .then(function (data) {
+                {
+                    dispatch({
+                        type: 'UPLOAD_PIC_SUCCESS',
+                        picName: data
+                        // todo result                        
+                    });
+                }
             });
-        },
-        getMyPlannies: () => {
-            dispatch(startLoadingAction());
+        },        
+        getMyPlanniesAsync: () => {
+            dispatch(startLoading());
 
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
 
@@ -110,17 +52,17 @@ export const plannyActionCreators = (dispatch) => {
                 method: "GET",
                 headers: requestHeaders,
             })
-            .then(handleErrors)
+            //.then(handleErrors)
             .then((response) => response.json())
             .then(function (plannies) {               
-                dispatch(getMyPlanniesAction(plannies));
-                dispatch(stopLoadingAction());    
+                dispatch(getMyPlannies(plannies));
+                dispatch(stopLoading());    
             }).catch(function (error) {
                 console.log("getMyPlannies failed.");
             });
         },
-        getPlannies: (query) => {
-            dispatch(startLoadingAction());
+        getPlanniesAsync: (query) => {
+            dispatch(startLoading());
             let requestHeaders = HeaderHelper.getJsonHeader();       
 
             fetch("https://localhost:44378/api/plannies/proposals",
@@ -131,11 +73,11 @@ export const plannyActionCreators = (dispatch) => {
              })
             .then((response) => response.json())
             .then(function (plannies) {               
-                dispatch(searchPlanniesAction(plannies));
-                dispatch(stopLoadingAction());    
+                dispatch(searchPlannies(plannies));
+                dispatch(stopLoading());    
             });
         },
-        getPlanny: (id) => {
+        getPlannyAsync: (id) => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
             dispatch({
                 type: 'GET_PLANNY_REQUEST',
@@ -147,10 +89,10 @@ export const plannyActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {                   
-                dispatch(getPlannyAction(data));                                  
+                dispatch(getPlanny(data));                                  
             });
         },
-        joinPlanny: (id) => {
+        joinPlannyAsync: (id) => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();           
 
             fetch("https://localhost:44378/api/plannies/joinproposal/" + id,
@@ -160,10 +102,10 @@ export const plannyActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {
-                dispatch(joinPlannyAction(data)); 
+                dispatch(joinPlanny(data)); 
             });
         },
-        cancelParticipation: (id) => {
+        cancelParticipationAsync: (id) => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();         
 
             fetch("https://localhost:44378/api/plannies/cancelparticipation/",
@@ -174,10 +116,10 @@ export const plannyActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {              
-                dispatch(cancelParticipationAction(id));       
+                dispatch(cancelParticipation(id));       
             });
         },
-        approveParticipation: (id) => {
+        approveParticipationAsync: (id) => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
         
             fetch("https://localhost:44378/api/plannies/approveparticipation",
@@ -188,10 +130,10 @@ export const plannyActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {
-                dispatch(approveParticipationAction());
+                dispatch(approveParticipation());
             });
         },
-        declineParticipation: (id) => {
+        declineParticipationAsync: (id) => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
 
             fetch("https://localhost:44378/api/plannies/declineparticipation",
@@ -202,25 +144,12 @@ export const plannyActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {                
-                dispatch(declineParticipationAction());
+                dispatch(declineParticipation());
             });
         },
-        getMainCategories: () => {         
-            dispatch(startLoadingAction());
+        getSubCategoriesAsync: () => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
-            fetch("https://localhost:44378/api/categories/main", {
-                method: "GET",
-                headers: requestHeaders,
-            })
-            .then((response) => response.json())
-            .then(function (data) {
-                dispatch(getMainCategoriesAction(data));
-                dispatch(stopLoadingAction());    
-            });
-        },
-        getSubCategories: () => {
-            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
-            dispatch(startLoadingAction());
+            dispatch(startLoading());
 
             fetch("https://localhost:44378/api/categories/sub", {
                 method: "GET",
@@ -228,22 +157,22 @@ export const plannyActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {
-                dispatch(getSubCategoriesAction(data));
-                dispatch(stopLoadingAction());    
+                dispatch(getSubCategories(data));
+                dispatch(stopLoading());    
             });
         },
-        geoCode: (address) => {
+        geoCodeAsync: (address) => {
             fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyD2JkejS3AyjhdLpPnD-tRM6MLJnX6oYQc", {
                 method: "GET",
             })
             .then((response) => response.json())
             .then(function (data) {                
                 if (data != null && data.results != null && data.results.length > 0) {
-                    dispatch(geoCodeAction(data.results[0].geometry.location.lat,data.results[0].geometry.location.lng));
+                    dispatch(geoCode(data.results[0].geometry.location.lat,data.results[0].geometry.location.lng));
                 }            
             });
         },
-        deleteProposal: (id) => {
+        deleteProposalAsync: (id) => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
 
             fetch("https://localhost:44378/api/plannies/proposals/" + id,
@@ -253,11 +182,10 @@ export const plannyActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {                
-                dispatch(deleteProposalAction(id));                
+                dispatch(deleteProposal(id));                
             });
         },
-
-        getMyParticipations: () => {
+        getMyParticipationsAsync: () => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();          
             fetch("https://localhost:44378/api/plannies/myparticipations" +
             " ", {
@@ -267,16 +195,8 @@ export const plannyActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {            
-                dispatch(getMyParticiapationsAction(data));
+                dispatch(getMyParticiapations(data));
             });
         },
     };
 };
-
-function handleErrors(response) {
-    if (!response.ok) {
-        throw Error(response);
-    }
-    return response;
-}
-

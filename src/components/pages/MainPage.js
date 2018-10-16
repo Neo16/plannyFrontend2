@@ -2,8 +2,10 @@ import * as React from 'react';
 import './MainPage.css';
 import { Row, Col, Input, Button } from 'reactstrap';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { MainCategoryButton } from '../atoms/MainCategoryButton';
-import { plannyActionCreators } from '../../actions/actionCreators';
+import { plannyAsyncActionCreators } from '../../actions/asyncActionCreators/plannyAsyncActionCreators';
+import { categoryAsyncActionCreator } from '../../actions/asyncActionCreators/categoryAsyncActionCreator';
 
 class MainPage extends React.Component {
 
@@ -26,8 +28,8 @@ class MainPage extends React.Component {
 
   search() {
     var query = { ...this.state.query };
-    query.latitude = this.props.state.searchGeocode.latitude;
-    query.longitude = this.props.state.searchGeocode.longitude;
+   // query.latitude = this.props.state.searchGeocode.latitude;
+    //query.longitude = this.props.state.searchGeocode.longitude;
     query.categoryIds = this.selectedCategories;
 
     console.log(query);
@@ -51,8 +53,8 @@ class MainPage extends React.Component {
   }
 
   componentDidMount() { 
-    this.props.getMainCategories();
-    this.props.getSubCategories();   
+   this.props.getMainCategoriesAsync();
+  //   this.props.getSubCategories();   
   }
 
   toggleSelectCategory(parent) {
@@ -240,7 +242,7 @@ class MainPage extends React.Component {
         </Row>
 
         <Row className="planniesRow">
-          asd
+          
         </Row>
       </div>
     );
@@ -251,5 +253,8 @@ export default connect(
   (state) => ({
     state: state.acquirePlanniesState,
   }),
-  plannyActionCreators  
+  dispatch => ({
+    ...plannyAsyncActionCreators(dispatch),
+    ...categoryAsyncActionCreator(dispatch)
+  })
 )(MainPage);

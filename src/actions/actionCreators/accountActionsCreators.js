@@ -1,11 +1,11 @@
-export function loginAction(result){    
+export function loginResult(result){    
    return { type: 'LOGIN_ACTION_RESULT', result}
 }
 
-export function logoutAction(){    
+export function logout(){    
   return { type: 'LOGOUT_ACTION'};    
 }
 
-export function registerAction(result){
+export function registerResult(result){
   return {  type: 'REGISTER_RESULT_ACTION',  result}
 }

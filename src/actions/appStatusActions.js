@@ -1,7 +1,7 @@
-export function startLoadingAction() {
+export function startLoading() {
     return { type: 'REGISTER_RESULT_ACTION' }
 }
 
-export function stopLoadingAction() {
+export function stopLoading() {
     return { type: 'REGISTER_RESULT_ACTION' }
 }

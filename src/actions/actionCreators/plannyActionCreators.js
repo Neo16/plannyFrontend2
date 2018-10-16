@@ -1,72 +1,65 @@
 
-export function getMyPlanniesAction(plannies) {
+export function getMyPlannies(plannies) {
     return {
         type: 'GET_MY_PLANNIES',
         plannies
     }
 }
 
-export function searchPlanniesAction(plannies) {
+export function searchPlannies(plannies) {
     return {
         type: 'SEARCH_PLANNIES',
         plannies
     }
 }
 
-export function pictureUploadAction(picName) {
+export function pictureUpload(picName) {
     return {
         type: 'UPLOAD_PICS',
         picName
     }
 }
 
-export function getPlannyAction(planny) {
+export function getPlanny(planny) {
     return {
         type: 'GET_PLANNY_SUCCES',
         planny
     }
 }
 
-export function joinPlannyAction() {
+export function joinPlanny() {
     return {
         type: 'JOIN_PLANNYS'
     }
 }
 
-export function cancelParticipationAction(participationId) {
+export function cancelParticipation(participationId) {
     return {
         type: 'CANCEL_PARTICIPATIONS',
         participationId
     }
 }
 
-export function approveParticipationAction() {
+export function approveParticipation() {
     return {
         type: 'APPROVE_PARTICIPATIONS'
     }
 }
 
-export function declineParticipationAction() {
+export function declineParticipation() {
     return {
         type: 'DECLINE_PARTICIPATIONS'
     }
 }
 
-export function getMainCategoriesAction(categories) {
-    return {
-        type: 'GET_MAINCATEGORIES',
-        categories
-    }
-}
-
-export function getSubCategoriesAction(categories) {
+export function getSubCategories(categories) {
     return {
         type: 'GET_SUBCATEGORIESS',
         categories
     }
 }
 
-export function geoCodeAction(latitude, longitude) {
+export function geoCode(latitude, longitude) {
     return {
         type: 'GET_GEOCODES',
         latitude,
@@ -74,14 +67,14 @@ export function geoCodeAction(latitude, longitude) {
     }
 }
 
-export function deleteProposalAction(id) {
+export function deleteProposal(id) {
     return {
         type: 'DELETE_PROPOSALS',
         id
     }
 }
 
-export function getMyParticiapationsAction(participations) {
+export function getMyParticiapations(participations) {
     return {
         type: 'GET_MYPARTICIPATIONSS',
         participations
