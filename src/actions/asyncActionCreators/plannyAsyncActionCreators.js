@@ -62,8 +62,9 @@ export const plannyAsyncActionCreators = (dispatch) => {
             });
         },
         getPlanniesAsync: (query) => {
+            console.log('planny search action fired');
             dispatch(startLoading());
-            let requestHeaders = HeaderHelper.getJsonHeader();       
+            let requestHeaders = HeaderHelper.getJsonHeader();                   
 
             fetch("https://localhost:44378/api/plannies/proposals",
              {

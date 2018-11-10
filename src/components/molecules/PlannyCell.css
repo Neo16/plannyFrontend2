@@ -1,0 +1,42 @@
+.plannyCell {
+  display: block;
+  height: 100%;
+  border: 1px solid gray;
+  margin-bottom: 10px;
+  font-family: Montserrat; }
+  .plannyCell .imageWrapper {
+    height: 115px;
+    overflow: hidden; }
+    .plannyCell .imageWrapper img {
+      padding-top: 0.5px;
+      padding-left: 1px;
+      padding-right: 0.5px;
+      width: 100%; }
+  .plannyCell .plannyTitle {
+    position: absolute;
+    top: 55px;
+    left: 30px;
+    font-size: 21px;
+    background: #2b2b2beb;
+    color: white;
+    display: inline;
+    padding: 4px 8px;
+    font-weight: 600; }
+  .plannyCell .plannyDesc {
+    margin-top: 10px;
+    margin-left: 10px; }
+  .plannyCell .plannyButtonWrapper {
+    text-align: right;
+    padding: 15px; }
+  .plannyCell .categoryCont {
+    margin: 8px; }
+  .plannyCell .categoryTag {
+    background: #2b2b2beb;
+    display: inline;
+    color: white;
+    padding: 3px 5px;
+    margin-right: 5px;
+    background-color: #337ab7; }
+
+.plannyCellWrapper {
+  margin-bottom: 20px; }

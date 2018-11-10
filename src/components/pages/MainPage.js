@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './MainPage.css';
 import { Row, Col, Input, Button } from 'reactstrap';
+import { PlannyTable } from '../organisms/PlannyTable';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { MainCategoryButton } from '../atoms/MainCategoryButton';
@@ -31,7 +32,7 @@ class MainPage extends React.Component {
    // query.latitude = this.props.state.searchGeocode.latitude;
     //query.longitude = this.props.state.searchGeocode.longitude;
     query.categoryIds = this.selectedCategories;   
-    this.props.getPlannies(JSON.stringify(query));
+    this.props.getPlanniesAsync(JSON.stringify(query));
   }
 
   handleQueryChange(e) {   
@@ -51,6 +52,7 @@ class MainPage extends React.Component {
 
   componentDidMount() { 
    this.props.getMainCategoriesAsync();
+   this.props.getPlanniesAsync(null);
   //   this.props.getSubCategories();   
   }
 
@@ -241,7 +243,9 @@ class MainPage extends React.Component {
         </Row>
 
         <Row className="planniesRow">
-          
+        <PlannyTable
+            plannies={this.props.state.plannies}
+            gotoDetails={this.gotoDetails} />
         </Row>
       </div>
     );
