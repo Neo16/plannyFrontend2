@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from 'reactstrap';
-import './PlannyCell.scss';
+import './PlannyCell.css';
 
 export class PlannyCell extends React.Component
 {

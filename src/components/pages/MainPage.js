@@ -53,7 +53,7 @@ class MainPage extends React.Component {
   componentDidMount() { 
    this.props.getMainCategoriesAsync();
    this.props.getPlanniesAsync(null);
-  //   this.props.getSubCategories();   
+   this.props.getSubCategoriesAsync();   
   }
 
   toggleSelectCategory(parent) {
@@ -240,13 +240,10 @@ class MainPage extends React.Component {
               <Spinner />
             } */}
           </Col>
-        </Row>
-
-        <Row className="planniesRow">
+        </Row>       
         <PlannyTable
             plannies={this.props.state.plannies}
-            gotoDetails={this.gotoDetails} />
-        </Row>
+            gotoDetails={this.gotoDetails} />      
       </div>
     );
   }
