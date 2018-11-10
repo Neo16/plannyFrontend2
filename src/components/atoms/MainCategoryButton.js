@@ -8,7 +8,7 @@ export class MainCategoryButton extends React.Component
             <li onClick={() => this.props.toggleSelectCategory(c)} key={c.id}>
                 <img className="categoryIcon" src={"/" + c.name + ".svg"} />
                 <div className="categoryTitle"
-                    style={{ color: this.props.currentParentCategoryId == c.id ? '#3F6EC1' : 'black' }}>{c.name}</div>
+                    style={{ color: this.props.currentParentCategoryId === c.id ? '#3F6EC1' : 'black' }}>{c.name}</div>
             </li>
         );
     }

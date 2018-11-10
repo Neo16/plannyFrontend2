@@ -30,14 +30,11 @@ class MainPage extends React.Component {
     var query = { ...this.state.query };
    // query.latitude = this.props.state.searchGeocode.latitude;
     //query.longitude = this.props.state.searchGeocode.longitude;
-    query.categoryIds = this.selectedCategories;
-
-    console.log(query);
+    query.categoryIds = this.selectedCategories;   
     this.props.getPlannies(JSON.stringify(query));
   }
 
-  handleQueryChange(e) {
-    console.log(e.target.value);
+  handleQueryChange(e) {   
     const name = e.target.name;
     this.setState({
       query: {
@@ -107,6 +104,7 @@ class MainPage extends React.Component {
             <ul className="nav category-tabs horizontal" role="tablist">
               {mainCats.map((c) =>
                 <MainCategoryButton
+                  key = {c.id}
                   category={c}
                   toggleSelectCategory={this.toggleSelectCategory}
                   currentParentCategoryId={this.state.currentParentCategoryId}
@@ -137,14 +135,15 @@ class MainPage extends React.Component {
             <div>
               <label>Gender:</label>
               <Input
+                type="select"
                 value={this.state.query.participantsGender}
+                defaultValue="2"
                 name="participantsGender"
                 onChange={this.handleQueryChange}
-                className="inlineControl"
-                componentClass="select">
+                className="inlineControl">
                 <option value="0">male</option>
                 <option value="1">female</option>
-                <option value="2" selected >doesn't matter</option>
+                <option value="2">doesn't matter</option>
               </Input>
             </div>
           </Col>

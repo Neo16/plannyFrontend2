@@ -35,8 +35,7 @@ export const acquirePlanniesReducer = (state, action) => {
                     participationState: 'Required'
                 }
             }
-        case 'GET_MAINCATEGORIES':
-            console.log("asd");
+        case 'GET_MAINCATEGORIES':           
             return {
                 ...state,
                 mainCategories: action.categories
