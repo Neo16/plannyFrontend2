@@ -12,33 +12,6 @@ h1, h2{
     border-radius: 7px;  
 }
 
-.subCategoryRow{
-    position: absolute;
-    background-color: $app-background-gray;
-    border-radius: 7px;  
-    width: 40%;      
-    left: 30%;
-    z-index: 1000000;
-    padding: 10px 20px;
-  
-
-    .checkbox input[type=checkbox]{
-        width: 20px;    
-        height: 20px;   
-        margin-left: -27px;
-        padding-bottom: 4px;
-        font-size: 15px;
-    }
-
-    .checkbox label{
-        line-height: 34px;
-        min-height: 20px;
-        padding-left: 20px;       
-        font-weight: 400;      
-        margin-left: 14px;
-    }
-}
-
 @media only screen and (max-width : 1600px) {
     .subCategoryRow {
         width: 50%;
@@ -56,49 +29,6 @@ h1, h2{
     .subCategoryRow {
         width: 70%;
         left: 15%;
-    }
-}
-
-
-.categoryRow{
-    background-color: $app-background-gray;
-    padding: 25px 0px;
-    border-radius: 7px;
-}
-
-.category-tabs.horizontal {
-    background-color: transparent;
-    border-bottom: 0;
-    text-align: center;
-
-    & > li {
-        padding-right: 40px;
-        float: initial;
-        display: inline-block;     
-    }
-
-    .categoryIcon{
-        cursor: pointer;
-        width: 80px;
-        height: 80px;
-    }
-
-    .categoryTitle{
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 600;
-        padding-top: 10px;
-        font-family: Montserrat;  
-
-    }
-
-    white-space: nowrap;
-    overflow: -moz-scrollbars-none;
-    overflow: scroll;
-    -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-        display: none;
     }
 }
 

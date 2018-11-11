@@ -8,27 +8,6 @@ h1, h2 {
   background-color: #eaeaea;
   border-radius: 7px; }
 
-.subCategoryRow {
-  position: absolute;
-  background-color: #eaeaea;
-  border-radius: 7px;
-  width: 40%;
-  left: 30%;
-  z-index: 1000000;
-  padding: 10px 20px; }
-  .subCategoryRow .checkbox input[type=checkbox] {
-    width: 20px;
-    height: 20px;
-    margin-left: -27px;
-    padding-bottom: 4px;
-    font-size: 15px; }
-  .subCategoryRow .checkbox label {
-    line-height: 34px;
-    min-height: 20px;
-    padding-left: 20px;
-    font-weight: 400;
-    margin-left: 14px; }
-
 @media only screen and (max-width: 1600px) {
   .subCategoryRow {
     width: 50%;
@@ -43,36 +22,6 @@ h1, h2 {
   .subCategoryRow {
     width: 70%;
     left: 15%; } }
-
-.categoryRow {
-  background-color: #eaeaea;
-  padding: 25px 0px;
-  border-radius: 7px; }
-
-.category-tabs.horizontal {
-  background-color: transparent;
-  border-bottom: 0;
-  text-align: center;
-  white-space: nowrap;
-  overflow: -moz-scrollbars-none;
-  overflow: scroll;
-  -ms-overflow-style: none; }
-  .category-tabs.horizontal > li {
-    padding-right: 40px;
-    float: initial;
-    display: inline-block; }
-  .category-tabs.horizontal .categoryIcon {
-    cursor: pointer;
-    width: 80px;
-    height: 80px; }
-  .category-tabs.horizontal .categoryTitle {
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    padding-top: 10px;
-    font-family: Montserrat; }
-  .category-tabs.horizontal::-webkit-scrollbar {
-    display: none; }
 
 .glyphicon {
   font-size: 40px !important;
