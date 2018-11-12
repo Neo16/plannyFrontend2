@@ -1,18 +1,36 @@
 @import '../../variables.scss';
 
-.categoryRow{
-    background-color: $app-background-gray;
+.categoryRow{   
+    background: $form-bg;
     padding: 25px 0px;
     border-radius: 7px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.scroll-arrow:hover{
+    color: $app-highlight-secondary;
+}
+
+.scroll-arrow-left{
+    @extend .scroll-arrow;
+    margin-right: 8px;
+}
+
+.scroll-arrow-right{
+    @extend .scroll-arrow;
+    margin-left: 8px;
 }
 
 .category-tabs {
     background-color: transparent;
     border-bottom: 0;
-    text-align: center; 
+    text-align: center;    
 
     .category-item{      
-        padding: 0px 10px;
+        padding: 0px 12px;
 
         .category-button{
             display: flex;
@@ -53,8 +71,8 @@
 }
 
 .subCategoryRow{
-    position: absolute;
-    background-color: $app-background-gray;
+    background: $form-bg;
+    position: absolute; 
     border-radius: 7px;  
     width: 40%;      
     left: 30%;

@@ -6,9 +6,9 @@ h1, h2{
 }
 
 .formRow{    
+    background: $form-bg;
     padding: 25px;
-    text-align: left;
-    background-color: $app-background-gray;
+    text-align: left;   
     border-radius: 7px;  
 }
 
@@ -42,10 +42,6 @@ h1, h2{
     padding-top: 24px;
     display: inline-block;   
     text-align: center;       
-}
-
-.scroll-right, .scroll-left {
-    cursor: pointer;
 }
 
 .inlineControl.form-control{ 

@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Input, Button, Label } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { MainCategoryButton } from '../atoms/MainCategoryButton';
 import { plannyAsyncActionCreators } from '../../actions/asyncActionCreators/plannyAsyncActionCreators';
 import { categoryAsyncActionCreator } from '../../actions/asyncActionCreators/categoryAsyncActionCreator';
@@ -42,8 +43,8 @@ class SearchForm extends React.Component {
     }
 
 
-    toggleSelectCategory(parentId) {       
-        parentId = parseInt(parentId);   
+    toggleSelectCategory(parentId) {
+        parentId = parseInt(parentId);
 
         if (this.state.currentParentCategoryId === 0 ||
             parentId === this.state.currentParentCategoryId || !this.state.subcategoriesVisible) {
@@ -58,7 +59,7 @@ class SearchForm extends React.Component {
                 currentParentCategoryId: parentId,
                 currentSubCategories: this.props.state.subCategories.filter((c) => c.parentCategoryId === parentId)
             });
-        }      
+        }
     }
 
     handleSelectSubCategory(id) {
@@ -101,14 +102,14 @@ class SearchForm extends React.Component {
             />
         );
 
-        const Arrow = ({ className, text }) => {
+        const Arrow = ({ iconName, className }) => {
             return (
-                <span className={className}>{text}</span>
+                <FontAwesomeIcon icon={iconName} size="4x" className={className} />
             );
         };
 
-        const ArrowLeft = Arrow({ text: '<', className: 'scroll-left' });
-        const ArrowRight = Arrow({ text: '>', className: 'scroll-right' });      
+        const ArrowLeft = Arrow({ iconName: 'angle-left', className:"pointer scroll-arrow-left" });
+        const ArrowRight = Arrow({ iconName: 'angle-right',  className:"pointer scroll-arrow-right" });
 
         return (
             <div>
@@ -122,7 +123,7 @@ class SearchForm extends React.Component {
                             dragging={true}
                             onSelect={this.toggleSelectCategory}
                             itemClass="category-item"
-                            transition={1.1}                       
+                            transition={1.1}
                         />
                     </Col>
                 </Row>

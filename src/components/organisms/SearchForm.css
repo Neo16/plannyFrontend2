@@ -1,7 +1,19 @@
 .categoryRow {
-  background-color: #eaeaea;
+  background: #fefefe;
   padding: 25px 0px;
   border-radius: 7px; }
+
+.pointer {
+  cursor: pointer; }
+
+.scroll-arrow:hover, .scroll-arrow-left:hover, .scroll-arrow-right:hover {
+  color: #33599B; }
+
+.scroll-arrow-left {
+  margin-right: 8px; }
+
+.scroll-arrow-right {
+  margin-left: 8px; }
 
 .category-tabs {
   background-color: transparent;
@@ -12,7 +24,7 @@
   overflow: scroll;
   -ms-overflow-style: none; }
   .category-tabs .category-item {
-    padding: 0px 10px; }
+    padding: 0px 12px; }
     .category-tabs .category-item .category-button {
       display: flex;
       flex-direction: column;
@@ -35,8 +47,8 @@
     display: none; }
 
 .subCategoryRow {
+  background: #fefefe;
   position: absolute;
-  background-color: #eaeaea;
   border-radius: 7px;
   width: 40%;
   left: 30%;
