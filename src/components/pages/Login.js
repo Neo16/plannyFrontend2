@@ -3,7 +3,7 @@ import { Row, Col, Button, Input } from 'reactstrap';
 import { Redirect, Link } from 'react-router-dom';
 import { accountAsyncActionsCreators } from '../../actions/asyncActionCreators/accountAsyncActionsCreators'
 import { connect } from 'react-redux';
-import './Login.scss';
+import './Login.css';
 
 export class Login extends React.Component {
 
@@ -41,7 +41,7 @@ export class Login extends React.Component {
 
     return (   
       <Row>
-        <Col md={4} mdOffset={4} className="loginForm">
+        <Col xl={{ size: 4, offset: 4}} lg={{ size: 6, offset: 3 }}  md={{ size: 8, offset: 2 }} className="loginForm">
           <h3>Login</h3>
           <Input
             value={this.state.userName}
