@@ -1,0 +1,6 @@
+@import '../global.scss';
+
+.loginForm {
+    @extend .basicForm;
+    margin-top: 150px;
+}

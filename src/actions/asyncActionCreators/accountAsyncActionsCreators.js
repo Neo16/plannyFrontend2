@@ -1,5 +1,5 @@
 import { HeaderHelper } from '../../actions/headerHelper';
-import {loginResult, registerResult} from '../actionCreators/accountActionsCreators'
+import { loginSuccess, loginInvalid, registerResult } from '../actionCreators/accountActionsCreators'
 
 export const accountAsyncActionsCreators = (dispatch) => {
     return {
@@ -11,15 +11,22 @@ export const accountAsyncActionsCreators = (dispatch) => {
                 body: String(loginData),
                 headers: requestHeaders,
             })
-        //  .then(handleErrors)
-            .then((response) => response.json())
-            .then(function (data) {
-                dispatch(loginResult(data));
+            .then(function (response) {
+                if (response.status === 200) {
+                    response.json()
+                        .then(function (data) {
+                            console.log(data);
+                            dispatch(loginSuccess(data));
+                        });
+                }
+                else if (response.status === 400) {                  
+                    dispatch(loginInvalid());                  
+                }
             })
             .catch(function (error) {
                 console.log("request failed.");
             });
-        },        
+        },
         registerAsync: (data) => {
             let requestHeaders = HeaderHelper.getJsonHeader();
 
@@ -28,14 +35,14 @@ export const accountAsyncActionsCreators = (dispatch) => {
                 body: String(data),
                 headers: requestHeaders,
             })
-            .then((response) => response.json())
-            .then(function (data) {
-                console.log(data);
-                dispatch(registerResult(data));
-            })
-            .catch(function (error) {
-                console.log("Registration failed.");
-            });
+                .then((response) => response.json())
+                .then(function (data) {
+                    console.log(data);
+                    dispatch(registerResult(data));
+                })
+                .catch(function (error) {
+                    console.log("Registration failed.");
+                });
         },
     }
 };

@@ -1,5 +1,9 @@
-export function loginResult(result){    
-   return { type: 'LOGIN_ACTION_RESULT', result}
+export function loginSuccess(result){    
+   return { type: 'LOGIN_ACTION_SUCCESS', result}
+}
+
+export function loginInvalid(result){    
+  return { type: 'LOGIN_ACTION_INVALID'}
 }
 
 export function logout(){    

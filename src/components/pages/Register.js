@@ -7,8 +7,7 @@ import { accountAsyncActionsCreators } from './../../actions/asyncActionCreators
 class Register extends React.Component {
 
     constructor(props) {
-        super(props);
-        console.log(props);
+        super(props);       
         this.state = {
             email: '',
             age: 0,
