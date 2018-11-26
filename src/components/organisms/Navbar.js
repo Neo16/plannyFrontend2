@@ -39,7 +39,7 @@ class PlannyNavBar extends React.Component {
                         {
                             this.props.accountState.isLoggedIn &&
                             <NavItem>
-                                <NavLink onClick={this.logOut}>Logout</NavLink>
+                                <NavLink href="~" onClick={this.logOut.bind(this)}>Logout</NavLink>
                             </NavItem>
                         }
                         {

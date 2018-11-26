@@ -3,16 +3,20 @@ export class AccountState {
     loginError;
     registerError;
     registerSuccess;
+    userName;
 }
 
 export const accountReducer = (state, action) => {
     switch (action.type) {
-        case 'LOGIN_ACTION_SUCCESS':           
-            localStorage.setItem('user', 'asd');
-            localStorage.setItem('userToken', action.result.accessToken);
+        case 'LOGIN_ACTION_SUCCESS':     
+            let userName = action.result.userName;
+            localStorage.setItem('planny-user', userName);
+            localStorage.setItem('planny-userToken', action.result.userToken);
             return {
                 ...state,
-                isLoggedIn: true
+                isLoggedIn: true,
+                username: userName
+
             }
         case 'LOGIN_ACTION_INVALID':           
             return {
@@ -20,6 +24,8 @@ export const accountReducer = (state, action) => {
                 loginError: "Invalid username or password."
             }
         case 'LOGOUT_ACTION':
+            localStorage.removeItem('planny-user');
+            localStorage.removeItem('planny-userToken');
             return {
                 ...state,
                 isLoggedIn: false

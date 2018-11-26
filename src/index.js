@@ -20,6 +20,7 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import  Login  from './components/pages/Login';
 
 
+//redux developer tool settings:
 const composeEnhancers =
   typeof window === 'object' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
@@ -38,10 +39,7 @@ const combinedReducer = combineReducers({
 });
 
 const store = createStore(
-  combinedReducer,
-  {
-     accountState: new AccountState()
-  },
+  combinedReducer,  
   enhancer
 );
 
@@ -65,6 +63,11 @@ const render = () => {
     document.getElementById('root')
   );
 }
+
+if (localStorage.getItem('planny-user')) {
+  store.getState().accountState.isLoggedIn = true; 
+}
+
 
 store.subscribe(render);
 registerServiceWorker();
