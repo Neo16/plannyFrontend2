@@ -87,9 +87,9 @@ export class MyPlannies extends React.Component {
 
 export default connect(
   (state) => ({
-    myPlanniesState: state.myPlanniesState,
+    myPlanniesState: state.myPlanniesState
   }),
-  plannyActionCreators
+  plannyActionCreators  
 )(MyPlannies);
 
 

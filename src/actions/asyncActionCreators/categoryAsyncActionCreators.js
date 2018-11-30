@@ -2,7 +2,7 @@ import { getCategoriesResult, getMainCategoriesResult} from '../actionCreators/c
 import { HeaderHelper } from '../headerHelper';
 import {stopLoading, startLoading} from '../actionCreators/globalActionCreators';
 
-export const categoryAsyncActionCreator = (dispatch) => {
+export const categoryAsyncActionCreators = (dispatch) => {
     return {
         getCategoriesAsync: () => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();

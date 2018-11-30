@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Row, Col, FormGroup, Button, Media, Input } from 'reactstrap';
+import { categoryAsyncActionCreators } from '../../actions/asyncActionCreators/categoryAsyncActionCreators';
+import { connect } from 'react-redux';
 import './CreateEditPlannyForm.scss'
 
-export default class CreatePlannyForm extends React.Component {
+export class CreatePlannyForm extends React.Component {
 
   uploadCalled;
 
@@ -30,7 +32,7 @@ export default class CreatePlannyForm extends React.Component {
 
   componentDidMount() {
     this.uploadCalled = false;
-    this.props.getCategories();
+    this.props.getCategoriesAsync();
   }
 
   uploadPicture(e) {
@@ -49,9 +51,9 @@ export default class CreatePlannyForm extends React.Component {
 
   createCategoryOptions() {
     let items = [];
-    let categories = this.props.editCreateState.categories;
+    let categories = this.props.appCommonState.categories;
 
-    if (categories.length > 0) {
+    if (categories != undefined && categories.length > 0) {
       for (let i = 0; i < categories.length; i++) {
         items.push(
           <option key={categories[i].id} value={categories[i].id}>
@@ -64,19 +66,14 @@ export default class CreatePlannyForm extends React.Component {
 
   render() {
     return (
-      <Row>
-        {/* {
-          this.props.editCreateState.isLoading && this.uploadCalled &&
-          <Spinner />
-        }                */}
-        <Col md={6} mdOffset={3} className="basicForm">        
-          {this.props.editCreateState.uplodedPictureUrl != '' &&
-            <Media data-src={this.props.editCreateState.uplodedPictureUrl}
+      <React.Fragment>
+        <Col md={6} mdOffset={3} className="basicForm">
+          {this.props.pictureUploadState.uplodedPictureUrl != '' &&
+            <Media data-src={this.props.pictureUploadState.uplodedPictureUrl}
               className="plannyPic"
               rounded
               responsive />
           }
-
           <FormGroup
             controlId="formBasicText">
             <Input
@@ -84,16 +81,14 @@ export default class CreatePlannyForm extends React.Component {
               value={this.state.Name}
               placeholder="Name"
               name="Name"
-              onChange={this.handleChange}
-            />
+              onChange={this.handleChange} />
             <Input
               componentClass="textarea"
               name="Description"
               type="text"
               value={this.state.Description}
               placeholder="Description"
-              onChange={this.handleChange}
-            />
+              onChange={this.handleChange} />
             <Input
               onChange={this.handleChange}
               value={this.state.CategoryId}
@@ -119,30 +114,29 @@ export default class CreatePlannyForm extends React.Component {
           </div>
 
           <FormGroup>
-
             <Input
               name="FromTime"
               type="datetime-local"
               value={this.state.FromTime}
               onChange={this.handleChange}>
             </Input>
-
             <Input
               name="ToTime"
               type="datetime-local"
               value={this.state.ToTime}
               onChange={this.handleChange}>
             </Input>
-
-            <Button
-              bsStyle="primary"
-              onClick={() => this.addPlanny()}>
-              Add Planny
-          </Button>
-
           </FormGroup>
         </Col>
-      </Row>
+      </React.Fragment>
     );
   }
 }
+
+export default connect(
+  (state) => ({
+    pictureUploadState: state.pictureUploadState,
+    appCommonState: state.appCommonState
+  }),
+  categoryAsyncActionCreators  
+)(CreatePlannyForm); 

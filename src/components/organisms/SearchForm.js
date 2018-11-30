@@ -5,7 +5,7 @@ import { Row, Col, Input, Button, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { MainCategoryButton } from '../atoms/MainCategoryButton';
 import { plannyAsyncActionCreators } from '../../actions/asyncActionCreators/plannyAsyncActionCreators';
-import { categoryAsyncActionCreator } from '../../actions/asyncActionCreators/categoryAsyncActionCreator';
+import { categoryAsyncActionCreators } from '../../actions/asyncActionCreators/categoryAsyncActionCreators';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import './SearchForm.css';
 
@@ -50,14 +50,14 @@ class SearchForm extends React.Component {
             parentId === this.state.currentParentCategoryId || !this.state.subcategoriesVisible) {
             this.setState({
                 subcategoriesVisible: !this.state.subcategoriesVisible,
-                currentSubCategories: this.props.state.subCategories.filter((c) => c.parentCategoryId === parentId),
+                currentSubCategories: this.props.appCommonState.subCategories.filter((c) => c.parentCategoryId === parentId),
                 currentParentCategoryId: parentId,
             });
         }
         else {
             this.setState({
                 currentParentCategoryId: parentId,
-                currentSubCategories: this.props.state.subCategories.filter((c) => c.parentCategoryId === parentId)
+                currentSubCategories: this.props.appCommonState.subCategories.filter((c) => c.parentCategoryId === parentId)
             });
         }
     }
@@ -90,7 +90,7 @@ class SearchForm extends React.Component {
     }
 
     render() {
-        var mainCats = this.props.state.mainCategories;
+        var mainCats = this.props.appCommonState.mainCategories;
         if (mainCats === undefined) {
             return null;
         }
@@ -257,11 +257,11 @@ class SearchForm extends React.Component {
 }
 
 export default connect(
-    (state) => ({
-        state: state.acquirePlanniesState,
+    (state) => ({      
+        appCommonState: state.appCommonState
     }),
     dispatch => ({
         ...plannyAsyncActionCreators(dispatch),
-        ...categoryAsyncActionCreator(dispatch)
+        ...categoryAsyncActionCreators(dispatch)
     })
 )(SearchForm);

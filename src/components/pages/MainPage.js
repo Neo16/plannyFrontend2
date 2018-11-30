@@ -30,6 +30,6 @@ class MainPage extends React.Component {
 
 export default connect(
   (state) => ({
-      state: state.acquirePlanniesState,
+      state: state.acquirePlanniesState 
   }) 
 )(MainPage);

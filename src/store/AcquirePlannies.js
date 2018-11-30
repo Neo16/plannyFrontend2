@@ -34,17 +34,7 @@ export const acquirePlanniesReducer = (state, action) => {
                     ...state.plannyDetail,
                     participationState: 'Required'
                 }
-            }
-        case 'GET_MAINCATEGORIES':           
-            return {
-                ...state,
-                mainCategories: action.categories
-            }
-        case 'GET_SUBCATEGORIESS':
-            return {
-                ...state,
-                subCategories: action.categories
-            }
+            }       
         case 'GET_GEOCODES':
             return {
                 ...state,

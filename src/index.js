@@ -12,8 +12,9 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { accountReducer, AccountState } from './/store/Account'
+import { PictureUploadState, pictureUploadReducer } from './/store/PictureUpload'
 import { acquirePlanniesReducer } from './/store/AcquirePlannies'
-import { appStatusReducer } from './/store/AppStatus'
+import { appCommonReducer } from './/store/AppCommon'
 import PlannyNavBar from './components/organisms/Navbar'
 import { library as fontLibrary } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -36,7 +37,8 @@ const enhancer = composeEnhancers(
 const combinedReducer = combineReducers({
   accountState: accountReducer,
   acquirePlanniesState: acquirePlanniesReducer,
-  appStatusState: appStatusReducer
+  appCommonState: appCommonReducer,
+  pictureUploadState: pictureUploadReducer
 });
 
 const store = createStore(
