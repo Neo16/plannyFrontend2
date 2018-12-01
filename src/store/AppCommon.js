@@ -11,7 +11,7 @@ export const appCommonReducer = (state, action) => {
                 ...state,
                 mainCategories: action.categories
             }
-        case 'GET_SUBCATEGORIESS':
+        case 'GET_SUBCATEGORIESS':      
             return {
                 ...state,
                 subCategories: action.categories

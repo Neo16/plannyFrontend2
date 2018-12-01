@@ -13,7 +13,7 @@ export const categoryAsyncActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {            
-                dispatch(getCategoriesResult(data));            
+                dispatch(getCategoriesResult(data)); 
             });
         },
         getMainCategoriesAsync: () => {         

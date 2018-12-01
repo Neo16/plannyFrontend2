@@ -1,6 +1,6 @@
 export function getCategoriesResult(categories) {
     return {
-        type: 'GET_CATEGORIES_SUCCESS',
+        type: 'GET_SUBCATEGORIESS',
         categories
     };
 }

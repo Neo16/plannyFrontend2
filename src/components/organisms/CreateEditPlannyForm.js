@@ -10,24 +10,12 @@ export class CreatePlannyForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      Name: "",
-      Description: "",
-      CategoryId: "-1",
-      FromTime: '',
-      ToTime: '',
-      PictureName: ''
-    }
-
     this.handleChange = this.handleChange.bind(this);
-    this.uploadPicture = this.uploadPicture.bind(this);
   }
 
   handleChange(e) {
     const name = e.target.name;
-    this.setState({
-      [name]: e.target.value
-    });
+    this.props.onChange(name, e.target.value);
   }
 
   componentDidMount() {
@@ -35,23 +23,15 @@ export class CreatePlannyForm extends React.Component {
     this.props.getCategoriesAsync();
   }
 
-  uploadPicture(e) {
-    this.uploadCalled = true;
-    let file = e.target.files[0];
-    this.props.uploadPlannyPicture(file);
-  }
-
-  addPlanny() {
-    this.props.createPlannyProposal(JSON.stringify({
-      ...this.state,
-      PictureName: this.props.editCreateState.UploadedPictureName
-    }));
-    console.log(JSON.stringify(this.state));
-  }
+  // uploadPicture(e) {
+  //   this.uploadCalled = true;
+  //   let file = e.target.files[0];
+  //   this.props.uploadPlannyPicture(file);
+  // } 
 
   createCategoryOptions() {
     let items = [];
-    let categories = this.props.appCommonState.categories;
+    let categories = this.props.appCommonState.subCategories;
 
     if (categories != undefined && categories.length > 0) {
       for (let i = 0; i < categories.length; i++) {
@@ -67,34 +47,31 @@ export class CreatePlannyForm extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Col md={6} mdOffset={3} className="basicForm">
+        <div className={"basicForm " + (this.props.className || "")}>
           {this.props.pictureUploadState.uplodedPictureUrl != '' &&
-            <Media data-src={this.props.pictureUploadState.uplodedPictureUrl}
-              className="plannyPic"
-              rounded
-              responsive />
+            <Media
+              data-src={this.props.pictureUploadState.uplodedPictureUrl}
+              className="plannyPic rounded img-fluid"/>
           }
-          <FormGroup
-            controlId="formBasicText">
+          <FormGroup>
             <Input
               type="text"
-              value={this.state.Name}
+              value={this.props.planny.Name}
               placeholder="Name"
               name="Name"
               onChange={this.handleChange} />
             <Input
-              componentClass="textarea"
-              name="Description"
-              type="text"
-              value={this.state.Description}
+              type="textarea"
+              name="Description"             
+              value={this.props.planny.Description}
               placeholder="Description"
               onChange={this.handleChange} />
             <Input
               onChange={this.handleChange}
-              value={this.state.CategoryId}
+              value={this.props.planny.CategoryId}
               name="CategoryId"
               placeholder="Choose a category"
-              componentClass="select">
+              type="select">
               <option value="-1" disabled>Choose a Category</option>
               {this.createCategoryOptions()}
             </Input>
@@ -117,17 +94,17 @@ export class CreatePlannyForm extends React.Component {
             <Input
               name="FromTime"
               type="datetime-local"
-              value={this.state.FromTime}
+              value={this.props.planny.FromTime}
               onChange={this.handleChange}>
             </Input>
             <Input
               name="ToTime"
               type="datetime-local"
-              value={this.state.ToTime}
+              value={this.props.planny.ToTime}
               onChange={this.handleChange}>
             </Input>
           </FormGroup>
-        </Col>
+        </div>
       </React.Fragment>
     );
   }
@@ -138,5 +115,5 @@ export default connect(
     pictureUploadState: state.pictureUploadState,
     appCommonState: state.appCommonState
   }),
-  categoryAsyncActionCreators  
+  categoryAsyncActionCreators
 )(CreatePlannyForm); 
