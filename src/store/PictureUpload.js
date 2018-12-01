@@ -1,28 +1,18 @@
 export class PictureUpload {
-    uplodedPictureUrl;
-    UploadedPictureName;
+    uplodedPictureUrl; 
 }
 
 export const pictureUploadReducer = (state, action) => {
-    switch (action.type) {
-        case 'UPLOAD_PIC_REQUEST':
+    switch (action.type) {      
+        case 'UPLOAD_PICS':
             return {
-                ...state,
-                isLoading: !state.isLoading
-            }
-        case 'UPLOAD_PIC_SUCCESS':
-            return {
-                ...state,
-                UploadedPictureName: action.picName,
-                uplodedPictureUrl: 'https://edemstorage.blob.core.windows.net/pictures-container/'
-                    + action.picName,
-                isLoading: !state.isLoading
+                ...state,              
+                uplodedPictureUrl: action.pictureUrl
             }
 
         default: return state ||
         {
-            uplodedPictureUrl: null,
-            UploadedPictureName: null,
+            uplodedPictureUrl: null,           
         };
     }
 }

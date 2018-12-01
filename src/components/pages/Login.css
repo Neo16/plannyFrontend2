@@ -72,5 +72,11 @@ html, body, #root {
 .titleWrapper {
   margin-bottom: 18px; }
 
+.react-datepicker-wrapper {
+  width: 100%; }
+
+.react-datepicker__input-container {
+  width: 100%; }
+
 .loginForm {
   margin-top: 150px; }

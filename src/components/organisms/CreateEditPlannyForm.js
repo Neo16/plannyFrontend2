@@ -1,16 +1,21 @@
 import * as React from 'react';
 import { Row, Col, FormGroup, Button, Media, Input } from 'reactstrap';
 import { categoryAsyncActionCreators } from '../../actions/asyncActionCreators/categoryAsyncActionCreators';
+import { plannyAsyncActionCreators } from '../../actions/asyncActionCreators/plannyAsyncActionCreators';
 import { connect } from 'react-redux';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import './CreateEditPlannyForm.scss'
 
-export class CreatePlannyForm extends React.Component {
 
-  uploadCalled;
+export class CreateEditPlannyForm extends React.Component {
 
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.uploadPicture = this.uploadPicture.bind(this);
+    this.handleFromTimeTimeChage = this.handleFromTimeTimeChage.bind(this);
+    this.handleToTimeTimeChage = this.handleToTimeTimeChage.bind(this);
   }
 
   handleChange(e) {
@@ -18,16 +23,24 @@ export class CreatePlannyForm extends React.Component {
     this.props.onChange(name, e.target.value);
   }
 
+  handleFromTimeTimeChage(value) {
+    this.props.onChange("FromTime", value);
+  }
+
+  handleToTimeTimeChage(value) {
+    this.props.onChange("ToTime", value);
+  }
+
   componentDidMount() {
-    this.uploadCalled = false;
     this.props.getCategoriesAsync();
   }
 
-  // uploadPicture(e) {
-  //   this.uploadCalled = true;
-  //   let file = e.target.files[0];
-  //   this.props.uploadPlannyPicture(file);
-  // } 
+  uploadPicture(e) {
+    console.log(e.target.files);
+    this.uploadCalled = true;
+    let file = e.target.files[0];
+    this.props.uploadPlannyPictureAsync(file);
+  }
 
   createCategoryOptions() {
     let items = [];
@@ -49,9 +62,9 @@ export class CreatePlannyForm extends React.Component {
       <React.Fragment>
         <div className={"basicForm " + (this.props.className || "")}>
           {this.props.pictureUploadState.uplodedPictureUrl != '' &&
-            <Media
-              data-src={this.props.pictureUploadState.uplodedPictureUrl}
-              className="plannyPic rounded img-fluid"/>
+            <img
+              src={this.props.pictureUploadState.uplodedPictureUrl}
+              className="plannyPic rounded img-fluid" />
           }
           <FormGroup>
             <Input
@@ -62,7 +75,7 @@ export class CreatePlannyForm extends React.Component {
               onChange={this.handleChange} />
             <Input
               type="textarea"
-              name="Description"             
+              name="Description"
               value={this.props.planny.Description}
               placeholder="Description"
               onChange={this.handleChange} />
@@ -83,26 +96,29 @@ export class CreatePlannyForm extends React.Component {
               type="file"
               onChange={this.uploadPicture}>
             </Input>
-            <Button
-              className="upload-btn"
-              onClick={() => this.addPlanny()}>
-              Upload cover photo
-            </Button>
           </div>
 
-          <FormGroup>
-            <Input
-              name="FromTime"
-              type="datetime-local"
-              value={this.props.planny.FromTime}
-              onChange={this.handleChange}>
-            </Input>
-            <Input
-              name="ToTime"
-              type="datetime-local"
-              value={this.props.planny.ToTime}
-              onChange={this.handleChange}>
-            </Input>
+          <FormGroup className={"mt-2"}>
+            <DatePicker
+              className={"form-control"}
+              onChange={this.handleFromTimeTimeChage}
+              selected={this.props.planny.FromTime}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              dateFormat="MMMM d, yyyy h:mm aa"
+              timeCaption="time"
+            />
+            <DatePicker
+              className={"form-control"}
+              onChange={this.handleToTimeTimeChage}
+              selected={this.props.planny.ToTime}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              dateFormat="MMMM d, yyyy h:mm aa"
+              timeCaption="time"
+            />          
           </FormGroup>
         </div>
       </React.Fragment>
@@ -115,5 +131,8 @@ export default connect(
     pictureUploadState: state.pictureUploadState,
     appCommonState: state.appCommonState
   }),
-  categoryAsyncActionCreators
-)(CreatePlannyForm); 
+  dispatch => ({
+    ...plannyAsyncActionCreators(dispatch),
+    ...categoryAsyncActionCreators(dispatch)
+  })
+)(CreateEditPlannyForm); 

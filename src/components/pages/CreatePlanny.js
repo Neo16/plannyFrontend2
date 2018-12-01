@@ -14,9 +14,8 @@ export class CreatePlanny extends React.Component {
         Name: "",
         Description: "",
         CategoryId: "-1",
-        FromTime: '',
-        ToTime: '',
-        PictureName: ''
+        FromTime: new Date(),
+        ToTime: new Date(),       
       }
     }
 
@@ -26,8 +25,8 @@ export class CreatePlanny extends React.Component {
 
   addPlanny() {
     this.props.createPlannyProposalAsync(JSON.stringify({
-      ...this.state.planny,
-      //PictureName: this.props.editCreateState.UploadedPictureName
+      ...this.state.planny,      
+      PictureUrl:  this.props.pictureUploadState.uplodedPictureUrl    
     }));
     console.log(JSON.stringify(this.state));
   }
@@ -66,5 +65,8 @@ export class CreatePlanny extends React.Component {
 // - a kép feltöltés a formon intéződik. 
 
 export default connect(
+  (state) => ({
+    pictureUploadState: state.pictureUploadState,    
+  }),
   plannyAsyncActionCreators
 )(CreatePlanny); 

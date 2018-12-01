@@ -3,7 +3,7 @@ export class HeaderHelper{
         return ({
             'Accept': '*/*',
             'content-type': 'application/json', 
-            'authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'authorization': 'Bearer ' + localStorage.getItem('planny-userToken')
         });
     }
     
@@ -17,7 +17,7 @@ export class HeaderHelper{
     static getAuthorizedHeader(){
         return ({
             'Accept': '*/*',
-            'authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'authorization': 'Bearer ' + localStorage.getItem('planny-userToken')
         });
     }
 }

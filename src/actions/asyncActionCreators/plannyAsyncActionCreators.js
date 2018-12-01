@@ -18,30 +18,20 @@ export const plannyAsyncActionCreators = (dispatch) => {
             .then((response) => response.json());            
         },
         uploadPlannyPictureAsync: (picture) => {
-            dispatch({
-                type: 'UPLOAD_PIC_REQUEST'
-            });
+
+            //Todo fire isloading            
 
             let requestHeaders = HeaderHelper.getAuthorizedHeader();
-
             const formData = new FormData();
             formData.append("Picture", picture);
 
-            fetch("https://localhost:44378/api/files", {
+            fetch("https://localhost:44378/api/files/upload-picture", {
                 method: "POST",
                 body: formData,
                 headers: requestHeaders,
             })
             .then((response) => response.json())
-            .then(function (data) {
-                {
-                    dispatch({
-                        type: 'UPLOAD_PIC_SUCCESS',
-                        picName: data
-                        // todo result                        
-                    });
-                }
-            });
+            .then((data) => dispatch(pictureUpload(data)));            
         },        
         getMyPlanniesAsync: () => {
             dispatch(startLoading());

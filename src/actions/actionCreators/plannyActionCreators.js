@@ -13,10 +13,10 @@ export function searchPlannies(plannies) {
     }
 }
 
-export function pictureUpload(picName) {
+export function pictureUpload(pictureUrl) {
     return {
         type: 'UPLOAD_PICS',
-        picName
+        pictureUrl
     }
 }
 
