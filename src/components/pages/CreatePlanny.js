@@ -11,19 +11,16 @@ export class CreatePlanny extends React.Component {
     super(props);
     this.state = {
       planny: {
-        Name: "",
-        Description: "",
-        CategoryId: "-1",
-        FromTime: new Date(),
-        ToTime: new Date(),       
+        name: "",
+        description: "",
+        categoryId: "-1",
+        fromTime: new Date(),
+        toTime: new Date(),       
       }
-    }
-
-    this.addPlanny = this.addPlanny.bind(this);
-    this.handleFieldChange = this.handleFieldChange.bind(this);
+    }       
   }
 
-  addPlanny() {
+  createPlanny =() => {
     this.props.createPlannyProposalAsync(JSON.stringify({
       ...this.state.planny,      
       PictureUrl:  this.props.pictureUploadState.uplodedPictureUrl    
@@ -31,7 +28,7 @@ export class CreatePlanny extends React.Component {
     console.log(JSON.stringify(this.state));
   }
 
-  handleFieldChange(name, value) {
+  handleFieldChange = (name, value) => {
     this.setState({
       planny: {
        ...this.state.planny,
@@ -44,7 +41,6 @@ export class CreatePlanny extends React.Component {
     return (
       <Row>
         <Col md={{ size: 6, offset: 3 }} className="mt-3">
-
           <div className="title">Create Planny</div>
           <CreateEditPlannyForm
             onChange={this.handleFieldChange}
@@ -52,7 +48,7 @@ export class CreatePlanny extends React.Component {
             className="mt-2" />
           <Button
             className="float-right mt-2"           
-            onClick={this.addPlanny}>
+            onClick={this.createPlanny}>
             Add Planny
           </Button>
         </Col>
@@ -60,9 +56,6 @@ export class CreatePlanny extends React.Component {
     );
   }
 }
-
-// Todo:
-// - a kép feltöltés a formon intéződik. 
 
 export default connect(
   (state) => ({

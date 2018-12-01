@@ -7,11 +7,21 @@ import {stopLoading, startLoading} from '../actionCreators/globalActionCreators'
 
 export const plannyAsyncActionCreators = (dispatch) => {
     return {
-        createPlannyProposalAsync: (planny) => {
+        createPlannyAsync: (planny) => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
 
             fetch("https://localhost:44378/api/plannies", {
                 method: "POST",
+                body: String(planny),
+                headers: requestHeaders,
+            })
+            .then((response) => response.json());            
+        },
+        updatePlannyAsync: (id, planny) => {
+            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
+
+            fetch("https://localhost:44378/api/plannies/"+id, {
+                method: "PUT",
                 body: String(planny),
                 headers: requestHeaders,
             })
@@ -38,7 +48,7 @@ export const plannyAsyncActionCreators = (dispatch) => {
 
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
 
-            fetch("https://localhost:44378/api/plannies/myproposals", {
+            fetch("https://localhost:44378/api/plannies/my", {
                 method: "GET",
                 headers: requestHeaders,
             })
@@ -56,7 +66,7 @@ export const plannyAsyncActionCreators = (dispatch) => {
             dispatch(startLoading());
             let requestHeaders = HeaderHelper.getJsonHeader();                   
 
-            fetch("https://localhost:44378/api/plannies/proposals",
+            fetch("https://localhost:44378/api/plannies/search",
              {
                 method: "POST",
                 headers: requestHeaders,
@@ -73,7 +83,7 @@ export const plannyAsyncActionCreators = (dispatch) => {
             dispatch({
                 type: 'GET_PLANNY_REQUEST',
             });
-            fetch("https://localhost:44378/api/plannies/proposals/" + id,
+            fetch("https://localhost:44378/api/plannies/" + id,
             {
                 method: "GET",
                 headers: requestHeaders
@@ -86,7 +96,7 @@ export const plannyAsyncActionCreators = (dispatch) => {
         joinPlannyAsync: (id) => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();           
 
-            fetch("https://localhost:44378/api/plannies/joinproposal/" + id,
+            fetch("https://localhost:44378/api/plannies/join/" + id,
             {
                 method: "GET",
                 headers: requestHeaders
@@ -163,10 +173,10 @@ export const plannyAsyncActionCreators = (dispatch) => {
                 }            
             });
         },
-        deleteProposalAsync: (id) => {
+        deleteAsync: (id) => {
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
 
-            fetch("https://localhost:44378/api/plannies/proposals/" + id,
+            fetch("https://localhost:44378/api/plannies/" + id,
             {
                 method: "DELETE",
                 headers: requestHeaders

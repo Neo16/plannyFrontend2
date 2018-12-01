@@ -8,6 +8,7 @@ import Register from './components/pages/Register';
 import { Container } from 'reactstrap';
 import MainPage from './components/pages/MainPage';
 import CreatePlanny from './components/pages/CreatePlanny';
+import EditPlanny from './components/pages/EditPlanny';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -60,6 +61,7 @@ const render = () => {
             <Route path='/' exact component={MainPage} />
             <Route path='/login' exact component={Login} />
             <Route path='/plannies/create' exact component={CreatePlanny} />
+            <Route path='/plannies/edit/:id' exact component={EditPlanny} />
           </Container>
         </div>
       </BrowserRouter>

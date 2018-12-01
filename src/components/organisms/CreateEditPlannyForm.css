@@ -87,13 +87,13 @@ html, body, #root {
   margin-top: -5px; }
 
 .upload-btn {
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  width: 100%; }
+  width: 100%;
+  z-index: 100; }
 
 .upload-btn-wrapper input[type=file] {
   font-size: 100px;
   position: absolute;
   left: 0;
   top: 0;
-  opacity: 0; }
+  opacity: 0;
+  z-index: -1; }

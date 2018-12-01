@@ -22,7 +22,7 @@ export function pictureUpload(pictureUrl) {
 
 export function getPlanny(planny) {
     return {
-        type: 'GET_PLANNY_SUCCES',
+        type: 'GET_PLANNY',
         planny
     }
 }
