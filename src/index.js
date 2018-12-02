@@ -14,6 +14,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { accountReducer, AccountState } from './/store/Account'
 import { PictureUploadState, pictureUploadReducer } from './/store/PictureUpload'
+import { MyPlanniesState, myPlanniesReducer } from './/store/MyPlannies'
 import { acquirePlanniesReducer } from './/store/AcquirePlannies'
 import { appCommonReducer } from './/store/AppCommon'
 import PlannyNavBar from './components/organisms/Navbar'
@@ -21,6 +22,7 @@ import { library as fontLibrary } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import  Login  from './components/pages/Login';
+import MyPlannies from './components/pages/MyPlannies';
 
 
 //redux developer tool settings:
@@ -39,7 +41,8 @@ const combinedReducer = combineReducers({
   accountState: accountReducer,
   acquirePlanniesState: acquirePlanniesReducer,
   appCommonState: appCommonReducer,
-  pictureUploadState: pictureUploadReducer
+  pictureUploadState: pictureUploadReducer,
+  myPlanniesState: myPlanniesReducer
 });
 
 const store = createStore(
@@ -62,6 +65,7 @@ const render = () => {
             <Route path='/login' exact component={Login} />
             <Route path='/plannies/create' exact component={CreatePlanny} />
             <Route path='/plannies/edit/:id' exact component={EditPlanny} />
+            <Route path='/plannies/my' exact component={MyPlannies} />
           </Container>
         </div>
       </BrowserRouter>

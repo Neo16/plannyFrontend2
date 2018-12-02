@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavItem, NavLink, Collapse, NavbarToggler } from 'reactstrap';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/actionCreators/accountActionsCreators';
-import If  from '../../components/atoms/If';
+import If from '../../components/atoms/If';
 
 
 class PlannyNavBar extends React.Component {
@@ -12,13 +12,13 @@ class PlannyNavBar extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false          
+            isOpen: false
         };
     }
 
     toggle() {
         this.setState({
-            isOpen: !this.state.isOpen            
+            isOpen: !this.state.isOpen
         });
     }
     logOut() {
@@ -33,23 +33,23 @@ class PlannyNavBar extends React.Component {
                     <Nav navbar>
                         <NavItem>
                             <NavLink href="/">Planny</NavLink>
-                        </NavItem>     
-                        <If condition={this.props.accountState.isLoggedIn }>
+                        </NavItem>
+                        <If condition={this.props.accountState.isLoggedIn}>
                             <NavItem>
-                                <NavLink href="/myplannies">My plannies</NavLink>
+                                <NavLink href="/plannies/my" >My plannies</NavLink>
                             </NavItem>
-                             <NavItem>
-                                  <NavLink href="/plannies/create" >New Planny</NavLink>
+                            <NavItem>
+                                <NavLink href="/plannies/create" >New Planny</NavLink>
                             </NavItem>
-                             <NavItem>
+                            <NavItem>
                                 <NavLink href="~" onClick={this.logOut.bind(this)}>Logout</NavLink>
                             </NavItem>
                         </If>
-                         <If condition={!this.props.accountState.isLoggedIn}>
-                             <NavItem>
+                        <If condition={!this.props.accountState.isLoggedIn}>
+                            <NavItem>
                                 <NavLink href="/login" >Login</NavLink>
                             </NavItem>
-                        </If>   
+                        </If>
                     </Nav>
                 </Collapse>
             </Navbar>);

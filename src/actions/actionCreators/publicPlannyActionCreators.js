@@ -1,22 +1,7 @@
-
-export function getMyPlannies(plannies) {
-    return {
-        type: 'GET_MY_PLANNIES',
-        plannies
-    }
-}
-
 export function searchPlannies(plannies) {
     return {
         type: 'SEARCH_PLANNIES',
         plannies
-    }
-}
-
-export function pictureUpload(pictureUrl) {
-    return {
-        type: 'UPLOAD_PICS',
-        pictureUrl
     }
 }
 
@@ -40,37 +25,11 @@ export function cancelParticipation(participationId) {
     }
 }
 
-export function approveParticipation() {
-    return {
-        type: 'APPROVE_PARTICIPATIONS'
-    }
-}
-
-export function declineParticipation() {
-    return {
-        type: 'DECLINE_PARTICIPATIONS'
-    }
-}
-
-export function getSubCategories(categories) {
-    return {
-        type: 'GET_SUBCATEGORIESS',
-        categories
-    }
-}
-
 export function geoCode(latitude, longitude) {
     return {
         type: 'GET_GEOCODES',
         latitude,
         longitude
-    }
-}
-
-export function deleteProposal(id) {
-    return {
-        type: 'DELETE_PROPOSALS',
-        id
     }
 }
 

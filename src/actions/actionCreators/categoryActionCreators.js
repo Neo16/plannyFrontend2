@@ -1,4 +1,4 @@
-export function getCategoriesResult(categories) {
+export function getSubCategoriesResult(categories) {
     return {
         type: 'GET_SUBCATEGORIESS',
         categories

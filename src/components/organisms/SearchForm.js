@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Row, Col, Input, Button, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { MainCategoryButton } from '../atoms/MainCategoryButton';
-import { plannyAsyncActionCreators } from '../../actions/asyncActionCreators/plannyAsyncActionCreators';
+import { publicPlannyAsyncActionCreators } from '../../actions/asyncActionCreators/publicPlannyAsyncActionCreators';
 import { categoryAsyncActionCreators } from '../../actions/asyncActionCreators/categoryAsyncActionCreators';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import './SearchForm.css';
@@ -261,7 +261,7 @@ export default connect(
         appCommonState: state.appCommonState
     }),
     dispatch => ({
-        ...plannyAsyncActionCreators(dispatch),
+        ...publicPlannyAsyncActionCreators(dispatch),
         ...categoryAsyncActionCreators(dispatch)
     })
 )(SearchForm);

@@ -64,12 +64,12 @@ html, body, #root {
   padding: 6px 9px;
   background-color: #2b2b2beb;
   padding: 6px;
-  display: inline;
   color: white;
   text-transform: uppercase;
   font-family: Montserrat; }
 
 .titleWrapper {
+  margin-top: 20px;
   margin-bottom: 18px; }
 
 .react-datepicker-wrapper {

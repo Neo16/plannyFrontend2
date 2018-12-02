@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Row, Col, FormGroup, Button, Media, Input, Label } from 'reactstrap';
 import { categoryAsyncActionCreators } from '../../actions/asyncActionCreators/categoryAsyncActionCreators';
-import { plannyAsyncActionCreators } from '../../actions/asyncActionCreators/plannyAsyncActionCreators';
+import { managePlannyAsyncActionCreators } from '../../actions/asyncActionCreators/managePlannyAsyncActionCreators';
 import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,7 +15,7 @@ export class CreateEditPlannyForm extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getCategoriesAsync();
+    this.props.getSubCategoriesAsync();
   }
 
   handleChange = (e) => {
@@ -141,7 +141,7 @@ export default connect(
     appCommonState: state.appCommonState
   }),
   dispatch => ({
-    ...plannyAsyncActionCreators(dispatch),
-    ...categoryAsyncActionCreators(dispatch)
+    ...managePlannyAsyncActionCreators(dispatch),
+    ...categoryAsyncActionCreators(dispatch),    
   })
 )(CreateEditPlannyForm); 

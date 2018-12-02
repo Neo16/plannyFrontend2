@@ -1,7 +1,8 @@
 import * as React from 'react';
 import CreateEditPlannyForm from '../organisms/CreateEditPlannyForm';
 import { connect } from 'react-redux';
-import { plannyAsyncActionCreators } from '../../actions/asyncActionCreators/plannyAsyncActionCreators'
+import { managePlannyAsyncActionCreators } from '../../actions/asyncActionCreators/managePlannyAsyncActionCreators'
+import { categoryAsyncActionCreators } from '../../actions/asyncActionCreators/categoryAsyncActionCreators';
 import { ApplicationState } from '../..';
 import { Row, Col, Button } from 'reactstrap';
 
@@ -21,7 +22,7 @@ export class CreatePlanny extends React.Component {
   }
 
   createPlanny =() => {
-    this.props.createPlannyProposalAsync(JSON.stringify({
+    this.props.createPlannyAsync(JSON.stringify({
       ...this.state.planny,      
       PictureUrl:  this.props.pictureUploadState.uplodedPictureUrl    
     }));
@@ -61,5 +62,5 @@ export default connect(
   (state) => ({
     pictureUploadState: state.pictureUploadState,    
   }),
-  plannyAsyncActionCreators
+  managePlannyAsyncActionCreators
 )(CreatePlanny); 

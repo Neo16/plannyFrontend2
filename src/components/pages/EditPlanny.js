@@ -1,7 +1,8 @@
 import * as React from 'react';
 import CreateEditPlannyForm from '../organisms/CreateEditPlannyForm';
 import { connect } from 'react-redux';
-import { plannyAsyncActionCreators } from '../../actions/asyncActionCreators/plannyAsyncActionCreators'
+import { publicPlannyAsyncActionCreators } from '../../actions/asyncActionCreators/publicPlannyAsyncActionCreators';
+import { managePlannyAsyncActionCreators } from '../../actions/asyncActionCreators/managePlannyAsyncActionCreators'
 import { ApplicationState } from '../..';
 import { Row, Col, Button } from 'reactstrap';
 import If from '../../components/atoms/If';
@@ -86,5 +87,8 @@ export default connect(
     pictureUploadState: state.pictureUploadState,
     acquirePlanniesState: state.acquirePlanniesState
   }),
-  plannyAsyncActionCreators
+  dispatch => ({
+    ...publicPlannyAsyncActionCreators(dispatch),
+    ...managePlannyAsyncActionCreators(dispatch)
+  })
 )(EditPlanny); 

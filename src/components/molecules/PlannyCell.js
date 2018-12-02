@@ -20,7 +20,7 @@ export class PlannyCell extends React.Component
         </div>
         <div className="categoryCont">
           <div className="categoryTag">
-            {p.categoryNames[0]}
+            {p.categories[0].name}
           </div>
         </div>
         <div className="plannyTitle">

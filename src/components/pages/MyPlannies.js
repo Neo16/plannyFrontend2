@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { plannyActionCreators } from '../../actions/actionCreators'
+import { managePlannyAsyncActionCreators } from '../../actions/asyncActionCreators/managePlannyAsyncActionCreators'
 import { ApplicationState } from '../..';
-import { MyPlannyTable } from '../organisms/MyPlannyTable'
-import { Row, Col, Button } from 'react-bootstrap'
-import { MyParticipation } from '../../model/MyParticipation';
-import './MyPlannies.scss';
+import { MyPlannyTable } from '../organisms/MyPlannyTable';
+import { Row, Col, Button } from 'reactstrap';
+import If from '../atoms/If';
+import './MyPlannies.css';
+
 
 export class MyPlannies extends React.Component {
 
@@ -17,7 +18,7 @@ export class MyPlannies extends React.Component {
     this.deleteProposal = this.deleteProposal.bind(this);
   }
 
-  createNew(){
+  createNew() {
     this.props.history.push("/createplanny");
   }
 
@@ -30,8 +31,7 @@ export class MyPlannies extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getMyPlannies();
-    this.props.getMyParticipations();
+    this.props.getMyPlanniesAsync();
   }
 
   deleteProposal(id) {
@@ -50,15 +50,17 @@ export class MyPlannies extends React.Component {
             <div className="title"> My Plannies </div>
           </div>
 
-          <MyPlannyTable
-            deleteProposal={this.deleteProposal}
-            plannies={this.props.myPlanniesState.plannies}
-            approveParticipation={this.approveParticipation}
-            declineParticipation={this.declineParticipation} 
-            createNew = {() => this.createNew()}/>      
+          <If condition={this.props.myPlanniesState.plannies != null}>
+            <MyPlannyTable
+              deleteProposal={this.deleteProposal}
+              plannies={this.props.myPlanniesState.plannies}
+              approveParticipation={this.approveParticipation}
+              declineParticipation={this.declineParticipation}
+              createNew={() => this.createNew()} />
+          </If>
         </Col>
 
-        <Col xs={12}>
+        {/* <Col xs={12}>
           <div className="titleWrapper">
             <div className="title"> My Participations</div>
           </div>
@@ -76,11 +78,8 @@ export class MyPlannies extends React.Component {
               </div>
             )}
           </div>
-
-
-        </Col>
+        </Col> */}
       </Row>
-
     );
   }
 }
@@ -89,7 +88,7 @@ export default connect(
   (state) => ({
     myPlanniesState: state.myPlanniesState
   }),
-  plannyActionCreators  
+  managePlannyAsyncActionCreators
 )(MyPlannies);
 
 

@@ -1,0 +1,41 @@
+
+@import '../../variables.scss';
+
+.applicantsBox{  
+    background-color: lavender;
+    border: 1px solid lightgray;
+
+    .applicantsHeader{        
+        padding: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        color: white;
+        background-color: $app-lighter-gray;
+        font-family: Montserrat;  
+        letter-spacing: 1.4px; 
+
+        .right{
+            font-size: 15px;
+        }
+    }
+
+    .applicantsList{
+        max-height: 100px;
+        overflow-y: auto;   
+        margin-left: -1px;
+        margin-right: -1px;
+        .applicant{
+            font-size: 15px;
+            background-color: white;
+            height: 41px;
+            padding: 10px 10px;   
+            border: 1px solid lightgray;
+            margin-bottom: -1px;       
+        }
+    }
+}
+
+.plannyCellWrapper{
+    margin-bottom: 20px;
+}
+
