@@ -1,10 +1,10 @@
 import * as React from 'react';
 import CreateEditPlannyForm from '../organisms/CreateEditPlannyForm';
 import { connect } from 'react-redux';
-import { managePlannyAsyncActionCreators } from '../../actions/asyncActionCreators/managePlannyAsyncActionCreators'
-import { categoryAsyncActionCreators } from '../../actions/asyncActionCreators/categoryAsyncActionCreators';
+import { managePlannyAsyncActionCreators } from '../../actions/asyncActionCreators/managePlannyAsyncActionCreators';
 import { ApplicationState } from '../..';
 import { Row, Col, Button } from 'reactstrap';
+import './../../global.css';
 
 export class CreatePlanny extends React.Component {
 
@@ -14,17 +14,18 @@ export class CreatePlanny extends React.Component {
       planny: {
         name: "",
         description: "",
-        categoryId: "-1",
+        categoryIds: [],
         fromTime: new Date(),
-        toTime: new Date(),       
+        toTime: new Date(),
       }
-    }       
+    }
   }
 
-  createPlanny =() => {
+  createPlanny = () => {
     this.props.createPlannyAsync(JSON.stringify({
-      ...this.state.planny,      
-      PictureUrl:  this.props.pictureUploadState.uplodedPictureUrl    
+      ...this.state.planny,
+      pictureUrl: this.props.pictureUploadState.uplodedPictureUrl,
+      categoryIds: this.state.planny.categoryIds.map(c => c.value)
     }));
     console.log(JSON.stringify(this.state));
   }
@@ -32,8 +33,8 @@ export class CreatePlanny extends React.Component {
   handleFieldChange = (name, value) => {
     this.setState({
       planny: {
-       ...this.state.planny,
-       [name]: value
+        ...this.state.planny,
+        [name]: value
       }
     });
   }
@@ -43,15 +44,19 @@ export class CreatePlanny extends React.Component {
       <Row>
         <Col md={{ size: 6, offset: 3 }} className="mt-3">
           <div className="title">Create Planny</div>
-          <CreateEditPlannyForm
-            onChange={this.handleFieldChange}
-            planny={this.state.planny}
-            className="mt-2" />
-          <Button
-            className="float-right mt-2"           
-            onClick={this.createPlanny}>
-            Add Planny
-          </Button>
+          <div className="basicForm mt-3">
+            <CreateEditPlannyForm
+              planny={this.state.planny}
+              onChange={this.handleFieldChange} />
+            <div className="d-flex flex-row-reverse">
+              <Button
+                color="info"
+                className="align"
+                onClick={this.createPlanny}>
+                Add Planny
+            </Button>
+            </div>
+          </div>
         </Col>
       </Row>
     );
@@ -60,7 +65,7 @@ export class CreatePlanny extends React.Component {
 
 export default connect(
   (state) => ({
-    pictureUploadState: state.pictureUploadState,    
+    pictureUploadState: state.pictureUploadState,
   }),
   managePlannyAsyncActionCreators
 )(CreatePlanny); 

@@ -18,6 +18,10 @@ export class MyPlannies extends React.Component {
     this.deleteProposal = this.deleteProposal.bind(this);
   }
 
+  componentDidMount() {
+    this.props.getMyPlanniesAsync();
+  }
+
   createNew() {
     this.props.history.push("/createplanny");
   }
@@ -28,11 +32,7 @@ export class MyPlannies extends React.Component {
 
   approveParticipation(id) {
     this.props.approveParticipation(id);
-  }
-
-  componentDidMount() {
-    this.props.getMyPlanniesAsync();
-  }
+  } 
 
   deleteProposal(id) {
     this.props.deleteProposal(id);

@@ -1,26 +1,27 @@
+
+@import '../../variables.scss';
+
+
 .plannyCell{
+    background-color: $form-bg;
     display: block;
-    height: 100%;
-    border: 1px solid gray;    
+    height: 100%; 
     margin-bottom: 10px;
     font-family: Montserrat;  
 
     .imageWrapper{
-        height: 115px;
+        height: 200px;
         overflow: hidden;
-
-        img{
-            padding-top: 0.5px;
-            padding-left: 1px;
-            padding-right: 0.5px;
+        img{           
             width: 100%;
         }
     }
 
     .plannyTitle{
         position: absolute;
-        top: 55px;    
-        left: 30px;
+        top: 0px;    
+        left: 0px;
+        margin: 41px 38px;
         font-size: 21px;    
         background: #2b2b2beb;
         color: white;       

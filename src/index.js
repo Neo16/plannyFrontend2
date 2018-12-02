@@ -12,9 +12,9 @@ import EditPlanny from './components/pages/EditPlanny';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { accountReducer, AccountState } from './/store/Account'
-import { PictureUploadState, pictureUploadReducer } from './/store/PictureUpload'
-import { MyPlanniesState, myPlanniesReducer } from './/store/MyPlannies'
+import { accountReducer } from './/store/Account'
+import { pictureUploadReducer } from './/store/PictureUpload'
+import { myPlanniesReducer } from './/store/MyPlannies'
 import { acquirePlanniesReducer } from './/store/AcquirePlannies'
 import { appCommonReducer } from './/store/AppCommon'
 import PlannyNavBar from './components/organisms/Navbar'
@@ -23,7 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import  Login  from './components/pages/Login';
 import MyPlannies from './components/pages/MyPlannies';
-
+import Details from './components/pages/Details';
 
 //redux developer tool settings:
 const composeEnhancers =
@@ -57,17 +57,18 @@ const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
-        <div>
+        <React.Fragment>
           <PlannyNavBar />
           <Container className="fill">
             <Route path='/register' component={Register} />
             <Route path='/' exact component={MainPage} />
             <Route path='/login' exact component={Login} />
             <Route path='/plannies/create' exact component={CreatePlanny} />
-            <Route path='/plannies/edit/:id' exact component={EditPlanny} />
+            <Route path='/plannies/edit/:id(\d+)' exact component={EditPlanny} />
             <Route path='/plannies/my' exact component={MyPlannies} />
+            <Route path='/plannies/:id(\d+)' exact component={Details} />
           </Container>
-        </div>
+        </React.Fragment>
       </BrowserRouter>
     </Provider>,
     document.getElementById('root')

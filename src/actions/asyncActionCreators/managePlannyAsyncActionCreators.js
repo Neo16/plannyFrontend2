@@ -45,12 +45,17 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
             dispatch(startLoading());
             let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
 
-            fetch("https://localhost:44378/api/plannies/my", {
+            fetch("https://localhost:44378/api/plannies/myplannies", {
                 method: "GET",
                 headers: requestHeaders,
             })
-            //.then(handleErrors)
-            .then((response) => response.json())
+            .then((response) => {
+                if (response.ok) {
+                  return response.json();
+                } else {
+                  throw new Error('Something went wrong');
+                }
+            })
             .then(function (plannies) {               
                 dispatch(getMyPlannies(plannies));
                 dispatch(stopLoading());                

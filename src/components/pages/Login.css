@@ -21,22 +21,19 @@ html, body, #root {
 
 .basicForm, .loginForm {
   background-color: white;
-  border: 1px solid #08a7d6;
+  border: 2px solid #08a7d6;
   padding: 25px;
-  border-radius: 7px;
-  -webkit-box-shadow: 0px 0px 8px 1px rgba(8, 167, 214, 0.76);
-  -moz-box-shadow: 0px 0px 8px 1px rgba(8, 167, 214, 0.76);
-  box-shadow: 0px 0px 8px 1px rgba(8, 167, 214, 0.76); }
+  border-radius: 7px; }
   .basicForm h3, .loginForm h3 {
     margin-top: 0px; }
   .basicForm input.form-control, .loginForm input.form-control, .basicForm textarea.form-control, .loginForm textarea.form-control {
     margin-bottom: 10px;
-    font-size: 18px;
-    padding: 10px 14px;
-    border-radius: 7px; }
+    font-size: 17px;
+    padding: 7px 10px;
+    border-radius: 4px; }
   .basicForm textarea, .loginForm textarea {
     resize: none; }
-  .basicForm input.form-control:focus, .loginForm input.form-control:focus {
+  .basicForm input.form-control:focus, .loginForm input.form-control:focus, .basicForm textarea.form-control:focus, .loginForm textarea.form-control:focus {
     outline: 0;
     box-shadow: none;
     border: 1px solid darkgray; }
@@ -77,6 +74,44 @@ html, body, #root {
 
 .react-datepicker__input-container {
   width: 100%; }
+
+.btn.btn-info {
+  color: #fff;
+  background-color: #08a7d6;
+  border-color: #08a7d6;
+  background-image: none; }
+  .btn.btn-info:hover {
+    background-color: #1293bb; }
+
+.btn.btn-outline-info {
+  color: #08a7d6;
+  background-color: transparent;
+  background-image: none;
+  border-color: #08a7d6; }
+  .btn.btn-outline-info:hover {
+    color: #fff;
+    background-color: #08a7d6;
+    border-color: #08a7d6; }
+
+.upload-btn-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  margin-bottom: 5px;
+  margin-top: -5px; }
+
+.upload-btn {
+  width: 100%;
+  z-index: 100; }
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: -1; }
 
 .loginForm {
   margin-top: 150px; }

@@ -31,12 +31,9 @@ html, body, #root {
 
 .basicForm{
     background-color:white;
-    border: 1px solid $app-blue-brand;
+    border: 2px solid $app-blue-brand;
     padding: 25px;
-    border-radius: 7px;   
-    -webkit-box-shadow: 0px 0px 8px 1px rgba(8,167,214,0.76);
-    -moz-box-shadow: 0px 0px 8px 1px rgba(8,167,214,0.76);
-    box-shadow: 0px 0px 8px 1px rgba(8,167,214,0.76);
+    border-radius: 7px;     
 
     h3 {
         margin-top: 0px;
@@ -44,20 +41,19 @@ html, body, #root {
 
     input.form-control, textarea.form-control {
        margin-bottom: 10px;
-       font-size: 18px;
-       padding: 10px 14px;
-       border-radius: 7px       
-    }
+       font-size: 17px;
+       padding: 7px 10px;
+       border-radius: 4px;
+    }   
 
     textarea{
         resize: none;
     }
 
-    input.form-control:focus {       
+    input.form-control:focus, textarea.form-control:focus {       
         outline: 0;
         box-shadow: none;
-        border: 1px solid darkgray;
-  
+        border: 1px solid darkgray;  
     }
 
     .submitBtn{
@@ -96,7 +92,7 @@ html, body, #root {
 }
 
 .titleWrapper{
-    margin-top: 20px;
+    margin-top: 20px;   
     margin-bottom: 18px;
 }
 
@@ -107,3 +103,54 @@ html, body, #root {
 .react-datepicker__input-container{
     width: 100%;
 }
+
+.btn.btn-info{
+    color: #fff;
+    background-color: $app-blue-brand;
+    border-color: $app-blue-brand;  
+    background-image: none;
+
+    &:hover{
+        background-color: $app-blue-brand-hover;
+    }
+}
+
+.btn.btn-outline-info{
+    color: $app-blue-brand;
+    background-color: transparent;
+    background-image: none;
+    border-color: $app-blue-brand;
+
+    &:hover{
+        color: #fff;
+        background-color: $app-blue-brand;
+        border-color: $app-blue-brand;
+    }
+}
+
+.upload-btn-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-top: -5px;
+  }
+  
+  .upload-btn{
+    width: 100%;  
+    z-index: 100;
+  }
+  
+  .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    z-index: -1;
+  }
+  
+  .input{
+
+  }

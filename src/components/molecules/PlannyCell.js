@@ -1,20 +1,19 @@
 import * as React from 'react';
 import { Button } from 'reactstrap';
 import './PlannyCell.css';
+import If from './../atoms/If';
 
-export class PlannyCell extends React.Component
-{
+export class PlannyCell extends React.Component {
   render() {
     var p = this.props.planny;
 
     return (
       <div className="plannyCell">
         <div className="imageWrapper">
-          {p.pictureName != null &&
-            <img src={"https://edemstorage.blob.core.windows.net/pictures-container/"
-              + p.pictureName} />
+          {p.pictureUrl != null &&
+            <img src={p.pictureUrl} />
           }
-          {p.pictureName == null &&
+          {p.pictureUrl == null &&
             <img src="http://via.placeholder.com/350x300" />
           }
         </div>
@@ -31,12 +30,17 @@ export class PlannyCell extends React.Component
         </div>
 
         <div className="plannyButtonWrapper">
-          {this.props.mine &&
-            <Button onClick={() => this.props.deleteProposal(p.id)} style={{ 'margin-right': '10px' }}>
+          <If condition={this.props.mine}>            
+            <Button
+              className = {"float-left"}
+              onClick={() => this.props.deleteProposal(p.id)}
+              outline color="danger">
               Delete
            </Button>
-          }
-          <Button href={"/planny/"+ p.id}>
+          </If>
+          <Button            
+            outline color="info"
+            href={"/plannies/" + p.id}>
             Details
           </Button>
         </div>

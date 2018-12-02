@@ -1,47 +1,49 @@
 import * as React from 'react';
 import './PlannyCell.scss';
-import {PlannyCell} from './PlannyCell'
-import {ApplicantRow} from './../atoms/ApplicantRow';
+import { PlannyCell } from './PlannyCell'
+import { ApplicantRow } from './../atoms/ApplicantRow';
 import './PlannyCellWithAplicants.css';
+import If from './../atoms/If';
 
-export class PlannyCellWithAplicants extends React.Component
-{
+export class PlannyCellWithAplicants extends React.Component {
   render() {
     var p = this.props.planny;
 
     console.log(p.participants);
 
-    return (     
+    return (
       <div className="plannyCellWrapper">
-       <PlannyCell
-             key={p.id} 
-             planny={p} 
-             mine={true} 
-             deleteProposal = {this.props.deleteProposal}
-             gotoDetails={this.props.gotoDetails}/>
+        <PlannyCell
+          key={p.id}
+          planny={p}
+          mine={true}
+          deleteProposal={this.props.deleteProposal}
+          gotoDetails={this.props.gotoDetails} />
 
         <div className="applicantsBox">
           <div className="applicantsHeader">
-            Applicants       
-            <span className="right"> approve</span>     
-          </div>   
+            Applicants
+            <span className="right"> approve</span>
+          </div>
           <div className="applicantsList">
-              {p.participations.length > 0 && p.participations.map((p ) =>
-                  <ApplicantRow
-                     approve = {() => this.props.approveParticipation(p.participationId)}
-                     decline = {() => this.props.declineParticipation(p.participationId)}
-                     key={p.participationId}
-                     name={p.userName}/>
-              )}    
-              {p.participations.length ==  0 && 
-                  <div className="applicant">
-                      No applicants yet.                  
-                  </div>
-               }                  
-            </div>          
-        </div>         
-      </div>     
-       
+            <If condition={p.participations.length > 0}>
+              {p.participations.map((p) =>
+                <ApplicantRow
+                  approve={() => this.props.approveParticipation(p.participationId)}
+                  decline={() => this.props.declineParticipation(p.participationId)}
+                  key={p.participationId}
+                  name={p.userName} />
+              )}
+            </If>
+            <If condition={p.participations.length == 0}>
+              <div className="applicant">
+                No applicants yet.
+               </div>
+            </If>
+          </div>
+        </div>
+      </div>
+
     );
   }
 }

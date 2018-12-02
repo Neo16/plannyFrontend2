@@ -1,21 +1,19 @@
 .plannyCell {
+  background-color: #fefefe;
   display: block;
   height: 100%;
-  border: 1px solid gray;
   margin-bottom: 10px;
   font-family: Montserrat; }
   .plannyCell .imageWrapper {
-    height: 115px;
+    height: 200px;
     overflow: hidden; }
     .plannyCell .imageWrapper img {
-      padding-top: 0.5px;
-      padding-left: 1px;
-      padding-right: 0.5px;
       width: 100%; }
   .plannyCell .plannyTitle {
     position: absolute;
-    top: 55px;
-    left: 30px;
+    top: 0px;
+    left: 0px;
+    margin: 41px 38px;
     font-size: 21px;
     background: #2b2b2beb;
     color: white;

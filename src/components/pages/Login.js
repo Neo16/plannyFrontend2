@@ -33,7 +33,6 @@ export class Login extends React.Component {
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: "/" } };  
     
     if (this.props.state.isLoggedIn) {
       return <Redirect to="/" />;
@@ -61,7 +60,10 @@ export class Login extends React.Component {
             (this.props.state.loginError) &&
             <p>{this.props.state.loginError} </p>
           }
-          <Button className="submitBtn" onClick={this.login.bind(this)}>Login</Button>
+          <Button outline
+           color="info" 
+           className="submitBtn"
+           onClick={this.login.bind(this)}>Login</Button>
           <Link to="/register">Register</Link>
         </Col>
       </Row>

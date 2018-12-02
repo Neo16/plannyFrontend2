@@ -15,7 +15,7 @@ export class EditPlanny extends React.Component {
       planny: {
         name: "",
         description: "",
-        categoryId: "-1",
+        categoryIds: ["-1"],
         fromTime: new Date(),
         toTime: new Date(),
       }

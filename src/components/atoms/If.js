@@ -1,8 +1,6 @@
 
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
 const If = (props) => {
   if (props.condition) {
     return (
@@ -12,11 +10,6 @@ const If = (props) => {
     )
   }
   return null
-}
-
-If.propTypes = {
-  condition: PropTypes.any.isRequired,
-  children: PropTypes.any.isRequired,
 }
 
 export default If;

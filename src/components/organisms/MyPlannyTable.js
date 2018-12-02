@@ -10,6 +10,7 @@ export class MyPlannyTable extends React.Component {
         {this.props.plannies.map((p) =>
           <Col key={p.id} md={4} sm={6}>
             <PlannyCellWithAplicants
+              mine = {true}
               approveParticipation={this.props.approveParticipation}
               declineParticipation={this.props.declineParticipation}
               key={p.id} planny={p}
