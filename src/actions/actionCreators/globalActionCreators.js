@@ -1,11 +1,11 @@
-export function startLoading() {
+export function startLoading() { 
     return {
         type: 'START_LOADING'      
     };
 }
 
-export function stopLoading() {
+export function stopLoading() {  
     return {
-        type: 'START_LOADING'      
+        type: 'STOP_LOADING'      
     };
 }

@@ -21,20 +21,22 @@ import PlannyNavBar from './components/organisms/Navbar'
 import { library as fontLibrary } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
-import  Login  from './components/pages/Login';
+import Login from './components/pages/Login';
 import MyPlannies from './components/pages/MyPlannies';
 import Details from './components/pages/Details';
+import If from './components/atoms/If';
+import { Spinner } from './components/atoms/Spinner';
 
 //redux developer tool settings:
 const composeEnhancers =
   typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
       // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
     }) : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk)  
+  applyMiddleware(thunk)
 );
 
 const combinedReducer = combineReducers({
@@ -46,7 +48,7 @@ const combinedReducer = combineReducers({
 });
 
 const store = createStore(
-  combinedReducer,  
+  combinedReducer,
   enhancer
 );
 
@@ -59,7 +61,7 @@ const render = () => {
       <BrowserRouter>
         <React.Fragment>
           <PlannyNavBar />
-          <Container className="fill">
+          <Container className='fill' hidden={store.getState().appCommonState.isLoading}>
             <Route path='/register' component={Register} />
             <Route path='/' exact component={MainPage} />
             <Route path='/login' exact component={Login} />
@@ -68,6 +70,10 @@ const render = () => {
             <Route path='/plannies/my' exact component={MyPlannies} />
             <Route path='/plannies/:id(\d+)' exact component={Details} />
           </Container>
+
+          <If condition={store.getState().appCommonState.isLoading}>
+            <Spinner />
+          </If>
         </React.Fragment>
       </BrowserRouter>
     </Provider>,
@@ -76,7 +82,7 @@ const render = () => {
 }
 
 if (localStorage.getItem('planny-user')) {
-  store.getState().accountState.isLoggedIn = true; 
+  store.getState().accountState.isLoggedIn = true;
 }
 
 

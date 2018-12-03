@@ -14,7 +14,7 @@ export const categoryAsyncActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {
-                dispatch(getSubCategoriesResult(data));
+                dispatch(getSubCategoriesResult(data));               
                 dispatch(stopLoading());    
             });
         },

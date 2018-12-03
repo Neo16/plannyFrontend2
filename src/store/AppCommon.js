@@ -11,10 +11,20 @@ export const appCommonReducer = (state, action) => {
                 ...state,
                 mainCategories: action.categories
             }
-        case 'GET_SUBCATEGORIESS':      
+        case 'GET_SUBCATEGORIESS':
             return {
                 ...state,
                 subCategories: action.categories
+            }
+        case 'START_LOADING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'STOP_LOADING':
+            return {
+                ...state,
+                isLoading: false
             }
         default: return state || { isLoading: false }
     }

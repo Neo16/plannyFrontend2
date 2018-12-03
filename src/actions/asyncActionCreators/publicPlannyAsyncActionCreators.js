@@ -16,9 +16,9 @@ export const publicPlannyAsyncActionCreators = (dispatch) => {
                 body: String(query)
              })
             .then((response) => response.json())
-            .then(function (plannies) {               
-                dispatch(searchPlannies(plannies));
-                dispatch(stopLoading());    
+            .then(function (plannies) {        
+                dispatch(searchPlannies(plannies));               
+                dispatch(stopLoading());                   
             });
         },
         getPlannyAsync: (id) => {
