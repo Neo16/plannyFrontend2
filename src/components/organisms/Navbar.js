@@ -3,6 +3,7 @@ import { Navbar, Nav, NavItem, NavLink, Collapse, NavbarToggler } from 'reactstr
 import { connect } from 'react-redux';
 import { logout } from '../../actions/actionCreators/accountActionsCreators';
 import If from '../../components/atoms/If';
+import { Link } from 'react-router-dom';
 
 
 class PlannyNavBar extends React.Component {
@@ -32,14 +33,14 @@ class PlannyNavBar extends React.Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav navbar>
                         <NavItem>
-                            <NavLink href="/">Planny</NavLink>
+                            <NavLink tag={Link} to="/">Planny</NavLink>
                         </NavItem>
                         <If condition={this.props.accountState.isLoggedIn}>
                             <NavItem>
-                                <NavLink href="/plannies/my" >My plannies</NavLink>
+                                <NavLink tag={Link} to="/plannies/my">My plannies</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/plannies/create" >New Planny</NavLink>
+                                <NavLink tag={Link} to="/plannies/create">New Planny</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="~" onClick={this.logOut.bind(this)}>Logout</NavLink>
@@ -47,7 +48,7 @@ class PlannyNavBar extends React.Component {
                         </If>
                         <If condition={!this.props.accountState.isLoggedIn}>
                             <NavItem>
-                                <NavLink href="/login" >Login</NavLink>
+                                <NavLink tag={Link} to="/login" >Login</NavLink>
                             </NavItem>
                         </If>
                     </Nav>
