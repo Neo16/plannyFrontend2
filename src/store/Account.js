@@ -4,11 +4,17 @@ export class AccountState {
     registerError;
     registerSuccess;
     userName;
+    profile;
 }
 
 export const accountReducer = (state, action) => {
     switch (action.type) {
-        case 'LOGIN_ACTION_SUCCESS':     
+        case 'GET_MY_PROFILE':
+            return {
+                ...state,
+                profile: action.result
+            };
+        case 'LOGIN_ACTION_SUCCESS':
             let userName = action.result.userName;
             localStorage.setItem('planny-user', userName);
             localStorage.setItem('planny-userToken', action.result.userToken);
@@ -18,7 +24,7 @@ export const accountReducer = (state, action) => {
                 username: userName
 
             }
-        case 'LOGIN_ACTION_INVALID':           
+        case 'LOGIN_ACTION_INVALID':
             return {
                 ...state,
                 loginError: "Invalid username or password."

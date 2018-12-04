@@ -1,5 +1,6 @@
 import { HeaderHelper } from '../../actions/headerHelper';
-import { loginSuccess, loginInvalid, registerResult } from '../actionCreators/accountActionsCreators'
+import { loginSuccess, loginInvalid, registerResult, getMyProfile } from '../actionCreators/accountActionsCreators'
+import { stopLoading, startLoading } from '../actionCreators/globalActionCreators';
 
 export const accountAsyncActionsCreators = (dispatch) => {
     return {
@@ -11,21 +12,21 @@ export const accountAsyncActionsCreators = (dispatch) => {
                 body: String(loginData),
                 headers: requestHeaders,
             })
-            .then(function (response) {
-                if (response.status === 200) {
-                    response.json()
-                        .then(function (data) {
-                            console.log(data);
-                            dispatch(loginSuccess(data));
-                        });
-                }
-                else if (response.status === 400) {                  
-                    dispatch(loginInvalid());                  
-                }
-            })
-            .catch(function (error) {
-                console.log("request failed.");
-            });
+                .then(function (response) {
+                    if (response.status === 200) {
+                        response.json()
+                            .then(function (data) {
+                                console.log(data);
+                                dispatch(loginSuccess(data));
+                            });
+                    }
+                    else if (response.status === 400) {
+                        dispatch(loginInvalid());
+                    }
+                })
+                .catch(function (error) {
+                    console.log("request failed.");
+                });
         },
         registerAsync: (data) => {
             let requestHeaders = HeaderHelper.getJsonHeader();
@@ -43,6 +44,47 @@ export const accountAsyncActionsCreators = (dispatch) => {
                 .catch(function (error) {
                     console.log("Registration failed.");
                 });
+        },
+        getMyProfileAsync: () => {
+            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
+            dispatch(startLoading());
+
+            fetch("https://localhost:44378/api/profiles/own", {
+                method: "GET",
+                headers: requestHeaders,
+            })
+                .then(function (response) {
+                    if (response.status === 200) {
+                        response.json()
+                            .then(function (data) {
+                                dispatch(getMyProfile(data));
+                                dispatch(stopLoading());
+                            });
+                    }
+                })
+                .catch(function (error) {
+                    console.log("request failed.");
+                });
+        },
+        editMyProfileAsync: (profile) => {
+            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();          
+
+            fetch("https://localhost:44378/api/profiles/own/edit", {
+                method: "PUT",
+                body: String(profile),
+                headers: requestHeaders,
+            })
+            .then(function (response) {
+                if (response.status === 200) {
+                    response.json()
+                        .then(function (data) {                           
+                           alert('success');
+                    });
+                }
+            })
+            .catch(function (error) {
+                console.log("request failed.");
+            });
         },
     }
 };

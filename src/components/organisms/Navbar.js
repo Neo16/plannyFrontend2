@@ -42,6 +42,13 @@ class PlannyNavBar extends React.Component {
                             <NavItem>
                                 <NavLink tag={Link} to="/plannies/create">New Planny</NavLink>
                             </NavItem>
+                        </If>
+                    </Nav>
+                    <Nav navbar className="nav ml-auto">
+                        <If condition={this.props.accountState.isLoggedIn}>
+                            <NavItem>
+                                <NavLink tag={Link} to="/profile">Profile</NavLink>
+                            </NavItem>
                             <NavItem>
                                 <NavLink href="~" onClick={this.logOut.bind(this)}>Logout</NavLink>
                             </NavItem>

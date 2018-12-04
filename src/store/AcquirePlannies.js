@@ -1,10 +1,9 @@
 export class AcquirePlanniesState {
-    plannies
-    query
-    plannyDetail
-    mainCategories
-    subCategories   
-    searchGeocode
+    plannies;
+    query;
+    plannyDetail;
+    searchGeocode;
+    ownerProfile;
 }
 
 export const acquirePlanniesReducer = (state, action) => {

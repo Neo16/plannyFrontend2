@@ -5,9 +5,20 @@
   margin-bottom: 10px;
   font-family: Montserrat; }
   .plannyCell .imageWrapper {
-    height: 200px;
+    height: 220px;
     overflow: hidden; }
+    @media screen and (max-width: 1200px) {
+      .plannyCell .imageWrapper {
+        height: 180px; } }
+    @media screen and (max-width: 992px) {
+      .plannyCell .imageWrapper {
+        height: 150px; } }
+    @media screen and (max-width: 768px) {
+      .plannyCell .imageWrapper {
+        height: 130px; } }
     .plannyCell .imageWrapper img {
+      object-fit: cover;
+      min-height: 100%;
       width: 100%; }
   .plannyCell .plannyTitle {
     position: absolute;

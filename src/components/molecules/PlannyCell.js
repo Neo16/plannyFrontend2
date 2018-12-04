@@ -7,6 +7,10 @@ export class PlannyCell extends React.Component {
   render() {
     var p = this.props.planny;
 
+    if (p == undefined) {
+      return (<div></div>)
+    }
+
     return (
       <div className="plannyCell">
         <div className="imageWrapper">
@@ -18,9 +22,11 @@ export class PlannyCell extends React.Component {
           }
         </div>
         <div className="categoryCont">
-          <div className="categoryTag">
-            {p.categories[0].name}
-          </div>
+          {(p.categories.length > 0) &&
+            <div className="categoryTag">
+              {p.categories[0].name}
+            </div>
+         }
         </div>
         <div className="plannyTitle">
           {p.name}
@@ -30,15 +36,15 @@ export class PlannyCell extends React.Component {
         </div>
 
         <div className="plannyButtonWrapper">
-          <If condition={this.props.mine}>            
+          <If condition={this.props.mine}>
             <Button
-              className = {"float-left"}
+              className={"float-left"}
               onClick={() => this.props.deleteProposal(p.id)}
               outline color="danger">
               Delete
            </Button>
           </If>
-          <Button            
+          <Button
             outline color="info"
             href={"/plannies/" + p.id}>
             Details

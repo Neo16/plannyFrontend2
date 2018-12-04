@@ -13,3 +13,7 @@ export function logout(){
 export function registerResult(result){
   return {  type: 'REGISTER_RESULT_ACTION',  result}
 }
+
+export function getMyProfile(result){
+  return {  type: 'GET_MY_PROFILE',  result}
+}

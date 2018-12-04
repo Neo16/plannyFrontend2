@@ -1,7 +1,6 @@
 
 @import '../../variables.scss';
 
-
 .plannyCell{
     background-color: $form-bg;
     display: block;
@@ -9,10 +8,26 @@
     margin-bottom: 10px;
     font-family: Montserrat;  
 
-    .imageWrapper{
-        height: 200px;
+    .imageWrapper{      
+        height: 220px;   
+
+        @media screen and (max-width: 1200px) {
+            height: 180px;   
+        }  
+        
+        @media screen and (max-width: 992px) {
+            height: 150px;   
+        }  
+
+        @media screen and (max-width: 768px) {
+            height: 130px;   
+        }  
+     
+
         overflow: hidden;
-        img{           
+        img{                       
+            object-fit: cover;
+            min-height: 100%;
             width: 100%;
         }
     }

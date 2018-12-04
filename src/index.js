@@ -24,6 +24,7 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import Login from './components/pages/Login';
 import MyPlannies from './components/pages/MyPlannies';
 import Details from './components/pages/Details';
+import MyProfile from './components/pages/MyProfile';
 import If from './components/atoms/If';
 import { Spinner } from './components/atoms/Spinner';
 
@@ -69,6 +70,7 @@ const render = () => {
             <Route path='/plannies/edit/:id(\d+)' exact component={EditPlanny} />
             <Route path='/plannies/my' exact component={MyPlannies} />
             <Route path='/plannies/:id(\d+)' exact component={Details} />
+            <Route path='/profile' exact component={MyProfile} />
           </Container>
 
           <If condition={store.getState().appCommonState.isLoading}>
