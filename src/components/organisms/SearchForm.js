@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import './SearchForm.css';
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 class SearchForm extends React.Component {
 
@@ -26,22 +27,18 @@ class SearchForm extends React.Component {
                 settlementName: '',
                 rangeInKms: 100,
                 fromTime: new Date(),
-                toTime: new Date()
+                toTime: moment().add(7, 'd').toDate()
             }
-        }
-        this.toggleSelectCategory = this.toggleSelectCategory.bind(this);
-        this.handleSelectSubCategory = this.handleSelectSubCategory.bind(this);
-        this.handleQueryChange = this.handleQueryChange.bind(this);
-        this.search = this.search.bind(this);
+        }      
     }
 
     componentDidMount() {
         this.props.getMainCategoriesAsync();
         this.props.getSubCategoriesAsync();
-        this.props.getPlanniesAsync(null);
+        this.search();
     }
 
-    search() {
+    search = () => {
         var query = { ...this.state.query };
         //query.latitude = this.props.state.searchGeocode.latitude;
         //query.longitude = this.props.state.searchGeocode.longitude;
@@ -50,7 +47,7 @@ class SearchForm extends React.Component {
     }
 
 
-    toggleSelectCategory(parentId) {
+    toggleSelectCategory = (parentId) => {
         parentId = parseInt(parentId);
 
         if (this.state.currentParentCategoryId === 0 ||
@@ -69,7 +66,7 @@ class SearchForm extends React.Component {
         }
     }
 
-    handleSelectSubCategory(id) {
+    handleSelectSubCategory = (id) => {
         var index = this.selectedCategories.indexOf(id, 0);
         if (!(index > -1)) {
             this.selectedCategories.push(id);
@@ -81,19 +78,32 @@ class SearchForm extends React.Component {
         this.search();
     }
 
-    handleQueryChange(e) {
-        const name = e.target.name;
-        this.setState({
-            query: {
-                ...this.state.query,
-                [name]: e.target.value
-            }
-        });
+    handleQueryChange = (e) => {
+        let name = e.target.name;
+        let value = e.target.value;
+        this.setQueryValueChange(name, value);
 
         if (name === "settlementName" && e.target.value.length > 2) {
             this.props.geoCode(this.state.query.settlementName);
         }
+    }
+
+    setQueryValueChange = (name, value) => {
+        this.setState({
+            query: {
+                ...this.state.query,
+                [name]: value
+            }
+        });
         setTimeout(() => this.search(), 200);
+    }
+
+    handleFromTimeTimeChage = (value) => {
+        this.setQueryValueChange("fromTime", value);
+    }
+
+    handleToTimeTimeChage = (value) => {
+        this.setQueryValueChange("toTime", value);
     }
 
     render() {
