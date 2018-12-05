@@ -23,7 +23,7 @@ export class MyPlannies extends React.Component {
   }
 
   createNew() {
-    this.props.history.push("/createplanny");
+    this.props.history.push("/plannies/create");
   }
 
   declineParticipation(id) {

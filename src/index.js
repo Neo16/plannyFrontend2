@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Register from './components/pages/Register';
 import { Container } from 'reactstrap';
 import MainPage from './components/pages/MainPage';
@@ -63,14 +63,16 @@ const render = () => {
         <React.Fragment>
           <PlannyNavBar />
           <Container className='fill' hidden={store.getState().appCommonState.isLoading}>
-            <Route path='/register' component={Register} />
-            <Route path='/' exact component={MainPage} />
-            <Route path='/login' exact component={Login} />
-            <Route path='/plannies/create' exact component={CreatePlanny} />
-            <Route path='/plannies/edit/:id(\d+)' exact component={EditPlanny} />
-            <Route path='/plannies/my' exact component={MyPlannies} />
-            <Route path='/plannies/:id(\d+)' exact component={Details} />
-            <Route path='/profile' exact component={MyProfile} />
+            <Switch>
+              <Route path='/register' component={Register} />
+              <Route path='/' exact component={MainPage} />
+              <Route path='/login' exact component={Login} />
+              <Route path='/plannies/create' exact component={CreatePlanny} />
+              <Route path='/plannies/edit/:id(\d+)' exact component={EditPlanny} />
+              <Route path='/plannies/my' exact component={MyPlannies} />
+              <Route path='/plannies/:id(\d+)' exact component={Details} />
+              <Route path='/profile' exact component={MyProfile} />
+            </Switch>
           </Container>
 
           <If condition={store.getState().appCommonState.isLoading}>

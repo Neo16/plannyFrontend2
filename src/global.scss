@@ -151,6 +151,12 @@ html, body, #root {
     z-index: -1;
   }
   
-  .input{
+.profile-img{
+    height: 230px;
+    border-radius: 0.25rem;
 
-  }
+    @media screen and (max-width: 1200px) {
+        height: 180px;   
+    }      
+  
+}

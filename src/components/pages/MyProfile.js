@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { FormGroup, Button, Input, Label } from 'reactstrap';
+import { FormGroup, Button, Input, Label, Row, Col } from 'reactstrap';
 import { accountAsyncActionsCreators } from '../../actions/asyncActionCreators/accountAsyncActionsCreators';
+import { managePlannyAsyncActionCreators } from '../../actions/asyncActionCreators/managePlannyAsyncActionCreators';
 import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
 import Select from 'react-select';
@@ -8,104 +9,168 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export class MyProfile extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            profile: {
+                userName: "",
+                birthDate: new Date(),
+                gender: 0,
+                selfIntroduction: "",
+                pictureUrl: undefined,
+            }
+        }
+    }
+
     componentDidMount() {
         this.props.getMyProfileAsync();
     }
 
+    componentWillReceiveProps(nextProps) {
+        let oProfile = this.props.accountState.profile;
+        let nProfile = nextProps.accountState.profile;
+
+        if (nProfile && (oProfile == undefined || nProfile != oProfile)) {
+            this.setState({
+                profile: {
+                    ...nProfile,
+                    birthDate: new Date(nProfile.birthDate),
+                }
+            });
+        }
+    }
 
     handleChange = (e) => {
         const name = e.target.name;
-        this.props.onChange(name, e.target.value);
+        this.handleFieldChange(name, e.target.value);
     }
 
-    handleBirthDateChage = (value) => {
+    handleFieldChange = (name, value) => {
+        this.setState({
+            profile: {
+                ...this.state.profile,
+                [name]: value
+            }
+        });
+    }
 
+    handleBirthDateChange = (value) => {
+        this.handleFieldChange("birthDate", value);
     }
 
     uploadPicture = (e) => {
         console.log(e.target.files);
-        this.uploadCalled = true;
         let file = e.target.files[0];
         this.props.uploadPlannyPictureAsync(file);
+        this.setState({
+            ...this.state,
+            uploadPictureCalled: true
+        });
     }
 
     triggerInputFile = () => {
         this.fileInput.click();
     }
 
-    createCategoryOptions() {
-        let items = [];
-        let categories = this.props.appCommonState.subCategories;
-        if (categories != undefined && categories.length > 0) {
-            for (let i = 0; i < categories.length; i++) {
-                items.push({
-                    value: categories[i].id,
-                    label: categories[i].name
-                });
-            }
-        }
-        return items;
-    };
-
-    customSelecStyles = {
-        control: (base, state) => ({
-            ...base,
-            '&:hover': { borderColor: 'darkgray' }, // border style on hover     
-            boxShadow: 'none',
-            border: '1px solid #ced4da'
-        })
-    };
-
+    saveProfile = () => {
+        this.props.editMyProfileAsync(JSON.stringify({
+            ...this.state.profile,
+            pictureUrl: this.props.pictureUploadState.uplodedPictureUrl,
+        }));
+    }
 
     render() {
 
-        if (this.props.accountState.profile == undefined){
-            return(null);
+        if (this.props.accountState.profile == undefined) {
+            return (null);
         }
 
         return (
-            <React.Fragment>
-                <FormGroup>
-                    <Label>Username</Label>
-                    <Input
-                        type="text"
-                        value={this.props.accountState.profile.userName}
-                        placeholder="Username"
-                        name="userName"
-                        onChange={this.handleChange} />
-                    <Label>Introduction</Label>
-                    <Input
-                        type="textarea"
-                        name="selfIntroduction"
-                        value={this.props.accountState.profile.selfIntroduction}
-                        placeholder="about me"
-                        onChange={this.handleChange} />
-                    <Label>Category</Label>
-                </FormGroup>
+            <Row>
+                <Col md={{ size: 6, offset: 3 }} className="mt-3">
+                    <div className="title">My profile</div>
+                    <div className="basicForm mt-3">
 
-                {this.props.pictureUploadState.uplodedPictureUrl != null &&
-                    <img
-                        src={this.props.pictureUploadState.uplodedPictureUrl}
-                        className="plannyPic rounded img-fluid" />
-                }
+                        <div className="d-flex justify-content-center mb-3">
+                            {this.state.profile.pictureUrl != null && !this.state.uploadPictureCalled &&
+                                <img
+                                    src={this.state.profile.pictureUrl}
+                                    className="profile-img img-fluid" />
+                            }
 
-                <div className="upload-btn-wrapper">
-                    <Label>Picture</Label>
-                    <input
-                        ref={fileInput => this.fileInput = fileInput}
-                        name="picture"
-                        type="file"
-                        onChange={this.uploadPicture}>
-                    </input>
-                    <Button
-                        outline
-                        color="info"
-                        className="upload-btn"
-                        onClick={this.triggerInputFile}>
-                        Upload picture
-                     </Button>
-                </div>
-            </React.Fragment>
+                            {this.props.pictureUploadState.uplodedPictureUrl != null && this.state.uploadPictureCalled &&
+                                <img
+                                    src={this.props.pictureUploadState.uplodedPictureUrl}
+                                    className="profile-img img-fluid" />
+                            }
+                        </div>
+
+                        <FormGroup>
+                            <Label>Username</Label>
+                            <Input
+                                type="text"
+                                value={this.state.profile.userName}
+                                placeholder="Username"
+                                name="userName"
+                                onChange={this.handleChange} />
+
+                            <Label>Birthdate</Label>
+                            <DatePicker
+                                className={"form-control"}
+                                onChange={this.handleBirthDateChange}
+                                selected={this.state.profile.birthDate}
+                                dateFormat="MMMM d, yyyy" />
+
+                            <Label>Gender</Label>
+                            <Input type="select" name="gender"
+                                onChange={this.handleChange}
+                                value={this.state.profile.gender}>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </Input>
+
+                            <Label>About me</Label>
+                            <Input
+                                rows="5"
+                                type="textarea"
+                                name="selfIntroduction"
+                                value={this.state.profile.selfIntroduction}
+                                placeholder="about me"
+                                onChange={this.handleChange} />
+
+
+                        </FormGroup>
+
+
+                        <div className="upload-btn-wrapper">
+                            <Label>Picture</Label>
+                            <input
+                                ref={fileInput => this.fileInput = fileInput}
+                                name="picture"
+                                type="file"
+                                onChange={this.uploadPicture}>
+                            </input>
+                            <Button
+                                outline
+                                color="info"
+                                className="upload-btn"
+                                onClick={this.triggerInputFile}>
+                                Upload picture
+                             </Button>
+                        </div>
+
+
+                        <div className="d-flex flex-row-reverse mt-2">
+                            <Button
+                                color="info"
+                                className="align"
+                                onClick={this.saveProfile}>
+                                Save profile
+                            </Button>
+                        </div>
+                    </div>
+                </Col>
+            </Row>
         );
     }
 }
@@ -116,6 +181,7 @@ export default connect(
         accountState: state.accountState
     }),
     dispatch => ({
-        ...accountAsyncActionsCreators(dispatch)
+        ...accountAsyncActionsCreators(dispatch),
+        ...managePlannyAsyncActionCreators(dispatch),
     })
 )(MyProfile); 

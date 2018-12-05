@@ -67,7 +67,8 @@ export const accountAsyncActionsCreators = (dispatch) => {
                 });
         },
         editMyProfileAsync: (profile) => {
-            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();          
+            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader(); 
+            console.log(profile);         
 
             fetch("https://localhost:44378/api/profiles/own/edit", {
                 method: "PUT",
