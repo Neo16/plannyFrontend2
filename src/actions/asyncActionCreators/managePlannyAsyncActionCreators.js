@@ -2,6 +2,7 @@ import { HeaderHelper } from '../headerHelper';
 import { getMyPlannies, pictureUpload, approveParticipation, declineParticipation, deleteProposal}
  from '../actionCreators/managePlannyActionCreators';
 import {stopLoading, startLoading} from '../actionCreators/globalActionCreators';
+import { push } from 'connected-react-router';
 
 export const managePlannyAsyncActionCreators = (dispatch) => {
     return {
@@ -23,12 +24,17 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
                 body: String(planny),
                 headers: requestHeaders,
             })
-            .then((response) => response.json());            
+            .then(function (response) {
+                if (response.status === 200) {
+                    dispatch(push('/'));   
+                }
+                else{
+                    //todo: művelet sikertelen popup feldob 
+                }
+            });                      
         },
         uploadPlannyPictureAsync: (picture) => {
-
             //Todo fire isloading            
-
             let requestHeaders = HeaderHelper.getAuthorizedHeader();
             const formData = new FormData();
             formData.append("Picture", picture);

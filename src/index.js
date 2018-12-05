@@ -12,6 +12,7 @@ import EditPlanny from './components/pages/EditPlanny';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { routerMiddleware, connectRouter, ConnectedRouter } from 'connected-react-router'
 import { accountReducer } from './/store/Account'
 import { pictureUploadReducer } from './/store/PictureUpload'
 import { myPlanniesReducer } from './/store/MyPlannies'
@@ -27,6 +28,7 @@ import Details from './components/pages/Details';
 import MyProfile from './components/pages/MyProfile';
 import If from './components/atoms/If';
 import { Spinner } from './components/atoms/Spinner';
+import { createBrowserHistory } from 'history'
 
 //redux developer tool settings:
 const composeEnhancers =
@@ -36,20 +38,25 @@ const composeEnhancers =
       // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
     }) : compose;
 
-const enhancer = composeEnhancers(
-  applyMiddleware(thunk)
-);
+const history = createBrowserHistory();
 
-const combinedReducer = combineReducers({
+const createRootReducer = (history) => combineReducers({
   accountState: accountReducer,
   acquirePlanniesState: acquirePlanniesReducer,
   appCommonState: appCommonReducer,
   pictureUploadState: pictureUploadReducer,
-  myPlanniesState: myPlanniesReducer
+  myPlanniesState: myPlanniesReducer,
+  router: connectRouter(history),
 });
 
+const enhancer = composeEnhancers(
+  applyMiddleware(    
+    routerMiddleware(history),
+    thunk
+  )
+);
 const store = createStore(
-  combinedReducer,
+  createRootReducer(history),
   enhancer
 );
 
@@ -59,7 +66,7 @@ fontLibrary.add(faAngleRight);
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <React.Fragment>
           <PlannyNavBar />
           <Container className='fill' hidden={store.getState().appCommonState.isLoading}>
@@ -79,7 +86,7 @@ const render = () => {
             <Spinner />
           </If>
         </React.Fragment>
-      </BrowserRouter>
+      </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
   );

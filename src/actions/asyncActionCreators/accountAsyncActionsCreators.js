@@ -78,8 +78,9 @@ export const accountAsyncActionsCreators = (dispatch) => {
             .then(function (response) {
                 if (response.status === 200) {
                     response.json()
-                        .then(function (data) {                           
-                           alert('success');
+                        .then(function (data) {    
+                            // Todo rendes popup kéne                       
+                           alert('Successfully saved profile.');                          
                     });
                 }
             })
