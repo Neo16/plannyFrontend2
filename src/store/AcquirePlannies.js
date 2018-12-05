@@ -18,20 +18,20 @@ export const acquirePlanniesReducer = (state, action) => {
                 ...state,
                 plannyDetail: action.planny
             };
-        case 'CANCEL_PARTICIPATIONS':
+        case 'CANCEL_PARTICIPATION':
             return {
                 ...state,
                 plannyDetail: {
                     ...state.plannyDetail,
-                    participationState: 'none'
+                    joinStatus: '1'
                 }
             }
-        case 'JOIN_PLANNYS':
+        case 'JOIN_PLANNY':
             return {
                 ...state,
                 plannyDetail: {
                     ...state.plannyDetail,
-                    participationState: 'Required'
+                    joinStatus: '2'
                 }
             }       
         case 'GET_GEOCODES':

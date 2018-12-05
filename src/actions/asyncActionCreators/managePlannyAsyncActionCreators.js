@@ -1,5 +1,5 @@
 import { HeaderHelper } from '../headerHelper';
-import { getMyPlannies, pictureUpload, approveParticipation, declineParticipation, deleteProposal}
+import { getMyPlannies, pictureUpload, approvedParticipation, declinedParticipation, deleteProposal}
  from '../actionCreators/managePlannyActionCreators';
 import {stopLoading, startLoading} from '../actionCreators/globalActionCreators';
 import { push } from 'connected-react-router';
@@ -80,7 +80,7 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {
-                dispatch(approveParticipation());
+                dispatch(approvedParticipation());
             });
         },
         declineParticipationAsync: (id) => {
@@ -94,7 +94,7 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {                
-                dispatch(declineParticipation());
+                dispatch(declinedParticipation());
             });
         },  
         deleteAsync: (id) => {

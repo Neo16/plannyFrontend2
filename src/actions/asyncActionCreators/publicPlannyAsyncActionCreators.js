@@ -1,5 +1,5 @@
 import { HeaderHelper } from '../headerHelper';
-import { searchPlannies, getPlanny, joinPlanny, cancelParticipation, geoCode, getMyParticiapations } from '../actionCreators/publicPlannyActionCreators';
+import { searchPlannies, getPlanny, joinedPlanny, canceledParticipation, geoCode, getMyParticiapations } from '../actionCreators/publicPlannyActionCreators';
 import {stopLoading, startLoading} from '../actionCreators/globalActionCreators';
 
 export const publicPlannyAsyncActionCreators = (dispatch) => {
@@ -46,7 +46,7 @@ export const publicPlannyAsyncActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {
-                dispatch(joinPlanny(data)); 
+                dispatch(joinedPlanny()); 
             });
         },
         cancelParticipationAsync: (id) => {
@@ -60,7 +60,7 @@ export const publicPlannyAsyncActionCreators = (dispatch) => {
             })
             .then((response) => response.json())
             .then(function (data) {              
-                dispatch(cancelParticipation(id));       
+                dispatch(canceledParticipation());       
             });
         },       
         geoCodeAsync: (address) => {

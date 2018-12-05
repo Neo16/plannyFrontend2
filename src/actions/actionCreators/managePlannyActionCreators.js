@@ -13,15 +13,17 @@ export function pictureUpload(pictureUrl) {
     }
 }
 
-export function approveParticipation() {
+export function approvedParticipation(id) {
     return {
-        type: 'APPROVE_PARTICIPATIONS'
+        type: 'APPROVE_PARTICIPATIONS',
+        id: id
     }
 }
 
-export function declineParticipation() {
+export function declinedParticipation(id) {
     return {
-        type: 'DECLINE_PARTICIPATIONS'
+        type: 'DECLINE_PARTICIPATIONS',
+        id: id
     }
 }
 

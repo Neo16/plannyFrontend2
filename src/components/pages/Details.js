@@ -5,6 +5,7 @@ import { Row, Col, Button } from 'reactstrap';
 import If from '../atoms/If';
 import moment from 'moment';
 import './Details.css';
+import { Link } from 'react-router-dom';
 
 export class PlannyDetails extends React.Component {
 
@@ -17,11 +18,11 @@ export class PlannyDetails extends React.Component {
   }
 
   joinPlanny() {
-    this.props.joinPlanny(this.plannyId);
+    this.props.joinPlannyAsync(this.plannyId);   
   }
 
   cancelPlanny() {
-    this.props.cancelParticipation(this.plannyId);
+    this.props.cancelParticipationAsync(this.plannyId);   
   }
 
   componentDidMount() {
@@ -38,9 +39,8 @@ export class PlannyDetails extends React.Component {
       return (
         <Row>
           <Col md={{ size: 8, offset: 2 }} className="details-cont mt-3">
-          
+
             <div className="plannyTitle">{p.name}</div>
-            
 
             <div className="plannyDetailsImg-wrapper">
               <img className="plannyDetailsImg" src={p.pictureUrl} />
@@ -64,29 +64,35 @@ export class PlannyDetails extends React.Component {
 
               <div className="plannyInfo"><b>Location:</b> {p.location != undefined && p.location.address} </div>
 
+              <div className="plannyInfo">
+                <b>Hosted by:</b> <Link to={'/profiles/'+ p.ownerId}>{p.ownerName}</Link> 
+              </div>
+
               <div className="plannyInfo"><b>Max number of participants:</b> {p.maxParticipants} </div>
 
               <div className="plannyInfo"><b>Participants age:</b> {p.minAge} - {p.maxAge} </div>
 
               <div className="plannyInfo"><b>Participants gender: </b>doesn't matter</div>
 
-              {p.participationState == "none" &&
+              {this.props.acquirePlanniesState.plannyDetail.joinStatus == '1' &&
                 <Button
                   className="joinButton"
-                  bsStyle="primary"
+                  color="info" outline
                   onClick={this.joinPlanny}>
                   Join planny
               </Button>}
-              {p.participationState == "Required" &&
+              {this.props.acquirePlanniesState.plannyDetail.joinStatus == '2' &&
                 <Button
+                  outline 
                   className="joinButton"
                   onClick={this.cancelPlanny}>
                   Cancel join request
               </Button>}
-              {p.participationState == "Approved" &&
+              {this.props.acquirePlanniesState.plannyDetail.joinStatus == '3' &&
                 <Button
                   className="joinButton"
-                  bsStyle="success"
+                  outline 
+                  color="danger"
                   onClick={this.cancelPlanny}>
                   Cancel participation
               </Button>}
@@ -102,5 +108,7 @@ export default connect(
   (state) => ({
     acquirePlanniesState: state.acquirePlanniesState
   }),
-  publicPlannyAsyncActionCreators
+  dispatch => ({
+    ...publicPlannyAsyncActionCreators(dispatch)   
+  })
 )(PlannyDetails); 

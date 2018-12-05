@@ -10,9 +10,9 @@
       width: 100%; }
   .details-cont .plannyTitle {
     position: absolute;
-    bottom: 0px;
+    top: 0px;
     left: 0px;
-    margin: 350px 39px;
+    margin: 285px 39px;
     font-size: 28px;
     background: #2b2b2beb;
     color: white;
@@ -41,4 +41,5 @@
       margin-top: 15px; }
     .details-cont .details-cont-body .joinButton {
       margin-top: 15px;
-      float: right; }
+      float: right;
+      margin-bottom: 15px; }

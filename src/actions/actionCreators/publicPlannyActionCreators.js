@@ -12,16 +12,15 @@ export function getPlanny(planny) {
     }
 }
 
-export function joinPlanny() {
+export function joinedPlanny() {
     return {
-        type: 'JOIN_PLANNYS'
+        type: 'JOIN_PLANNY'
     }
 }
 
-export function cancelParticipation(participationId) {
+export function canceledParticipation() {
     return {
-        type: 'CANCEL_PARTICIPATIONS',
-        participationId
+        type: 'CANCEL_PARTICIPATION'        
     }
 }
 

@@ -12,7 +12,7 @@ class MainPage extends React.Component {
   }
 
   gotoDetails(id) {
-    this.props.history.push('/planny/' + id);
+    this.props.history.push('/plannies/' + id);
   }
 
   render() {
