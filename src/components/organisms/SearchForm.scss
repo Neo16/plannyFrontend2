@@ -6,6 +6,8 @@
     border-radius: 7px;
 }
 
+.InlineformUnit
+
 .pointer {
     cursor: pointer;
 }
@@ -95,3 +97,20 @@
         margin-left: 14px;
     }
 }
+
+.form-group{
+    width: 100%;
+
+    input.form-control{
+        flex: 1;
+    }
+
+    .react-datepicker-wrapper {
+        flex: 1 !important;
+        .form-control{
+            width: 100% !important;
+            text-align: center;
+        }
+    }
+}
+

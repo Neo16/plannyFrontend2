@@ -3,7 +3,7 @@
   padding: 25px 0px;
   border-radius: 7px; }
 
-.pointer {
+.InlineformUnit .pointer {
   cursor: pointer; }
 
 .scroll-arrow:hover, .scroll-arrow-left:hover, .scroll-arrow-right:hover {
@@ -66,3 +66,13 @@
     padding-left: 20px;
     font-weight: 400;
     margin-left: 14px; }
+
+.form-group {
+  width: 100%; }
+  .form-group input.form-control {
+    flex: 1; }
+  .form-group .react-datepicker-wrapper {
+    flex: 1 !important; }
+    .form-group .react-datepicker-wrapper .form-control {
+      width: 100% !important;
+      text-align: center; }

@@ -37,58 +37,60 @@ export class PlannyDetails extends React.Component {
     else {
       return (
         <Row>
-          <Col md={{size: 8, offset: 2}} className="basicForm mt-3">
-            <div className="titleWrapper">
-              <div className="title">{p.name}</div>
-            </div>
+          <Col md={{ size: 8, offset: 2 }} className="details-cont mt-3">
+          
+            <div className="plannyTitle">{p.name}</div>
+            
 
-            <div>
+            <div className="plannyDetailsImg-wrapper">
               <img className="plannyDetailsImg" src={p.pictureUrl} />
             </div>
 
-            <div className="categoryCont">
-              <div className="categoryTag">
-                {p.categories != undefined && p.categories[0].name}
+            <div className="details-cont-body">
+              <div className="categoryCont">
+                <div className="categoryTag">
+                  {p.categories != undefined && p.categories[0].name}
+                </div>
               </div>
+
+              <div className="plannyTime">
+                <b>
+                  {moment(p.fromTime).format('YYYY.MM.DD hh:mm')}-
+                   {moment(p.toTime).format('YYYY.MM.DD hh:mm')}
+                </b>
+              </div>
+
+              <div className="plannyDescription">{p.description}</div>
+
+              <div className="plannyInfo"><b>Location:</b> {p.location != undefined && p.location.address} </div>
+
+              <div className="plannyInfo"><b>Max number of participants:</b> {p.maxParticipants} </div>
+
+              <div className="plannyInfo"><b>Participants age:</b> {p.minAge} - {p.maxAge} </div>
+
+              <div className="plannyInfo"><b>Participants gender: </b>doesn't matter</div>
+
+              {p.participationState == "none" &&
+                <Button
+                  className="joinButton"
+                  bsStyle="primary"
+                  onClick={this.joinPlanny}>
+                  Join planny
+              </Button>}
+              {p.participationState == "Required" &&
+                <Button
+                  className="joinButton"
+                  onClick={this.cancelPlanny}>
+                  Cancel join request
+              </Button>}
+              {p.participationState == "Approved" &&
+                <Button
+                  className="joinButton"
+                  bsStyle="success"
+                  onClick={this.cancelPlanny}>
+                  Cancel participation
+              </Button>}
             </div>
-
-            <div className="plannyTime">
-              <b>
-                {moment(p.fromTime).format('YYYY.MM.DD hh:mm')}-
-             {moment(p.toTime).format('YYYY.MM.DD hh:mm')}
-              </b>
-            </div>
-
-            <div className="plannyDescription">{p.description}</div>
-
-            <div className="plannyInfo"><b>Location:</b> {p.location != undefined && p.location.address} </div>
-
-            <div className="plannyInfo"><b>Max number of participants:</b> {p.maxParticipants} </div>
-
-            <div className="plannyInfo"><b>Participants age:</b> {p.minAge} - {p.maxAge} </div>
-
-            <div className="plannyInfo"><b>Participants gender: </b>doesn't matter</div>
-
-            {p.participationState == "none" &&
-              <Button
-                className="joinButton"
-                bsStyle="primary"
-                onClick={this.joinPlanny}>
-                Join planny
-           </Button>}
-            {p.participationState == "Required" &&
-              <Button
-                className="joinButton"
-                onClick={this.cancelPlanny}>
-                Cancel join request
-           </Button>}
-            {p.participationState == "Approved" &&
-              <Button
-                className="joinButton"
-                bsStyle="success"
-                onClick={this.cancelPlanny}>
-                Cancel participation
-           </Button>}
           </Col>
         </Row>
       );

@@ -7,8 +7,10 @@ import { MainCategoryButton } from '../atoms/MainCategoryButton';
 import { publicPlannyAsyncActionCreators } from '../../actions/asyncActionCreators/publicPlannyAsyncActionCreators';
 import { categoryAsyncActionCreators } from '../../actions/asyncActionCreators/categoryAsyncActionCreators';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
+import { Link } from 'react-router-dom';
+import DatePicker from "react-datepicker";
 import './SearchForm.css';
-
+import "react-datepicker/dist/react-datepicker.css";
 
 class SearchForm extends React.Component {
 
@@ -20,7 +22,12 @@ class SearchForm extends React.Component {
             subcategoriesVisible: false,
             currentSubCategories: [],
             currentParentCategoryId: 0,
-            query: ''
+            query: {
+                settlementName: '',
+                rangeInKms: 100,
+                fromTime: new Date(),
+                toTime: new Date()
+            }
         }
         this.toggleSelectCategory = this.toggleSelectCategory.bind(this);
         this.handleSelectSubCategory = this.handleSelectSubCategory.bind(this);
@@ -108,8 +115,8 @@ class SearchForm extends React.Component {
             );
         };
 
-        const ArrowLeft = Arrow({ iconName: 'angle-left', className:"pointer scroll-arrow-left" });
-        const ArrowRight = Arrow({ iconName: 'angle-right',  className:"pointer scroll-arrow-right" });
+        const ArrowLeft = Arrow({ iconName: 'angle-left', className: "pointer scroll-arrow-left" });
+        const ArrowRight = Arrow({ iconName: 'angle-right', className: "pointer scroll-arrow-right" });
 
         return (
             <div>
@@ -141,114 +148,67 @@ class SearchForm extends React.Component {
                     </Col>
                 </Row>
 
-                <h1>With who?</h1>
-                <Row className="formRow">
-                    <Col xs={4}>
-                        <div>
-                            <label>Gender:</label>
-                            <Input
-                                type="select"
-                                value={this.state.query.participantsGender}
-                                defaultValue="2"
-                                name="participantsGender"
-                                onChange={this.handleQueryChange}
-                                className="inlineControl">
-                                <option value="0">male</option>
-                                <option value="1">female</option>
-                                <option value="2">doesn't matter</option>
-                            </Input>
-                        </div>
-                    </Col>
-                    <Col xs={4}>
-                        <div>
-                            <label>Age:</label>
-                            <Input
-                                value={this.state.query.participantsAgeMin}
-                                name="participantsAgeMin"
-                                onChange={this.handleQueryChange}
-                                className="inlineControlSmall"
-                                type="number" /> -
-                            <Input
-                                value={this.state.query.participantsAgeMax}
-                                name="participantsAgeMax"
-                                onChange={this.handleQueryChange}
-                                className="inlineControlSmall"
-                                type="number" />
-                        </div>
-                    </Col>
-                    <Col xs={4}>
-                        <div>
-                            <label>Num of attendants:</label>
-                            <Input
-                                value={this.state.query.participantsNumberMin}
-                                name="participantsNumberMin"
-                                onChange={this.handleQueryChange}
-                                className="inlineControlSmall"
-                                type="number" /> -
-                            <Input
-                                value={this.state.query.participantsNumberMax}
-                                name="participantsNumberMax"
-                                onChange={this.handleQueryChange}
-                                className="inlineControlSmall"
-                                type="number" />
-                        </div>
-                    </Col>
-                </Row>
-
                 <h1>Where and when?</h1>
-                <Row className="formRow">
-                    <Col xs={6}>
-                        <div className="formLine">
-                            <label>Settlement:</label>
-                            <Input
-                                value={this.state.query.settlementName}
-                                name="settlementName"
-                                onChange={this.handleQueryChange}
-                                className="inlineControlBig"
-                                type="Text" />
-                        </div>
-                        <div>
-                            <label>Maximum distance:</label>
-                            <Input
-                                name="rangeInKms"
-                                value={this.state.query.rangeInKms}
-                                onChange={this.handleQueryChange}
-                                className="inlineControl"
-                                type="number" /> km
-                        </div>
-                    </Col>
-                    <Col xs={6}>
-                        <div className="formLine">
-                            <label>From:</label>
-                            <Input
-                                value={this.state.query.fromTime}
-                                name="fromTime"
-                                onChange={this.handleQueryChange}
-                                className="inlineControlBig"
-                                type="datetime-local">
-                            </Input>
-                        </div>
-                        <div>
-                            <label>To:</label>
-                            <Input
-                                value={this.state.query.toTime}
-                                name="toTime"
-                                onChange={this.handleQueryChange}
-                                style={{ 'margiLeft': '29px' }}
-                                className="inlineControlBig"
-                                type="datetime-local">
-                            </Input>
-                        </div>
-                    </Col>
+                <Row className="d-flex formRow">
+                    <form className="form-inline">
+                        <Col xs={6} className="d-flex">
+                            <div className="form-group">
+                                <Label className="mr-3">Settlement:</Label>
+                                <Input
+                                    value={this.state.query.settlementName}
+                                    name="settlementName"
+                                    onChange={this.handleQueryChange}
+                                    type="Text" />
+                            </div>
+                        </Col>
+
+                        <Col xs={6} className="d-flex">
+                            <div className="form-group">
+                                <Label className="mr-3">Maximum distance:</Label>
+                                <Input
+                                    name="rangeInKms"
+                                    value={this.state.query.rangeInKms}
+                                    onChange={this.handleQueryChange}
+                                    type="number" />
+                                <Label className="ml-3">km</Label>
+                            </div>
+                        </Col>
+
+                        <Col xs={6} className="d-flex mt-3">
+                            <div className="form-group">
+                                <Label className="mr-3">From:</Label>
+                                <DatePicker
+                                    className={"form-control"}
+                                    onChange={this.handleFromTimeTimeChage}
+                                    selected={this.state.query.fromTime}
+                                    showTimeSelect
+                                    timeFormat="HH:mm"
+                                    timeIntervals={30}
+                                    dateFormat="MMMM d, yyyy h:mm aa"
+                                    timeCaption="time" />
+                            </div>
+                        </Col>
+
+                        <Col xs={6} className="d-flex mt-3">
+                            <div className="form-group">
+                                <Label className="mr-3"> To:</Label>
+                                <DatePicker
+                                    className={"form-control"}
+                                    onChange={this.handleToTimeTimeChage}
+                                    selected={this.state.query.toTime}
+                                    showTimeSelect
+                                    timeFormat="HH:mm"
+                                    timeIntervals={30}
+                                    dateFormat="MMMM d, yyyy h:mm aa"
+                                    timeCaption="time" />
+                            </div>
+                        </Col>
+                    </form>
                 </Row>
                 <Row>
                     <Col xs={12} className="searchButtonWrapper">
                         <Button className="searchButton" onClick={this.search}>Search</Button>
-                        <Button className="searchButton" href="/createplanny">Add yours</Button>
-                        {/* {
-                    this.props.state.isLoading &&
-                    <Spinner />
-                    } */}
+                        <Button className="searchButton" tag={Link} to="/plannies/my">Add yours</Button>
                     </Col>
                 </Row>
             </div>
@@ -257,11 +217,12 @@ class SearchForm extends React.Component {
 }
 
 export default connect(
-    (state) => ({      
+    (state) => ({
         appCommonState: state.appCommonState
     }),
     dispatch => ({
         ...publicPlannyAsyncActionCreators(dispatch),
-        ...categoryAsyncActionCreators(dispatch)
+        ...categoryAsyncActionCreators(dispatch),
+
     })
 )(SearchForm);

@@ -1,29 +1,44 @@
-.plannyDetailsImg {
-  width: 100%; }
-
-.categoryCont {
-  margin: 8px 0px; }
-
-.categoryTag {
-  background: #2b2b2beb;
-  display: inline;
-  color: white;
-  padding: 3px 5px;
-  margin-right: 5px;
-  background-color: #337ab7; }
-
-.plannyDescription {
-  margin: 15px 0px;
-  font-size: 16px;
-  padding: 7px;
-  border: 1px solid lightgray; }
-
-.plannyTime {
-  margin-top: 15px; }
-
-.plannyInfo {
-  margin-top: 15px; }
-
-.joinButton {
-  margin-top: 15px;
-  float: right; }
+.details-cont {
+  background: white;
+  padding: 0px; }
+  .details-cont .plannyDetailsImg-wrapper {
+    height: 370px;
+    overflow: hidden; }
+    .details-cont .plannyDetailsImg-wrapper img.plannyDetailsImg {
+      object-fit: cover;
+      min-height: 100%;
+      width: 100%; }
+  .details-cont .plannyTitle {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    margin: 350px 39px;
+    font-size: 28px;
+    background: #2b2b2beb;
+    color: white;
+    display: inline;
+    padding: 4px 8px;
+    font-weight: 600; }
+  .details-cont .details-cont-body {
+    padding: 15px; }
+    .details-cont .details-cont-body .categoryCont {
+      margin: 8px 0px; }
+    .details-cont .details-cont-body .categoryTag {
+      background: #2b2b2beb;
+      display: inline;
+      color: white;
+      padding: 3px 5px;
+      margin-right: 5px;
+      background-color: #337ab7; }
+    .details-cont .details-cont-body .plannyDescription {
+      margin: 15px 0px;
+      font-size: 16px;
+      padding: 7px;
+      border: 1px solid lightgray; }
+    .details-cont .details-cont-body .plannyTime {
+      margin-top: 15px; }
+    .details-cont .details-cont-body .plannyInfo {
+      margin-top: 15px; }
+    .details-cont .details-cont-body .joinButton {
+      margin-top: 15px;
+      float: right; }

@@ -5,8 +5,8 @@ h1, h2 {
 .formRow {
   background: #fefefe;
   padding: 25px;
-  text-align: left;
-  border-radius: 7px; }
+  border-radius: 7px; 
+}
 
 @media only screen and (max-width: 1600px) {
   .subCategoryRow {
