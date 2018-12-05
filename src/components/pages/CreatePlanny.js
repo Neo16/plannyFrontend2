@@ -42,7 +42,7 @@ export class CreatePlanny extends React.Component {
   render() {
     return (
       <Row>
-        <Col md={{ size: 6, offset: 3 }} className="mt-3">
+      <Col xl={{ size: 6, offset: 3 }} md= {{ size: 8, offset: 2 }} sm={{size:10, offset: 1}} className="mt-3">
           <div className="title">Create Planny</div>
           <div className="basicForm mt-3">
             <CreateEditPlannyForm

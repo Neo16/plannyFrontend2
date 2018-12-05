@@ -30,7 +30,8 @@
     color: white;
     display: inline;
     padding: 4px 8px;
-    font-weight: 600; }
+    font-weight: 600;
+    cursor: pointer; }
   .plannyCell .plannyDesc {
     margin-top: 10px;
     margin-left: 10px; }

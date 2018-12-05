@@ -62,19 +62,23 @@ export class EditPlanny extends React.Component {
   render() {
     return (
       <Row>
-        <Col md={{ size: 6, offset: 3 }} className="mt-3">
-          <div className="title">Edit Planny</div>
-
+        <Col xl={{ size: 6, offset: 3 }} md= {{ size: 8, offset: 2 }} sm={{size:10, offset: 1}} className="mt-3">
+          <div className="title">Edit Planny</div>  
           <If condition={this.props.acquirePlanniesState.plannyDetail != undefined}>
-            <CreateEditPlannyForm
-              onChange={this.handleFieldChange}
-              planny={this.state.planny}
-              className="mt-2" />
-            <Button
-              className="float-right mt-2"
-              onClick={this.editPlanny}>
-              Save Planny
-          </Button>
+            <div className="basicForm mt-3">
+              <CreateEditPlannyForm
+                onChange={this.handleFieldChange}
+                planny={this.state.planny}
+                className="mt-2" />
+              <div className="d-flex flex-row-reverse">
+                <Button
+                  color="info"
+                  className="align"
+                  onClick={this.editPlanny}>
+                  Save Planny
+                </Button>
+              </div>
+            </div>
           </If>
         </Col>
       </Row>

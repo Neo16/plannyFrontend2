@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { managePlannyAsyncActionCreators } from '../../actions/asyncActionCreators/managePlannyAsyncActionCreators'
+import { managePlannyAsyncActionCreators } from '../../actions/asyncActionCreators/managePlannyAsyncActionCreators';
+import {commonAsyncActionCreators} from '../../actions/asyncActionCreators/commonAsyncActionCreators';
 import { ApplicationState } from '../..';
 import { MyPlannyTable } from '../organisms/MyPlannyTable';
 import { Row, Col, Button } from 'reactstrap';
 import If from '../atoms/If';
 import './MyPlannies.css';
-
+import { push } from 'connected-react-router';
 
 export class MyPlannies extends React.Component {
 
@@ -32,7 +33,7 @@ export class MyPlannies extends React.Component {
 
   approveParticipation(id) {
     this.props.approveParticipation(id);
-  } 
+  }
 
   deleteProposal(id) {
     this.props.deleteProposal(id);
@@ -40,6 +41,11 @@ export class MyPlannies extends React.Component {
 
   cancelPlanny(id) {
     this.props.cancelParticipation(id);
+  }
+
+  gotoDetails = (id) => {
+    console.log('fire');
+    this.props.navigate('/plannies/edit/' + id);
   }
 
   render() {
@@ -52,6 +58,7 @@ export class MyPlannies extends React.Component {
 
           <If condition={this.props.myPlanniesState.plannies != null}>
             <MyPlannyTable
+              gotoDetails={this.gotoDetails}
               deleteProposal={this.deleteProposal}
               plannies={this.props.myPlanniesState.plannies}
               approveParticipation={this.approveParticipation}
@@ -88,7 +95,10 @@ export default connect(
   (state) => ({
     myPlanniesState: state.myPlanniesState
   }),
-  managePlannyAsyncActionCreators
+  dispatch => ({
+    ...managePlannyAsyncActionCreators(dispatch),   
+    ...commonAsyncActionCreators(dispatch)
+  })  
 )(MyPlannies);
 
 

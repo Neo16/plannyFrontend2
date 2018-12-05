@@ -26,9 +26,9 @@ export class PlannyCell extends React.Component {
             <div className="categoryTag">
               {p.categories[0].name}
             </div>
-         }
+          }
         </div>
-        <div className="plannyTitle">
+        <div className="plannyTitle" onClick={() => {this.props.gotoDetails(p.id)}}>
           {p.name}
         </div>
         <div className="plannyDesc">
@@ -43,12 +43,19 @@ export class PlannyCell extends React.Component {
               outline color="danger">
               Delete
            </Button>
-          </If>
-          <Button
-            outline color="info"
-            href={"/plannies/" + p.id}>
-            Details
+            <Button
+              outline color="info"
+              href={"/plannies/edit/" + p.id}>
+              Edit
           </Button>
+          </If>
+          <If condition={!this.props.mine}>
+            <Button
+              outline color="info"
+              href={"/plannies/" + p.id}>
+              Details
+            </Button>
+          </If>        
         </div>
       </div>
     );
