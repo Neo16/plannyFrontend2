@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
 import Select from 'react-select';
 import "react-datepicker/dist/react-datepicker.css";
+import { uploadPictureApiCall } from '../../CommonService';
 
 export class CreateEditPlannyForm extends React.Component {
 
@@ -31,10 +32,13 @@ export class CreateEditPlannyForm extends React.Component {
   };
 
   uploadPicture = (e) => {
-    console.log(e.target.files);
-    this.uploadCalled = true;
-    let file = e.target.files[0];
-    this.props.uploadPlannyPictureAsync(file);
+    var file = e.target.files[0];
+    uploadPictureApiCall({
+      picture: file,
+      onSuccess: (data) => {
+        this.props.onChange('pictureUrl', data);
+      }
+    });
   }
 
   triggerInputFile = () => {
@@ -60,10 +64,9 @@ export class CreateEditPlannyForm extends React.Component {
       ...base,
       '&:hover': { borderColor: 'darkgray' }, // border style on hover     
       boxShadow: 'none',
-      border: '1px solid #ced4da'     
+      border: '1px solid #ced4da'
     })
   };
-  
 
   render() {
     return (
@@ -76,6 +79,33 @@ export class CreateEditPlannyForm extends React.Component {
             placeholder="Name"
             name="name"
             onChange={this.handleChange} />
+
+
+          <Label>Picture</Label>
+          <div className="d-flex justify-content-center">
+            {this.props.planny.pictureUrl != null &&
+              <img
+                src={this.props.planny.pictureUrl}
+                className="plannyPic rounded img-fluid" />
+            }
+          </div>
+          <div className="upload-btn-wrapper">
+            <input
+              ref={fileInput => this.fileInput = fileInput}
+              name="picture"
+              type="file"
+              onChange={this.uploadPicture}>
+            </input>
+            <Button
+              outline
+              color="info"
+              className="upload-btn"
+              onClick={this.triggerInputFile}>
+              Upload picture
+          </Button>
+          </div>
+
+
           <Label>Description</Label>
           <Input
             type="textarea"
@@ -91,11 +121,8 @@ export class CreateEditPlannyForm extends React.Component {
             value={this.props.planny.categoryIds}
             onChange={this.handleCategorySelectChange}
             options={this.createCategoryOptions()}
-            className='react-select-container' 
-            classNamePrefix="react-select"/>
-
-
-        
+            className='react-select-container'
+            classNamePrefix="react-select" />
         </FormGroup>
 
         <Label>Starting time</Label>
@@ -118,29 +145,6 @@ export class CreateEditPlannyForm extends React.Component {
           timeIntervals={15}
           dateFormat="MMMM d, yyyy h:mm aa"
           timeCaption="time" />
-
-        {this.props.pictureUploadState.uplodedPictureUrl != null &&
-          <img
-            src={this.props.pictureUploadState.uplodedPictureUrl}
-            className="plannyPic rounded img-fluid" />
-        }
-
-        <div className="upload-btn-wrapper">
-          <Label>Picture</Label>
-          <input
-            ref={fileInput => this.fileInput = fileInput}
-            name="picture"
-            type="file"
-            onChange={this.uploadPicture}>
-          </input>
-          <Button
-            outline
-            color="info"
-            className="upload-btn"
-            onClick={this.triggerInputFile}>
-            Upload picture
-          </Button>
-        </div>
       </React.Fragment>
     );
   }

@@ -17,14 +17,14 @@ export class CreatePlanny extends React.Component {
         categoryIds: [],
         fromTime: new Date(),
         toTime: new Date(),
+        pictureUrl: null
       }
     }
   }
 
   createPlanny = () => {
     this.props.createPlannyAsync(JSON.stringify({
-      ...this.state.planny,
-      pictureUrl: this.props.pictureUploadState.uplodedPictureUrl,
+      ...this.state.planny,    
       categoryIds: this.state.planny.categoryIds.map(c => c.value)
     }));
     console.log(JSON.stringify(this.state));

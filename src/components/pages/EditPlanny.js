@@ -45,7 +45,7 @@ export class EditPlanny extends React.Component {
   editPlanny = () => {
     this.props.updatePlannyAsync(this.state.planny.id, JSON.stringify({
       ...this.state.planny,
-      PictureUrl: this.props.pictureUploadState.uplodedPictureUrl
+      categoryIds: this.state.planny.categoryIds.map(c => c.value)
     }));
     console.log(JSON.stringify(this.state));
   }
@@ -62,8 +62,8 @@ export class EditPlanny extends React.Component {
   render() {
     return (
       <Row>
-        <Col xl={{ size: 6, offset: 3 }} md= {{ size: 8, offset: 2 }} sm={{size:10, offset: 1}} className="mt-3">
-          <div className="title">Edit Planny</div>  
+        <Col xl={{ size: 6, offset: 3 }} md={{ size: 8, offset: 2 }} sm={{ size: 10, offset: 1 }} className="mt-3">
+          <div className="title">Edit Planny</div>
           <If condition={this.props.acquirePlanniesState.plannyDetail != undefined}>
             <div className="basicForm mt-3">
               <CreateEditPlannyForm

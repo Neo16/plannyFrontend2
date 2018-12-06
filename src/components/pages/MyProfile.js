@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
 import Select from 'react-select';
 import "react-datepicker/dist/react-datepicker.css";
+import { uploadPictureApiCall } from '../../CommonService';
 
 export class MyProfile extends React.Component {
 
@@ -62,10 +63,13 @@ export class MyProfile extends React.Component {
         console.log(e.target.files);
         let file = e.target.files[0];
         this.props.uploadPlannyPictureAsync(file);
-        this.setState({
-            ...this.state,
-            uploadPictureCalled: true
-        });
+       
+        uploadPictureApiCall({
+            picture: file,
+            onSuccess: (data) => {
+              this.sate.profile.pictureUrl = data;
+            }
+          });
     }
 
     triggerInputFile = () => {
@@ -73,10 +77,7 @@ export class MyProfile extends React.Component {
     }
 
     saveProfile = () => {
-        this.props.editMyProfileAsync(JSON.stringify({
-            ...this.state.profile,
-            pictureUrl: this.props.pictureUploadState.uplodedPictureUrl,
-        }));
+        this.props.editMyProfileAsync(JSON.stringify(this.state.profile));
     }
 
     render() {
@@ -92,17 +93,11 @@ export class MyProfile extends React.Component {
                     <div className="basicForm mt-3">
 
                         <div className="d-flex justify-content-center mb-3">
-                            {this.state.profile.pictureUrl != null && !this.state.uploadPictureCalled &&
+                            {this.state.profile.pictureUrl != null 
                                 <img
                                     src={this.state.profile.pictureUrl}
                                     className="profile-img img-fluid" />
-                            }
-
-                            {this.props.pictureUploadState.uplodedPictureUrl != null && this.state.uploadPictureCalled &&
-                                <img
-                                    src={this.props.pictureUploadState.uplodedPictureUrl}
-                                    className="profile-img img-fluid" />
-                            }
+                            }                          
                         </div>
 
                         <FormGroup>
