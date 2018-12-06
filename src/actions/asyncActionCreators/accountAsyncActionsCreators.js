@@ -1,92 +1,38 @@
-import { HeaderHelper } from '../../actions/headerHelper';
-import { loginSuccess, loginInvalid, registerResult, getMyProfile } from '../actionCreators/accountActionsCreators'
-import { stopLoading, startLoading } from '../actionCreators/globalActionCreators';
+import { loginSuccess, loginInvalid, registerResult, getMyProfile } from '../actionCreators/accountActionsCreators';
+import { makeApiAction } from '../apiAsyncActionCreatorFactory';
 
 export const accountAsyncActionsCreators = (dispatch) => {
     return {
         loginAsync: (loginData) => {
-            let requestHeaders = HeaderHelper.getJsonHeader();
-
-            fetch("https://localhost:44378/api/Account/login", {
-                method: "POST",
-                body: String(loginData),
-                headers: requestHeaders,
-            })
-                .then(function (response) {
-                    if (response.status === 200) {
-                        response.json()
-                            .then(function (data) {
-                                console.log(data);
-                                dispatch(loginSuccess(data));
-                            });
-                    }
-                    else if (response.status === 400) {
-                        dispatch(loginInvalid());
-                    }
-                })
-                .catch(function (error) {
-                    console.log("request failed.");
-                });
+            makeApiAction({
+                url: 'account/login',
+                method: 'POST',
+                onSuccess: loginSuccess,
+                onFailure: loginInvalid,
+                data: String(loginData)
+            }, dispatch);
         },
         registerAsync: (data) => {
-            let requestHeaders = HeaderHelper.getJsonHeader();
-
-            fetch("https://localhost:44378/api/Account/Register", {
-                method: "POST",
-                body: String(data),
-                headers: requestHeaders,
-            })
-                .then((response) => response.json())
-                .then(function (data) {
-                    console.log(data);
-                    dispatch(registerResult(data));
-                })
-                .catch(function (error) {
-                    console.log("Registration failed.");
-                });
+            makeApiAction({
+                url: 'account/register',
+                method: 'POST',
+                onSuccess: registerResult,
+                data: data
+            }, dispatch);
         },
         getMyProfileAsync: () => {
-            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
-            dispatch(startLoading());
-
-            fetch("https://localhost:44378/api/profiles/own", {
-                method: "GET",
-                headers: requestHeaders,
-            })
-                .then(function (response) {
-                    if (response.status === 200) {
-                        response.json()
-                            .then(function (data) {
-                                dispatch(getMyProfile(data));
-                                dispatch(stopLoading());
-                            });
-                    }
-                })
-                .catch(function (error) {
-                    console.log("request failed.");
-                });
+            makeApiAction({
+                url: 'profiles/own',
+                onSuccess: getMyProfile,
+            }, dispatch);
         },
         editMyProfileAsync: (profile) => {
-            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader(); 
-            console.log(profile);         
-
-            fetch("https://localhost:44378/api/profiles/own/edit", {
-                method: "PUT",
-                body: String(profile),
-                headers: requestHeaders,
-            })
-            .then(function (response) {
-                if (response.status === 200) {
-                    response.json()
-                        .then(function (data) {    
-                            // Todo rendes popup kéne                       
-                           alert('Successfully saved profile.');                          
-                    });
-                }
-            })
-            .catch(function (error) {
-                console.log("request failed.");
-            });
+            makeApiAction({
+                url: 'profiles/own/edit',
+                method: 'POST',
+                onSuccess: () => { alert('Successfully saved profile.') },
+                data: String(profile)
+            }, dispatch);
         },
     }
 };

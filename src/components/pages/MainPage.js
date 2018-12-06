@@ -18,8 +18,7 @@ class MainPage extends React.Component {
   render() {
     return (
       <div>   
-        <SearchForm/>     
-        {/*todo rename state.searchedPlannies */}
+        <SearchForm/>      
         <PlannyTable
             plannies={this.props.publicPlanniesState.plannies}
             gotoDetails={this.gotoDetails} />      

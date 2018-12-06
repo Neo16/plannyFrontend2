@@ -14,7 +14,6 @@ export const makeApiAction = ({
 
     // axios default configs
     axios.defaults.baseURL = "https://localhost:44378/api";
-    axios.defaults.headers.common["Content-Type"] = "application/json";
     axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem('planny-userToken')}`;
     axios.defaults.headers.common["Accept"] = "*/*";
 
@@ -23,7 +22,10 @@ export const makeApiAction = ({
     axios
         .request({
             url,            
-            method,            
+            method,    
+            headers:{
+                'Content-Type': 'application/json'
+            },  
             [dataOrParams]: data,
         })
         .then(({ data }) => {

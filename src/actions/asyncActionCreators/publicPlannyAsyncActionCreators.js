@@ -1,91 +1,41 @@
-import { HeaderHelper } from '../headerHelper';
-import { searchPlannies, getPlanny, joinedPlanny, canceledParticipation, geoCode, getMyParticiapations } from '../actionCreators/publicPlannyActionCreators';
-import {stopLoading, startLoading} from '../actionCreators/globalActionCreators';
+import { searchPlannies, getPlanny, joinedPlanny, canceledParticipation, getMyParticiapations } from '../actionCreators/publicPlannyActionCreators';
+import { makeApiAction } from '../apiAsyncActionCreatorFactory';
 
 export const publicPlannyAsyncActionCreators = (dispatch) => {
-    return {        
+    return {
         getPlanniesAsync: (query) => {
-            console.log('planny search action fired');
-            dispatch(startLoading());
-            let requestHeaders = HeaderHelper.getJsonHeader();                   
-
-            fetch("https://localhost:44378/api/plannies/search",
-             {
-                method: "POST",
-                headers: requestHeaders,
-                body: String(query)
-             })
-            .then((response) => response.json())
-            .then(function (plannies) {        
-                dispatch(searchPlannies(plannies));               
-                dispatch(stopLoading());                   
-            });
+            makeApiAction({
+                url: 'plannies/search',
+                method: 'POST',
+                onSuccess: searchPlannies,
+                data: String(query)
+            }, dispatch);
         },
         getPlannyAsync: (id) => {
-            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();
-            dispatch({
-                type: 'GET_PLANNY_REQUEST',
-            });
-            fetch("https://localhost:44378/api/plannies/" + id,
-            {
-                method: "GET",
-                headers: requestHeaders
-            })
-            .then((response) => response.json())
-            .then(function (data) {                   
-                dispatch(getPlanny(data));                                  
-            });
+            makeApiAction({
+                url: 'plannies/' + id,
+                onSuccess: getPlanny,
+            }, dispatch);
         },
         joinPlannyAsync: (id) => {
-            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();           
-
-            fetch("https://localhost:44378/api/plannies/join/" + id,
-            {
-                method: "GET",
-                headers: requestHeaders
-            })
-            .then((response) => response.json())
-            .then(function (data) {
-                dispatch(joinedPlanny()); 
-            });
+            makeApiAction({
+                url: 'plannies/join/' + id,
+                onSuccess: joinedPlanny,
+            }, dispatch);
         },
         cancelParticipationAsync: (id) => {
-            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();         
-
-            fetch("https://localhost:44378/api/plannies/cancelparticipation/",
-            {
-                method: "POST",
-                headers: requestHeaders,
-                body: String(id)
-            })
-            .then((response) => response.json())
-            .then(function (data) {              
-                dispatch(canceledParticipation());       
-            });
-        },       
-        geoCodeAsync: (address) => {
-            fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyD2JkejS3AyjhdLpPnD-tRM6MLJnX6oYQc", {
-                method: "GET",
-            })
-            .then((response) => response.json())
-            .then(function (data) {                
-                if (data != null && data.results != null && data.results.length > 0) {
-                    dispatch(geoCode(data.results[0].geometry.location.lat,data.results[0].geometry.location.lng));
-                }            
-            });
-        },   
+            makeApiAction({
+                url: 'plannies/cancelparticipation',
+                method: 'POST',
+                onSuccess: canceledParticipation,
+                data: String(id)
+            }, dispatch);
+        },
         getMyParticipationsAsync: () => {
-            let requestHeaders = HeaderHelper.getAuthorizedJsonHeader();          
-            fetch("https://localhost:44378/api/plannies/myparticipations" +
-            " ", {
-                method: "GET",
-                headers: requestHeaders,
-
-            })
-            .then((response) => response.json())
-            .then(function (data) {            
-                dispatch(getMyParticiapations(data));
-            });
-        }, 
+            makeApiAction({
+                url: 'plannies/myparticipations',
+                onSuccess: getMyParticiapations,
+            }, dispatch);
+        },
     };
 };

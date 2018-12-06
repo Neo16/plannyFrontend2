@@ -1,6 +1,4 @@
 import { getSubCategoriesResult, getMainCategoriesResult } from '../actionCreators/categoryActionCreators';
-import { HeaderHelper } from '../headerHelper';
-import { stopLoading, startLoading } from '../actionCreators/globalActionCreators';
 import { makeApiAction } from '../apiAsyncActionCreatorFactory';
 
 export const categoryAsyncActionCreators = (dispatch) => {
