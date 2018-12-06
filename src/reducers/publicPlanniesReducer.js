@@ -1,17 +1,12 @@
-export class AcquirePlanniesState {
-    plannies;
-    query;
-    plannyDetail;
-    searchGeocode;
-    ownerProfile;
-}
 
-export const acquirePlanniesReducer = (state, action) => {
-    switch (action.type) {   
+import { PublicPlanniesState } from "../store/publicPlanniesState";
+
+export const publicPlanniesReducer = (state = new PublicPlanniesState(), action) => {
+    switch (action.type) {
         case 'SEARCH_PLANNIES':
             return {
                 ...state,
-                plannies: action.plannies               
+                plannies: action.plannies
             };
         case 'GET_PLANNY':
             return {
@@ -33,16 +28,8 @@ export const acquirePlanniesReducer = (state, action) => {
                     ...state.plannyDetail,
                     joinStatus: '2'
                 }
-            }       
-        case 'GET_GEOCODES':
-            return {
-                ...state,
-                searchGeocode: {
-                    longitude: action.longitude,
-                    latitude: action.latitude
-                }
             }
         default:
-            return state || new AcquirePlanniesState();
+            return state;
     }
 }

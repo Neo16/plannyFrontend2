@@ -1,13 +1,6 @@
-export class AccountState {
-    isLoggedIn;
-    loginError;
-    registerError;
-    registerSuccess;
-    userName;
-    profile;
-}
+import { AccountState } from '../store/accountState';
 
-export const accountReducer = (state, action) => {
+export const accountReducer = (state = new AccountState(), action) => {
     switch (action.type) {
         case 'GET_MY_PROFILE':
             return {
@@ -53,8 +46,7 @@ export const accountReducer = (state, action) => {
             }
 
         default: {
-            return { ...state };
+            return state;
         }
-
     }
 };

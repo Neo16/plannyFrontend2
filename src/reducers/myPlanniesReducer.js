@@ -1,10 +1,6 @@
-import { Reducer } from 'redux';
+import { MyPlanniesState } from '../store/myPlanniesState';
 
-export class MyPlanniesState {
-    plannies;    
-}
-
-export const myPlanniesReducer  = (state, action) => {
+export const myPlanniesReducer = (state = new MyPlanniesState(), action) => {
     switch (action.type) {
         case 'GET_MY_PLANNIES':
             return {
@@ -17,8 +13,6 @@ export const myPlanniesReducer  = (state, action) => {
                 plannies: state.plannies.filter(p => p.id != action.id)
             }
         default:
-            return state || {
-               plannies: null
-            }
+            return state;
     }
 };

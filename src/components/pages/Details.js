@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { publicPlannyAsyncActionCreators } from '../../actions/asyncActionCreators/publicPlannyAsyncActionCreators';
 import { Row, Col, Button } from 'reactstrap';
-import If from '../atoms/If';
 import moment from 'moment';
 import './Details.css';
 import { Link } from 'react-router-dom';

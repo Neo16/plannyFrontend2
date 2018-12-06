@@ -1,10 +1,7 @@
-export class AppCommonState {
-    isLoading;
-    mainCategories;
-    subCategories;
-}
 
-export const appCommonReducer = (state, action) => {
+import { AppCommonState } from '../store/appCommonState';
+
+export const appCommonReducer = (state = new AppCommonState(), action) => {
     switch (action.type) {
         case 'GET_MAINCATEGORIES':
             return {
@@ -26,6 +23,9 @@ export const appCommonReducer = (state, action) => {
                 ...state,
                 isLoading: false
             }
-        default: return state || { isLoading: false }
+            return state;
+
+        default:
+            return state;
     }
 }

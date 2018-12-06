@@ -21,7 +21,7 @@ class MainPage extends React.Component {
         <SearchForm/>     
         {/*todo rename state.searchedPlannies */}
         <PlannyTable
-            plannies={this.props.state.plannies}
+            plannies={this.props.publicPlanniesState.plannies}
             gotoDetails={this.gotoDetails} />      
       </div>
     );
@@ -30,6 +30,6 @@ class MainPage extends React.Component {
 
 export default connect(
   (state) => ({
-      state: state.acquirePlanniesState 
+      publicPlanniesState: state.publicPlanniesState 
   }) 
 )(MainPage);
