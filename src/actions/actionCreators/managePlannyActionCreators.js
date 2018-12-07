@@ -30,6 +30,6 @@ export function declinedParticipation(id) {
 export function deletePlanny(id) {
     return {
         type: 'DELETE_PLANNY',
-        id
+        id: id
     }
 }

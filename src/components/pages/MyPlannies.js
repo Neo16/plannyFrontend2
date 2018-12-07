@@ -24,7 +24,7 @@ export class MyPlannies extends React.Component {
   }
 
   declineParticipation = (id) => {
-    this.props.declineParticipation(id);
+    this.props.declineParticipationAsync(id);
   }
 
   approveParticipation = (id) => {

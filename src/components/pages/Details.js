@@ -30,7 +30,7 @@ export class PlannyDetails extends React.Component {
   }
 
   render() {
-    let p = this.props.acquirePlanniesState.plannyDetail;
+    let p = this.props.publicPlanniesState.plannyDetail;
     if (p == undefined) {
       return (<p></p>);
     }
@@ -73,21 +73,21 @@ export class PlannyDetails extends React.Component {
 
               <div className="plannyInfo"><b>Participants gender: </b>doesn't matter</div>
 
-              {this.props.acquirePlanniesState.plannyDetail.joinStatus == '1' &&
+              {this.props.publicPlanniesState.plannyDetail.joinStatus == '1' &&
                 <Button
                   className="joinButton"
                   color="info" outline
                   onClick={this.joinPlanny}>
                   Join planny
               </Button>}
-              {this.props.acquirePlanniesState.plannyDetail.joinStatus == '2' &&
+              {this.props.publicPlanniesState.plannyDetail.joinStatus == '2' &&
                 <Button
                   outline 
                   className="joinButton"
                   onClick={this.cancelPlanny}>
                   Cancel join request
               </Button>}
-              {this.props.acquirePlanniesState.plannyDetail.joinStatus == '3' &&
+              {this.props.publicPlanniesState.plannyDetail.joinStatus == '3' &&
                 <Button
                   className="joinButton"
                   outline 
@@ -105,7 +105,7 @@ export class PlannyDetails extends React.Component {
 
 export default connect(
   (state) => ({
-    acquirePlanniesState: state.acquirePlanniesState
+    publicPlanniesState: state.publicPlanniesState
   }),
   dispatch => ({
     ...publicPlannyAsyncActionCreators(dispatch)   

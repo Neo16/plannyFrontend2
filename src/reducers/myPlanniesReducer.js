@@ -8,12 +8,35 @@ export const myPlanniesReducer = (state = new MyPlanniesState(), action) => {
                 plannies: action.plannies
             };
         case 'DELETE_PLANNY':
-        console.log('ddddddd');
-        console.log(action.id);
             return {
                 ...state,
                 plannies: state.plannies.filter(p => p.id != action.id)
-            }
+            };
+        case 'APPROVE_PARTICIPATION':
+            return {
+                ...state,
+                plannies: state.plannies.map((planny) =>
+                    planny.participations.some(p => p.participationId == action.id)
+                        ? {
+                            ...planny,
+                            participations: planny.participations.map((part) =>
+                                part.participationId == action.id ? { ...part, state: 1 } : part)
+                        }
+                        : planny)
+            };
+        case 'DECLINE_PARTICIPATION': {       
+            return {
+                ...state,
+                plannies: state.plannies.map((planny) =>
+                    planny.participations.some(p => p.participationId == action.id)
+                        ? {
+                            ...planny,
+                            participations: planny.participations.map((part) =>
+                                part.participationId == action.id ? { ...part, state: 0 } : part)
+                        }
+                        : planny)
+            };
+        }
         default:
             return state;
     }

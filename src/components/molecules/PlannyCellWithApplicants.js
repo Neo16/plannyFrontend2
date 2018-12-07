@@ -7,10 +7,7 @@ import If from './../atoms/If';
 
 export class PlannyCellWithAplicants extends React.Component {
   render() {
-    var p = this.props.planny;
-
-    console.log(p.participants);
-
+    var p = this.props.planny;    
     return (
       <div className="plannyCellWrapper">
         <PlannyCell

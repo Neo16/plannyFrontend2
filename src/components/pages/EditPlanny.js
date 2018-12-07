@@ -23,8 +23,8 @@ export class EditPlanny extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let oPlanny = this.props.acquirePlanniesState.plannyDetail;
-    let nPlanny = nextProps.acquirePlanniesState.plannyDetail;
+    let oPlanny = this.props.publicPlanniesState.plannyDetail;
+    let nPlanny = nextProps.publicPlanniesState.plannyDetail;
 
     if (nPlanny && (oPlanny == undefined || nPlanny != oPlanny)) {
       this.setState({
@@ -64,7 +64,7 @@ export class EditPlanny extends React.Component {
       <Row>
         <Col xl={{ size: 6, offset: 3 }} md={{ size: 8, offset: 2 }} sm={{ size: 10, offset: 1 }} className="mt-3">
           <div className="title">Edit Planny</div>
-          <If condition={this.props.acquirePlanniesState.plannyDetail != undefined}>
+          <If condition={this.props.publicPlanniesState.plannyDetail != undefined}>
             <div className="basicForm mt-3">
               <CreateEditPlannyForm
                 onChange={this.handleFieldChange}
@@ -89,7 +89,7 @@ export class EditPlanny extends React.Component {
 export default connect(
   (state) => ({
     pictureUploadState: state.pictureUploadState,
-    acquirePlanniesState: state.acquirePlanniesState
+    publicPlanniesState: state.publicPlanniesState
   }),
   dispatch => ({
     ...publicPlannyAsyncActionCreators(dispatch),
