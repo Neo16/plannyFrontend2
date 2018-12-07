@@ -1,22 +1,5 @@
 @import './variables.scss';
 
-nav.navbar.navbar-inverse{
-    background-color: $app-highlight-secondary;
-
-    ul.navbar-nav{
-        background-color: $app-highlight-secondary;     
-        li>a {
-            color: white;
-            text-transform: uppercase;     
-            font-weight: 600; 
-            font-family: Montserrat;    
-        }
-        li:active, li:hover{
-            background-color: #5e7bad;
-        }
-    }
-}
-
 html, body, #root {
     height: 100%;
 }
@@ -55,23 +38,12 @@ html, body, #root {
         box-shadow: none;
         border: 1px solid darkgray;  
     }
-
-    .submitBtn{
-        float:right;
-        margin-top: 5px;
-        background: white;
-        color: $app-blue-brand;
-        border: 1px solid $app-blue-brand;       
-    }
 }
 
 .danger{
     color: #8c1616;
 }
 
-.success{
-    color: #3c763d;
-}
 
 .plannyPicEdit{
     margin-bottom: 20px;

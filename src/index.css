@@ -31,15 +31,6 @@ html, body, #root {
     border-radius: 7px; }
   .basicForm textarea {
     resize: none; }
-  .basicForm input.form-control:focus {
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #3F6EC1;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #3F6EC1; }
-  .basicForm .submitBtn {
-    float: right;
-    margin-top: 5px;
-    background-color: #3F6EC1;
-    color: white; }
 
 .danger {
   color: #8c1616; }

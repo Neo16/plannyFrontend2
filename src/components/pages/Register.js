@@ -70,11 +70,11 @@ class Register extends React.Component {
                         placeholder="password"
                     />
                     {!this.props.state.registerSuccess &&
-                        <Button className="submitBtn" onClick={this.register.bind(this)}>Register</Button>
+                        <Button onClick={this.register.bind(this)}>Register</Button>
                     }
                     {this.props.state.registerSuccess &&
                         <div>
-                            <Button className="submitBtn" bsStyle="success" onClick={this.navigateToLogin.bind(this)}>Click here to log in</Button>
+                            <Button bsStyle="success" onClick={this.navigateToLogin.bind(this)}>Click here to log in</Button>
                             <p className='success'>Registration successful!</p>
                         </div>
                     }

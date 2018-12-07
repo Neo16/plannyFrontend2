@@ -61,8 +61,7 @@ export class Login extends React.Component {
             <p>{this.props.state.loginError} </p>
           }
           <Button outline
-           color="info" 
-           className="submitBtn"
+           color="info"        
            onClick={this.login.bind(this)}>Login</Button>
           <Link to="/register">Register</Link>
         </Col>
