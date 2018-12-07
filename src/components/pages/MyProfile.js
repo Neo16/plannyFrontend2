@@ -60,16 +60,15 @@ export class MyProfile extends React.Component {
     }
 
     uploadPicture = (e) => {
-        console.log(e.target.files);
         let file = e.target.files[0];
         this.props.uploadPlannyPictureAsync(file);
-       
+
         uploadPictureApiCall({
             picture: file,
             onSuccess: (data) => {
-              this.sate.profile.pictureUrl = data;
+                this.sate.profile.pictureUrl = data;
             }
-          });
+        });
     }
 
     triggerInputFile = () => {
@@ -93,11 +92,10 @@ export class MyProfile extends React.Component {
                     <div className="basicForm mt-3">
 
                         <div className="d-flex justify-content-center mb-3">
-                            {this.state.profile.pictureUrl != null 
-                                <img
-                                    src={this.state.profile.pictureUrl}
+                            {this.state.profile.pictureUrl != null &&
+                                <img src={this.state.profile.pictureUrl}
                                     className="profile-img img-fluid" />
-                            }                          
+                            }
                         </div>
 
                         <FormGroup>

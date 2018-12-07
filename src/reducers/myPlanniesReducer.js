@@ -7,7 +7,9 @@ export const myPlanniesReducer = (state = new MyPlanniesState(), action) => {
                 ...state,
                 plannies: action.plannies
             };
-        case 'DELETE_PROPOSAL':
+        case 'DELETE_PLANNY':
+        console.log('ddddddd');
+        console.log(action.id);
             return {
                 ...state,
                 plannies: state.plannies.filter(p => p.id != action.id)

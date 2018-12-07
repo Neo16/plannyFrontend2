@@ -86,7 +86,7 @@ export class CreateEditPlannyForm extends React.Component {
             {this.props.planny.pictureUrl != null &&
               <img
                 src={this.props.planny.pictureUrl}
-                className="plannyPic rounded img-fluid" />
+                className="plannyPicEdit rounded img-fluid" />
             }
           </div>
           <div className="upload-btn-wrapper">

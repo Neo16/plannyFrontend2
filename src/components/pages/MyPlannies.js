@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { managePlannyAsyncActionCreators } from '../../actions/asyncActionCreators/managePlannyAsyncActionCreators';
-import {commonAsyncActionCreators} from '../../actions/asyncActionCreators/commonAsyncActionCreators';
+import { commonAsyncActionCreators } from '../../actions/asyncActionCreators/commonAsyncActionCreators';
 import { ApplicationState } from '../..';
 import { MyPlannyTable } from '../organisms/MyPlannyTable';
 import { Row, Col, Button } from 'reactstrap';
@@ -13,38 +13,33 @@ export class MyPlannies extends React.Component {
 
   constructor(props) {
     super(props);
-    this.declineParticipation = this.declineParticipation.bind(this);
-    this.approveParticipation = this.approveParticipation.bind(this);
-    this.cancelPlanny = this.cancelPlanny.bind(this);
-    this.deleteProposal = this.deleteProposal.bind(this);
   }
 
   componentDidMount() {
     this.props.getMyPlanniesAsync();
   }
 
-  createNew() {
-    this.props.history.push("/plannies/create");
+  createNew = () => {
+    this.props.navigate('/plannies/create');
   }
 
-  declineParticipation(id) {
+  declineParticipation = (id) => {
     this.props.declineParticipation(id);
   }
 
-  approveParticipation(id) {
-    this.props.approveParticipation(id);
+  approveParticipation = (id) => {
+    this.props.approveParticipationAsync(id);
   }
 
-  deleteProposal(id) {
-    this.props.deleteProposal(id);
+  deletePlanny = (id) => {
+    this.props.deletePlannyAsync(id);
   }
 
-  cancelPlanny(id) {
-    this.props.cancelParticipation(id);
+  cancelPlanny = (id) => {
+    this.props.cancelParticipationAsync(id);
   }
 
-  gotoDetails = (id) => {
-    console.log('fire');
+  gotoDetails = (id) => {   
     this.props.navigate('/plannies/edit/' + id);
   }
 
@@ -59,7 +54,7 @@ export class MyPlannies extends React.Component {
           <If condition={this.props.myPlanniesState.plannies != null}>
             <MyPlannyTable
               gotoDetails={this.gotoDetails}
-              deleteProposal={this.deleteProposal}
+              deletePlanny={this.deletePlanny}
               plannies={this.props.myPlanniesState.plannies}
               approveParticipation={this.approveParticipation}
               declineParticipation={this.declineParticipation}
@@ -96,9 +91,9 @@ export default connect(
     myPlanniesState: state.myPlanniesState
   }),
   dispatch => ({
-    ...managePlannyAsyncActionCreators(dispatch),   
+    ...managePlannyAsyncActionCreators(dispatch),
     ...commonAsyncActionCreators(dispatch)
-  })  
+  })
 )(MyPlannies);
 
 

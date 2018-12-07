@@ -15,21 +15,21 @@ export function pictureUpload(pictureUrl) {
 
 export function approvedParticipation(id) {
     return {
-        type: 'APPROVE_PARTICIPATIONS',
+        type: 'APPROVE_PARTICIPATION',
         id: id
     }
 }
 
 export function declinedParticipation(id) {
     return {
-        type: 'DECLINE_PARTICIPATIONS',
+        type: 'DECLINE_PARTICIPATION',
         id: id
     }
 }
 
-export function deleteProposal(id) {
+export function deletePlanny(id) {
     return {
-        type: 'DELETE_PROPOSALS',
+        type: 'DELETE_PLANNY',
         id
     }
 }

@@ -39,7 +39,7 @@ export class PlannyCell extends React.Component {
           <If condition={this.props.mine}>
             <Button
               className={"float-left"}
-              onClick={() => this.props.deleteProposal(p.id)}
+              onClick={() => this.props.deletePlanny(p.id)}
               outline color="danger">
               Delete
            </Button>

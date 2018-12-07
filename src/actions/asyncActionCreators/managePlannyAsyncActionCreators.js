@@ -1,4 +1,4 @@
-import { getMyPlannies, pictureUpload, approvedParticipation, declinedParticipation, deleteProposal }
+import { getMyPlannies, pictureUpload, approvedParticipation, declinedParticipation, deletePlanny }
     from '../actionCreators/managePlannyActionCreators';
 import { push } from 'connected-react-router';
 import { makeApiAction } from '../apiAsyncActionCreatorFactory';
@@ -43,11 +43,11 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
                 data: String(id)
             }, dispatch);
         },
-        deleteAsync: (id) => {
+        deletePlannyAsync: (id) => {
             makeApiAction({
-                url: 'api/plannies/' + id,
+                url: 'plannies/' + id,
                 method: 'DELETE',
-                onSuccess: deleteProposal,
+                onSuccess: deletePlanny,
                 data: String(id)
             }, dispatch);
         }

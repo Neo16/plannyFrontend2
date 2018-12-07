@@ -17,7 +17,7 @@ export class PlannyCellWithAplicants extends React.Component {
           key={p.id}
           planny={p}
           mine={true}
-          deleteProposal={this.props.deleteProposal}
+          deletePlanny={this.props.deletePlanny}
           gotoDetails={this.props.gotoDetails} />
 
         <div className="applicantsBox">

@@ -14,7 +14,7 @@ export class MyPlannyTable extends React.Component {
               approveParticipation={this.props.approveParticipation}
               declineParticipation={this.props.declineParticipation}
               key={p.id} planny={p}
-              deleteProposal={this.props.deleteProposal}
+              deletePlanny={this.props.deletePlanny}
               gotoDetails={this.props.gotoDetails} />
           </Col>)}
 
