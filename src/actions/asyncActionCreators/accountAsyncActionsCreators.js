@@ -29,7 +29,7 @@ export const accountAsyncActionsCreators = (dispatch) => {
         editMyProfileAsync: (profile) => {
             makeApiAction({
                 url: 'profiles/own/edit',
-                method: 'POST',
+                method: 'PUT',
                 onSuccess: () => { alert('Successfully saved profile.') },
                 data: String(profile)
             }, dispatch);
