@@ -19,9 +19,11 @@ export const uploadPictureApiCall = ({
             data: formData,
         })
         .then(({ data }) => {
+            console.log(data);
             onSuccess(data);
         })
         .catch(error => {
+            console.log('asd');
             alert('upload failed');
         });
 }

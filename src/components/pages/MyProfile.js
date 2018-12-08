@@ -60,13 +60,17 @@ export class MyProfile extends React.Component {
     }
 
     uploadPicture = (e) => {
-        let file = e.target.files[0];
-        this.props.uploadPlannyPictureAsync(file);
+        let file = e.target.files[0];       
 
         uploadPictureApiCall({
             picture: file,
             onSuccess: (data) => {
-                this.sate.profile.pictureUrl = data;
+                this.setState({
+                    profile: {
+                        ...this.state.profile,
+                        pictureUrl: data
+                    }
+                });              
             }
         });
     }

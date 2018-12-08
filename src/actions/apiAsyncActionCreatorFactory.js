@@ -7,7 +7,8 @@ export const makeApiAction = ({
     data = null,
     onSuccess = () => { },
     onFailure = apiError,
-    label = ""
+    label = "",
+    toggleIdLoading = true
 }, dispatch) => {
 
     const dataOrParams = ["GET", "DELETE"].includes(method) ? "params" : "data";
@@ -17,8 +18,10 @@ export const makeApiAction = ({
     axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem('planny-userToken')}`;
     axios.defaults.headers.common["Accept"] = "*/*";
 
-    dispatch(startLoading());
-
+    if (toggleIdLoading) {
+        dispatch(startLoading());
+    }
+   
     axios
         .request({
             url,            
@@ -35,7 +38,9 @@ export const makeApiAction = ({
             dispatch(onFailure(error));
         })
         .finally(() => {
-            dispatch(stopLoading());
+            if (toggleIdLoading) {
+                dispatch(stopLoading());
+            }            
         });
 };
 

@@ -32,7 +32,8 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
                 url: 'plannies/approveparticipation',
                 method: 'POST',
                 onSuccess: approvedParticipation,
-                data: String(id)
+                data: String(id),
+                toggleIdLoading: false
             }, dispatch);
         },
         declineParticipationAsync: (id) => {
@@ -40,7 +41,8 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
                 url: 'plannies/declineparticipation',
                 method: 'POST',
                 onSuccess: declinedParticipation,
-                data: String(id)
+                data: String(id),
+                toggleIdLoading: false
             }, dispatch);
         },
         deletePlannyAsync: (id) => {

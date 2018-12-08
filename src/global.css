@@ -99,3 +99,22 @@ html, body, #root {
   @media screen and (max-width: 1200px) {
     .profile-img {
       height: 180px; } }
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active,
+.btn-outline-secondary:not(:disabled):not(.disabled):active,
+.show > .btn-outline-secondary.dropdown-toggle {
+  color: #6c757d;
+  background-color: transparent;
+  border-color: #6c757d; }
+
+.btn-outline-secondary:focus {
+  box-shadow: none; }
+
+.btn-outline-secondary:hover {
+  color: #6c757d;
+  background-color: transparent;
+  border-color: #6c757d;
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }
+
+.toggle-button {
+  padding: 3px 9px; }

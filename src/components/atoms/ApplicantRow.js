@@ -1,15 +1,19 @@
 import * as React from 'react';
-import { Switch } from './Switch'
+import { ToggleButton } from './ToggleButton'
 
-export class  ApplicantRow extends React.Component
-{  
+export class ApplicantRow extends React.Component {
     render() {
         return (
             <div className="applicant">
-                {this.props.name}
-                <Switch onPositiveTogle={this.props.approve} onNegativeTogle={this.props.decline} />
+                <span>{this.props.name}</span>
+                <ToggleButton
+                    className="float-right"
+                    positiveText="Decline"
+                    negativeText="Approve"
+                    isPositive={this.props.participationState}
+                    onPositive={this.props.approve}
+                    onNegative={this.props.decline} />
             </div>
         );
     }
 }
-     

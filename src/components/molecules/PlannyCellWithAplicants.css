@@ -2,24 +2,30 @@
   background-color: lavender;
   border: 1px solid lightgray; }
   .applicantsBox .applicantsHeader {
+    cursor: pointer;
     padding: 10px;
     font-size: 18px;
     font-weight: 600;
     color: white;
     background-color: #c1c1c1;
     font-family: Montserrat;
-    letter-spacing: 1.4px; }
+    letter-spacing: 1.4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
     .applicantsBox .applicantsHeader .right {
       font-size: 15px; }
   .applicantsBox .applicantsList {
-    max-height: 100px;
-    overflow-y: auto;
+    max-height: 180px;
     margin-left: -1px;
     margin-right: -1px; }
     .applicantsBox .applicantsList .applicant {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       font-size: 15px;
       background-color: white;
-      height: 41px;
+      height: 60px;
       padding: 10px 10px;
       border: 1px solid lightgray;
       margin-bottom: -1px; }

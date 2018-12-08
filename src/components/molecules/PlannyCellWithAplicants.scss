@@ -6,6 +6,7 @@
     border: 1px solid lightgray;
 
     .applicantsHeader{        
+        cursor: pointer;
         padding: 10px;
         font-size: 18px;
         font-weight: 600;
@@ -13,21 +14,26 @@
         background-color: $app-lighter-gray;
         font-family: Montserrat;  
         letter-spacing: 1.4px; 
-
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         .right{
             font-size: 15px;
         }
     }
 
     .applicantsList{
-        max-height: 100px;
-        overflow-y: auto;   
+        max-height: 180px;      
         margin-left: -1px;
         margin-right: -1px;
         .applicant{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
             font-size: 15px;
             background-color: white;
-            height: 41px;
+            height: 60px;
             padding: 10px 10px;   
             border: 1px solid lightgray;
             margin-bottom: -1px;       
