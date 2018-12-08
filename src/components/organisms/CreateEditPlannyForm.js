@@ -28,7 +28,7 @@ export class CreateEditPlannyForm extends React.Component {
   }
 
   handleCategorySelectChange = (value) => {
-    this.props.onChange("categoryIds", value)
+    this.props.onChange("categories", value)
   };
 
   uploadPicture = (e) => {
@@ -105,7 +105,6 @@ export class CreateEditPlannyForm extends React.Component {
           </Button>
           </div>
 
-
           <Label>Description</Label>
           <Input
             type="textarea"
@@ -113,12 +112,12 @@ export class CreateEditPlannyForm extends React.Component {
             value={this.props.planny.description}
             placeholder="Description"
             onChange={this.handleChange} />
-          <Label>Category</Label>
 
+          <Label>Categoryies</Label>
           <Select
             styles={this.customSelecStyles}
             isMulti
-            value={this.props.planny.categoryIds}
+            value={this.props.planny.categories}
             onChange={this.handleCategorySelectChange}
             options={this.createCategoryOptions()}
             className='react-select-container'

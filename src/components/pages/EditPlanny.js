@@ -15,7 +15,6 @@ export class EditPlanny extends React.Component {
       planny: {
         name: "",
         description: "",
-        categoryIds: ["-1"],
         fromTime: new Date(),
         toTime: new Date(),
       }
@@ -32,6 +31,10 @@ export class EditPlanny extends React.Component {
           ...nPlanny,
           fromTime: new Date(nPlanny.fromTime),
           toTime: new Date(nPlanny.toTime),
+          categories: nPlanny.categories.map(c => Object.assign({}, {
+            value: c.id,
+            label: c.name
+          }))
         }
       });
     }
@@ -45,9 +48,8 @@ export class EditPlanny extends React.Component {
   editPlanny = () => {
     this.props.updatePlannyAsync(this.state.planny.id, JSON.stringify({
       ...this.state.planny,
-      categoryIds: this.state.planny.categoryIds.map(c => c.value)
+      categoryIds: this.state.planny.categories.map(c => c.value)
     }));
-    console.log(JSON.stringify(this.state));
   }
 
   handleFieldChange = (name, value) => {

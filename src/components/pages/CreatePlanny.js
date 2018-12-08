@@ -27,7 +27,6 @@ export class CreatePlanny extends React.Component {
       ...this.state.planny,    
       categoryIds: this.state.planny.categoryIds.map(c => c.value)
     }));
-    console.log(JSON.stringify(this.state));
   }
 
   handleFieldChange = (name, value) => {

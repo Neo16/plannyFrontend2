@@ -54,14 +54,14 @@ class SearchForm extends React.Component {
             parentId === this.state.currentParentCategoryId || !this.state.subcategoriesVisible) {
             this.setState({
                 subcategoriesVisible: !this.state.subcategoriesVisible,
-                currentSubCategories: this.props.appCommonState.subCategories.filter((c) => c.parentCategoryId === parentId),
+                currentSubCategories: this.props.appCommonState.subCategories.filter((c) => c.mainCategoryId === parentId),
                 currentParentCategoryId: parentId,
             });
         }
         else {
             this.setState({
                 currentParentCategoryId: parentId,
-                currentSubCategories: this.props.appCommonState.subCategories.filter((c) => c.parentCategoryId === parentId)
+                currentSubCategories: this.props.appCommonState.subCategories.filter((c) => c.mainCategoryId === parentId)
             });
         }
     }
