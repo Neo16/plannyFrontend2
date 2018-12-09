@@ -1,14 +1,16 @@
 import axios from "axios";
 import { stopLoading, startLoading, apiError } from './actionCreators/globalActionCreators';
+import { push } from 'connected-react-router';
 
 export const makeApiAction = ({
     url = "",
     method = "GET",
     data = null,
-    onSuccess = () => { },
+    onSuccess = undefined,
     onFailure = apiError,
     label = "",
-    toggleIdLoading = true
+    toggleIdLoading = true,
+    onSuccessNavigation = undefined
 }, dispatch) => {
 
     const dataOrParams = ["GET", "DELETE"].includes(method) ? "params" : "data";
@@ -21,18 +23,23 @@ export const makeApiAction = ({
     if (toggleIdLoading) {
         dispatch(startLoading());
     }
-   
+
     axios
         .request({
-            url,            
-            method,    
-            headers:{
+            url,
+            method,
+            headers: {
                 'Content-Type': 'application/json'
-            },  
+            },
             [dataOrParams]: data,
         })
         .then(({ data }) => {
-            dispatch(onSuccess(data));
+            if (onSuccessNavigation != undefined) {
+                dispatch(push(onSuccessNavigation));
+            }
+            if (onSuccess != undefined) {
+                dispatch(onSuccess(data));
+            }
         })
         .catch(error => {
             dispatch(onFailure(error));
@@ -40,7 +47,7 @@ export const makeApiAction = ({
         .finally(() => {
             if (toggleIdLoading) {
                 dispatch(stopLoading());
-            }            
+            }
         });
 };
 

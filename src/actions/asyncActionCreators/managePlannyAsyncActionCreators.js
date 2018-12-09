@@ -1,6 +1,6 @@
 import { getMyPlannies, pictureUpload, approvedParticipation, declinedParticipation, deletePlanny }
     from '../actionCreators/managePlannyActionCreators';
-import { push } from 'connected-react-router';
+
 import { makeApiAction } from '../apiAsyncActionCreatorFactory';
 
 export const managePlannyAsyncActionCreators = (dispatch) => {
@@ -9,7 +9,7 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
             makeApiAction({
                 url: 'plannies',
                 method: 'POST',
-                onSuccess: () => { push('/') },
+                onSuccessNavigation: '/plannies/my',
                 data: String(planny)
             }, dispatch);
         },
@@ -17,7 +17,7 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
             makeApiAction({
                 url: 'plannies/' + id,
                 method: 'PUT',
-                onSuccess: () => { push('/') },
+                onSuccessNavigation: '/plannies/my',
                 data: String(planny)
             }, dispatch);
         },
