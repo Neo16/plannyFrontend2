@@ -6,6 +6,13 @@ export function getMyPlannies(plannies) {
     }
 }
 
+export function getMyParticipations(participations) {
+    return {
+        type: 'GET_MY_PARTICIPATIONS',
+        participations
+    }
+}
+
 export function pictureUpload(pictureUrl) {
     return {
         type: 'UPLOAD_PICS',

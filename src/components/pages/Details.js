@@ -10,17 +10,11 @@ export class PlannyDetails extends React.Component {
 
   plannyId;
 
-  constructor(props) {
-    super(props)
-    this.joinPlanny = this.joinPlanny.bind(this);
-    this.cancelPlanny = this.cancelPlanny.bind(this);
-  }
-
-  joinPlanny() {
+  joinPlanny = () => {
     this.props.joinPlannyAsync(this.plannyId);   
   }
 
-  cancelPlanny() {
+  cancelPlanny = () => {
     this.props.cancelParticipationAsync(this.plannyId);   
   }
 

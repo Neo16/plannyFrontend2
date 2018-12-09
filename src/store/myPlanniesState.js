@@ -1,3 +1,4 @@
 export class MyPlanniesState {
-    plannies;    
+    plannies;  
+    participations;  
 }

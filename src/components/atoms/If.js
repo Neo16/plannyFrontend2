@@ -2,7 +2,7 @@
 import React from 'react';
 
 const If = (props) => {
-  if (props.condition) {
+  if (props.condition === true) {
     return (
       <React.Fragment>
         { props.children }

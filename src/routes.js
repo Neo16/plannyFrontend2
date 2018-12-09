@@ -9,6 +9,7 @@ import EditPlanny from './components/pages/EditPlanny';
 import Details from './components/pages/Details';
 import MyProfile from './components/pages/MyProfile';
 import Register from './components/pages/Register';
+import MyParticipations from './components/pages/MyParticipations';
 
 export class Routes extends React.Component {
     render() {
@@ -21,6 +22,7 @@ export class Routes extends React.Component {
             <Route path='/plannies/my' exact component={MyPlannies} />
             <Route path='/plannies/:id(\d+)' exact component={Details} />
             <Route path='/profile' exact component={MyProfile} />
+            <Route path='/myparticipations' exact component={MyParticipations} />            
         </Switch>);
     }
 }

@@ -40,6 +40,9 @@ class PlannyNavBar extends React.Component {
                                 <NavLink tag={Link} to="/plannies/my">My plannies</NavLink>
                             </NavItem>
                             <NavItem>
+                                <NavLink tag={Link} to="/myparticipations">My participations</NavLink>
+                            </NavItem>
+                            <NavItem>
                                 <NavLink tag={Link} to="/plannies/create">New Planny</NavLink>
                             </NavItem>
                         </If>

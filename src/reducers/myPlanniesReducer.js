@@ -7,6 +7,11 @@ export const myPlanniesReducer = (state = new MyPlanniesState(), action) => {
                 ...state,
                 plannies: action.plannies
             };
+        case 'GET_MY_PARTICIPATIONS':
+            return {
+                ...state,
+                participations: action.participations
+            };
         case 'DELETE_PLANNY':
             return {
                 ...state,
@@ -24,7 +29,7 @@ export const myPlanniesReducer = (state = new MyPlanniesState(), action) => {
                         }
                         : planny)
             };
-        case 'DECLINE_PARTICIPATION': {       
+        case 'DECLINE_PARTICIPATION': {
             return {
                 ...state,
                 plannies: state.plannies.map((planny) =>

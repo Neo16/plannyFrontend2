@@ -1,4 +1,4 @@
-import { getMyPlannies, pictureUpload, approvedParticipation, declinedParticipation, deletePlanny }
+import { getMyPlannies, getMyParticipations, pictureUpload, approvedParticipation, declinedParticipation, deletePlanny }
     from '../actionCreators/managePlannyActionCreators';
 
 import { makeApiAction } from '../apiAsyncActionCreatorFactory';
@@ -25,6 +25,12 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
             makeApiAction({
                 url: 'plannies/myplannies',
                 onSuccess: getMyPlannies,
+            }, dispatch);
+        },
+        getMyParticipationsAsync: () => {
+            makeApiAction({
+                url: 'plannies/myparticipations',
+                onSuccess: getMyParticipations,
             }, dispatch);
         },
         approveParticipationAsync: (id) => {
