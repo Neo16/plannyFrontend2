@@ -10,7 +10,6 @@ export class MyParticipations extends React.Component {
     componentDidMount() {
         this.props.getMyParticipationsAsync(this.plannyId);
     }
-
     render() {
         return (
             <Row>

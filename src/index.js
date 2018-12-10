@@ -13,7 +13,9 @@ import If from './components/atoms/If';
 import { Spinner } from './components/atoms/Spinner';
 import { store, history } from './store/configureStore';
 import { Routes } from './routes';
- 
+import { DialogModal } from './components/organisms/DialogModal';
+import { showInfoModal, hideInfoModal } from './actions/actionCreators/globalActionCreators';
+
 fontLibrary.add(faAngleLeft);
 fontLibrary.add(faAngleRight);
 fontLibrary.add(faAngleDown);
@@ -26,11 +28,21 @@ const render = () => {
         <React.Fragment>
           <PlannyNavBar />
           <Container className='fill' hidden={store.getState().appCommonState.isLoading}>
-            <Routes/>         
+            <Routes />
           </Container>
           <If condition={store.getState().appCommonState.isLoading}>
             <Spinner />
           </If>
+          <If condition={store.getState().appCommonState.showInfoModal}>
+            {/* Error modal, todo export */}
+            <DialogModal
+              header = "Error"
+              body = {store.getState().appCommonState.infoModalMessage}
+              positiveButtonText="Ok"           
+              ok={() => store.dispatch(hideInfoModal())}
+            />
+          </If>
+          {/* Todo confirm modal is, ott láthatóság a komponensbe, és az action is */}
         </React.Fragment>
       </ConnectedRouter>
     </Provider>,

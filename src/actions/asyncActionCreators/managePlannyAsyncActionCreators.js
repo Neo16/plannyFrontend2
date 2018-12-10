@@ -2,6 +2,7 @@ import { getMyPlannies, getMyParticipations, pictureUpload, approvedParticipatio
     from '../actionCreators/managePlannyActionCreators';
 
 import { makeApiAction } from '../apiAsyncActionCreatorFactory';
+import { showInfoModal } from '../actionCreators/globalActionCreators';
 
 export const managePlannyAsyncActionCreators = (dispatch) => {
     return {
@@ -18,6 +19,7 @@ export const managePlannyAsyncActionCreators = (dispatch) => {
                 url: 'plannies/' + id,
                 method: 'PUT',
                 onSuccessNavigation: '/plannies/my',
+                onFailure: () => {dispatch(showInfoModal("Updating planny failed."))},
                 data: String(planny)
             }, dispatch);
         },

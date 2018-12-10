@@ -16,3 +16,16 @@ export function apiError(error) {
         error
     };
 }
+
+export function showInfoModal(message) {
+    return {
+        type: 'SHOW_INFO_MODAL',
+        message
+    };
+}
+
+export function hideInfoModal() {
+    return {
+        type: 'HIDE_INFO_MODAL'
+    };
+}

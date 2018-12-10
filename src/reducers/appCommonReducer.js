@@ -23,8 +23,17 @@ export const appCommonReducer = (state = new AppCommonState(), action) => {
                 ...state,
                 isLoading: false
             }
-            return state;
-
+        case 'SHOW_INFO_MODAL':
+            return {
+                ...state,
+                showInfoModal: true,
+                infoModalMessage: action.message
+            }
+        case 'HIDE_INFO_MODAL':
+            return {
+                ...state,
+                showInfoModal: false
+            }
         default:
             return state;
     }

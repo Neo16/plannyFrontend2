@@ -1,5 +1,5 @@
 import axios from "axios";
-import { stopLoading, startLoading, apiError } from './actionCreators/globalActionCreators';
+import { stopLoading, startLoading, apiError, showInfoModal } from './actionCreators/globalActionCreators';
 import { push } from 'connected-react-router';
 
 export const makeApiAction = ({
@@ -7,7 +7,7 @@ export const makeApiAction = ({
     method = "GET",
     data = null,
     onSuccess = undefined,
-    onFailure = apiError,
+    onFailure = undefined,
     label = "",
     toggleIdLoading = true,
     onSuccessNavigation = undefined
@@ -38,11 +38,15 @@ export const makeApiAction = ({
                 dispatch(push(onSuccessNavigation));
             }
             if (onSuccess != undefined) {
+                //todo rename onSuccess action 
                 dispatch(onSuccess(data));
             }
         })
         .catch(error => {
-            dispatch(onFailure(error));
+            dispatch(apiError(error));
+            if (onFailure != undefined) {
+                onFailure();
+            }
         })
         .finally(() => {
             if (toggleIdLoading) {
