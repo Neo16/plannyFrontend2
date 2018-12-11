@@ -12,6 +12,8 @@ import DatePicker from "react-datepicker";
 import './SearchForm.css';
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
+import { geocodeApiCall } from '../../CommonService';
+import debounce from 'lodash/debounce';
 
 class SearchForm extends React.Component {
 
@@ -24,12 +26,15 @@ class SearchForm extends React.Component {
             currentSubCategories: [],
             currentParentCategoryId: 0,
             query: {
-                settlementName: '',
                 rangeInKms: 100,
                 fromTime: new Date(),
-                toTime: moment().add(7, 'd').toDate()
-            }
-        }      
+                toTime: moment().add(7, 'd').toDate(),
+                longitude: undefined,
+                latitude: undefined
+            },
+            settlementName: '',
+        }
+        this.callGeocodeApi = debounce(this.callGeocodeApi, 500);
     }
 
     componentDidMount() {
@@ -40,8 +45,6 @@ class SearchForm extends React.Component {
 
     search = () => {
         var query = { ...this.state.query };
-        //query.latitude = this.props.state.searchGeocode.latitude;
-        //query.longitude = this.props.state.searchGeocode.longitude;
         query.categoryIds = this.selectedCategories;
         this.props.getPlanniesAsync(JSON.stringify(query));
     }
@@ -81,12 +84,31 @@ class SearchForm extends React.Component {
     handleQueryChange = (e) => {
         let name = e.target.name;
         let value = e.target.value;
-        this.setQueryValueChange(name, value);
 
-        if (name === "settlementName" && e.target.value.length > 2) {
-            this.props.geoCode(this.state.query.settlementName);
+        if (name === "settlementName") {
+            this.setState({
+                ...this.state,
+                settlementName: value
+            });
+            if (value.length > 2) {              
+                this.callGeocodeApi();
+            }
+        }
+        else {
+            this.setQueryValueChange(name, value);
         }
     }
+
+    callGeocodeApi = () => {        
+        geocodeApiCall({
+            address: this.state.settlementName,
+            onSuccess: (data) => {
+                this.setQueryValueChange('longitude', data.longitude);
+                this.setQueryValueChange('latitude', data.latitude);
+            }
+        });
+    };
+
 
     setQueryValueChange = (name, value) => {
         this.setState({
@@ -165,7 +187,7 @@ class SearchForm extends React.Component {
                             <div className="form-group">
                                 <Label className="mr-3">Settlement:</Label>
                                 <Input
-                                    value={this.state.query.settlementName}
+                                    value={this.state.settlementName}
                                     name="settlementName"
                                     onChange={this.handleQueryChange}
                                     type="Text" />

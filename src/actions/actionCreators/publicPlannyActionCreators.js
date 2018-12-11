@@ -24,14 +24,6 @@ export function canceledParticipation() {
     }
 }
 
-export function geoCode(latitude, longitude) {
-    return {
-        type: 'GET_GEOCODES',
-        latitude,
-        longitude
-    }
-}
-
 export function getMyParticiapations(participations) {
     return {
         type: 'GET_MYPARTICIPATIONSS',
