@@ -11,11 +11,11 @@ export class PlannyDetails extends React.Component {
   plannyId;
 
   joinPlanny = () => {
-    this.props.joinPlannyAsync(this.plannyId);   
+    this.props.joinPlannyAsync(this.plannyId);
   }
 
   cancelPlanny = () => {
-    this.props.cancelParticipationAsync(this.plannyId);   
+    this.props.cancelParticipationAsync(this.plannyId);
   }
 
   componentDidMount() {
@@ -41,9 +41,11 @@ export class PlannyDetails extends React.Component {
 
             <div className="details-cont-body">
               <div className="categoryCont">
-                <div className="categoryTag">
-                  {p.categories != undefined && p.categories[0].name}
-                </div>
+                {p.categories != undefined && p.categories.map(c => (
+                  <div className="categoryTag">
+                    {c.name}
+                  </div>
+                ))}
               </div>
 
               <div className="plannyTime">
@@ -58,7 +60,7 @@ export class PlannyDetails extends React.Component {
               <div className="plannyInfo"><b>Location:</b> {p.location != undefined && p.location.address} </div>
 
               <div className="plannyInfo">
-                <b>Hosted by:</b> <Link to={'/profiles/'+ p.ownerId}>{p.ownerName}</Link> 
+                <b>Hosted by:</b> <Link to={'/profiles/' + p.ownerId}>{p.ownerName}</Link>
               </div>
 
               <div className="plannyInfo"><b>Max number of participants:</b> {p.maxParticipants} </div>
@@ -76,7 +78,7 @@ export class PlannyDetails extends React.Component {
               </Button>}
               {this.props.publicPlanniesState.plannyDetail.joinStatus == '2' &&
                 <Button
-                  outline 
+                  outline
                   className="joinButton"
                   onClick={this.cancelPlanny}>
                   Cancel join request
@@ -84,7 +86,7 @@ export class PlannyDetails extends React.Component {
               {this.props.publicPlanniesState.plannyDetail.joinStatus == '3' &&
                 <Button
                   className="joinButton"
-                  outline 
+                  outline
                   color="danger"
                   onClick={this.cancelPlanny}>
                   Cancel participation
@@ -102,6 +104,6 @@ export default connect(
     publicPlanniesState: state.publicPlanniesState
   }),
   dispatch => ({
-    ...publicPlannyAsyncActionCreators(dispatch)   
+    ...publicPlannyAsyncActionCreators(dispatch)
   })
 )(PlannyDetails); 

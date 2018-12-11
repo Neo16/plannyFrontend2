@@ -155,3 +155,16 @@ html, body, #root {
 .toggle-button{
     padding: 3px 9px;
 }
+
+.categoryTag{
+    display: inline;
+    color: white;      
+    padding: 3px 5px;
+    margin-right: 5px;
+    background-color: #337ab7;     
+}
+
+a, a:hover, a:active {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}

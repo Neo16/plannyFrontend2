@@ -22,13 +22,13 @@ export class PlannyCell extends React.Component {
           }
         </div>
         <div className="categoryCont">
-          {(p.categories.length > 0) &&
+          {p.categories != undefined && p.categories.map(c => (
             <div className="categoryTag">
-              {p.categories[0].name}
+              {c.name}
             </div>
-          }
+          ))}       
         </div>
-        <div className="plannyTitle" onClick={() => {this.props.gotoDetails(p.id)}}>
+        <div className="plannyTitle" onClick={() => { this.props.gotoDetails(p.id) }}>
           {p.name}
         </div>
         <div className="plannyDesc">
@@ -55,7 +55,7 @@ export class PlannyCell extends React.Component {
               href={"/plannies/" + p.id}>
               Details
             </Button>
-          </If>        
+          </If>
         </div>
       </div>
     );

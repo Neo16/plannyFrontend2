@@ -1,0 +1,47 @@
+
+@import '../../variables.scss';
+
+.my-participation-row{
+    display: flex;
+    height: 120px;
+    border-bottom: 1px solid $app-lighter-gray;
+    background-color: white;
+}
+
+.part-planny-img-wrapper{
+    padding:15px;
+    .part-planny-img{
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+    }    
+ }
+
+.part-planny-middle-block{
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;   
+    .part-planny-title{   
+        flex: 2.8;     
+        font-size: 22px;
+        font-weight: 700;
+    } 
+    .part-planny-owner{   
+      padding-left: 10px;
+    } 
+}
+.part-planny-time-block{
+    align-items: center;
+    margin-right: 15px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;    
+}
+
+.part-attendees{
+    align-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 12px;
+}
+
