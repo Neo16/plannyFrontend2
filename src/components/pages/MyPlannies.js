@@ -8,11 +8,16 @@ import { Row, Col, Button } from 'reactstrap';
 import If from '../atoms/If';
 import './MyPlannies.css';
 import { push } from 'connected-react-router';
+import DialogModal from '../organisms/DialogModal';
 
 export class MyPlannies extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      showDeleteModal: false,
+      plannyToDeleteId: undefined
+    }
   }
 
   componentDidMount() {
@@ -35,11 +40,31 @@ export class MyPlannies extends React.Component {
     this.props.deletePlannyAsync(id);
   }
 
+  trydeletePlanny = (id) => {
+    this.setState({
+      ...this.state,
+      showDeleteModal: true,
+      plannyToDeleteId: id
+    });
+  }
+
+  onDeleteOk = (id) => {
+    this.deletePlanny(this.state.plannyToDeleteId);
+    this.hideDeleteModal();
+  }
+
+  hideDeleteModal = () => {
+    this.setState({
+      ...this.state,
+      showDeleteModal: false,
+    });
+  }
+
   cancelPlanny = (id) => {
     this.props.cancelParticipationAsync(id);
   }
 
-  gotoDetails = (id) => {   
+  gotoDetails = (id) => {
     this.props.navigate('/plannies/edit/' + id);
   }
 
@@ -54,7 +79,7 @@ export class MyPlannies extends React.Component {
           <If condition={this.props.myPlanniesState.plannies != null}>
             <MyPlannyTable
               gotoDetails={this.gotoDetails}
-              deletePlanny={this.deletePlanny}
+              deletePlanny={this.trydeletePlanny}
               plannies={this.props.myPlanniesState.plannies}
               approveParticipation={this.approveParticipation}
               declineParticipation={this.declineParticipation}
@@ -62,25 +87,18 @@ export class MyPlannies extends React.Component {
           </If>
         </Col>
 
-        {/* <Col xs={12}>
-          <div className="titleWrapper">
-            <div className="title"> My Participations</div>
-          </div>
-
-          <div className="myParticipationList">
-            {this.props.myPlanniesState.participations.map((part) =>
-              <div style={{'margin-bottom': '35px'}}>
-                <div className="myParticipationBox">
-                  <b>{part.plannyName}</b> - {part.state}
-                  <Button
-                    onClick={() => this.cancelPlanny(part.plannyId)}>
-                    Cancel
-                 </Button>
-                </div>
-              </div>
-            )}
-          </div>
-        </Col> */}
+        <If condition={this.state.showDeleteModal}>
+          <DialogModal
+            width="500px"
+            header="Confirm delete"
+            body="Are you sure you want to delete this planny?"
+            ok={() => { this.onDeleteOk() }}
+            cancel={() => { this.hideDeleteModal() }}
+            positiveButtonText="Yes, delete"
+            negativeButtonText="No"
+            hasNegativeButton={true}
+          />
+        </If>
       </Row>
     );
   }

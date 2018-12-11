@@ -13,7 +13,7 @@ import If from './components/atoms/If';
 import { Spinner } from './components/atoms/Spinner';
 import { store, history } from './store/configureStore';
 import { Routes } from './routes';
-import { DialogModal } from './components/organisms/DialogModal';
+import DialogModal from './components/organisms/DialogModal';
 import { showInfoModal, hideInfoModal } from './actions/actionCreators/globalActionCreators';
 
 fontLibrary.add(faAngleLeft);
@@ -36,9 +36,9 @@ const render = () => {
           <If condition={store.getState().appCommonState.showInfoModal}>
             {/* Error modal, todo export */}
             <DialogModal
-              header = "Error"
-              body = {store.getState().appCommonState.infoModalMessage}
-              positiveButtonText="Ok"           
+              header="Error"
+              body={store.getState().appCommonState.infoModalMessage}
+              positiveButtonText="Ok"
               ok={() => store.dispatch(hideInfoModal())}
             />
           </If>
